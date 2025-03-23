@@ -1,0 +1,25 @@
+
+
+view FV_CUS_HH_ASN comment 'Customer Household Association'(
+CUSTOMER_ID,
+HOUSEHOLD_ID,
+ENTY_ASN_RSN_ID,
+BEGIN_DATE_PRD_ID,
+END_DATE_PRD_ID,
+ENTY_1_ROLE_ID,
+ENTY_2_ROLE_ID
+)
+as
+select 
+    ENTY_1_ID CUSTOMER_ID, ENTY_2_ID HOUSEHOLD_ID, ENTY_ASN_RSN_ID, 
+BEGIN_DATE_PRD_ID, END_DATE_PRD_ID, ENTY_1_ROLE_ID, ENTY_2_ROLE_ID
+from 
+    F_ENTY_ASN
+where ( 
+    ENTY_1_TYPE = 'PN'
+and ENTY_2_TYPE = 'HH' )
+
+
+----
+---- End of FV_CUS_HH_ASN
+----

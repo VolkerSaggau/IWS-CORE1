@@ -1,0 +1,63 @@
+
+
+view D_PRM_CPGN_EPSD__D_TIME_PERIOD__REF_61611 (
+   FACT,
+   DIMENSION,
+   DIRECTION,
+   KEY,
+   COUNTER,
+   SOURCE,
+   INTEGRITYSTATE
+)
+AS
+(
+   select 
+      'D_PRM_CPGN_EPSD'                        AS FACT,
+      'D_TIME_PERIOD'                          AS DIMENSION,
+      'Inbound'                                AS DIRECTION,
+   	to_varchar(FACT.END_DATE_PRD_ID)         AS KEY,
+   	count(*)                                 AS COUNTER,
+      'in: ' || 'D_TIME_PERIOD'                AS SOURCE,
+      'info' AS INTEGRITYSTATE
+   from 
+   	D_PRM_CPGN_EPSD	 FACT
+   WHERE 
+      FACT.END_DATE_PRD_ID IN (select DIMENSION.PRD_ID from D_TIME_PERIOD	DIMENSION)
+   GROUP BY 
+      FACT.END_DATE_PRD_ID
+   
+   --
+   --
+
+UNION ALL
+
+   select 
+      'D_PRM_CPGN_EPSD'                        AS FACT,
+      'D_TIME_PERIOD'                          AS DIMENSION,
+      'Inbound'                                AS DIRECTION,
+   	to_varchar(FACT.END_DATE_PRD_ID)         AS KEY,
+   	count(*)                                 AS COUNTER,
+      'in: ' || 'D_TIME_PERIOD'                AS SOURCE,
+      'error' AS INTEGRITYSTATE
+   from 
+   	D_PRM_CPGN_EPSD	 FACT
+   WHERE 
+      FACT.END_DATE_PRD_ID NOT IN (select DIMENSION.PRD_ID from D_TIME_PERIOD	DIMENSION)
+   GROUP BY 
+      FACT.END_DATE_PRD_ID
+   
+   --
+   --
+
+)
+ORDER BY 
+   FACT DESC, 
+   DIMENSION DESC, 
+   INTEGRITYSTATE DESC, 
+   SOURCE DESC, 
+   COUNTER DESC, 
+   KEY DESC
+;
+--
+-- end of statement
+--

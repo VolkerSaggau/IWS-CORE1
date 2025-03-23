@@ -1,0 +1,63 @@
+
+
+view F_CPGN_CNTC_EVT__D_PROFESSION__REF_258272 (
+   FACT,
+   DIMENSION,
+   DIRECTION,
+   KEY,
+   COUNTER,
+   SOURCE,
+   INTEGRITYSTATE
+)
+AS
+(
+   select 
+      'F_CPGN_CNTC_EVT'                        AS FACT,
+      'D_PROFESSION'                           AS DIMENSION,
+      'Inbound'                                AS DIRECTION,
+   	to_varchar(FACT.PROFESSION_ID)           AS KEY,
+   	count(*)                                 AS COUNTER,
+      'in: ' || 'D_PROFESSION'                 AS SOURCE,
+      'info' AS INTEGRITYSTATE
+   from 
+   	F_CPGN_CNTC_EVT	 FACT
+   WHERE 
+      FACT.PROFESSION_ID IN (select DIMENSION.PROFESSION_ID from D_PROFESSION	DIMENSION)
+   GROUP BY 
+      FACT.PROFESSION_ID
+   
+   --
+   --
+
+UNION ALL
+
+   select 
+      'F_CPGN_CNTC_EVT'                        AS FACT,
+      'D_PROFESSION'                           AS DIMENSION,
+      'Inbound'                                AS DIRECTION,
+   	to_varchar(FACT.PROFESSION_ID)           AS KEY,
+   	count(*)                                 AS COUNTER,
+      'in: ' || 'D_PROFESSION'                 AS SOURCE,
+      'error' AS INTEGRITYSTATE
+   from 
+   	F_CPGN_CNTC_EVT	 FACT
+   WHERE 
+      FACT.PROFESSION_ID NOT IN (select DIMENSION.PROFESSION_ID from D_PROFESSION	DIMENSION)
+   GROUP BY 
+      FACT.PROFESSION_ID
+   
+   --
+   --
+
+)
+ORDER BY 
+   FACT DESC, 
+   DIMENSION DESC, 
+   INTEGRITYSTATE DESC, 
+   SOURCE DESC, 
+   COUNTER DESC, 
+   KEY DESC
+;
+--
+-- end of statement
+--

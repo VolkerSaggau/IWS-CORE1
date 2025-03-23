@@ -1,0 +1,34 @@
+== version = 1
+
+
+
+column table F_EMP_KEY_FCTS (
+   EMP_ID  INTEGER  NOT NULL   comment 'Entity ID',
+   LAST_HIRE_PRD_ID  INTEGER     comment 'Last Hire Date',
+   LAST_TERM_PRD_ID  INTEGER     comment 'Last Termination Date',
+   BEGIN_DATE_PRD_ID  INTEGER     comment 'Employee Key Facts Begin Date Period ID',
+   END_DATE_PRD_ID  INTEGER     comment 'Employee Key Facts End Date Period ID',
+   LAST_RVW_PRD_ID  INTEGER     comment 'Last Review Date',
+   REHIRE_IND  NVARCHAR(1)     comment 'Rehire Indicator',
+   WK_IN_LAST_RVW_PRD  INTEGER     comment 'Weeks In Last Review Period',
+   LAST_INCMT_AMT  DECIMAL(22,4)     comment 'Last Increment Amount',
+   PAY_SCAL_PERCENTIL  DECIMAL(4,2)     comment 'Pay Scale Percentile',
+   LAST_PRFM_RATING  NVARCHAR(2)     comment 'Employee Key Facts End Date Highest Grade',
+   EMPLOYEE_GRADE  NVARCHAR(35)     comment 'Employee Grade',
+   EMPLOYEE_TITLE  NVARCHAR(15)     comment 'Employee Title',
+   PRM_IND  NVARCHAR(1)     comment 'Ppromotable Indicator'
+, primary key  ( 
+     EMP_ID)
+)
+with associations(
+   MANY TO ONE join "D_TIME_PERIOD" as D_TIME_PERIOD_REF_71114 on (D_TIME_PERIOD_REF_71114.PRD_ID = LAST_RVW_PRD_ID),
+   MANY TO ONE join "D_TIME_PERIOD" as D_TIME_PERIOD_REF_71106 on (D_TIME_PERIOD_REF_71106.PRD_ID = END_DATE_PRD_ID),
+   MANY TO ONE join "D_TIME_PERIOD" as D_TIME_PERIOD_REF_71102 on (D_TIME_PERIOD_REF_71102.PRD_ID = BEGIN_DATE_PRD_ID),
+   MANY TO ONE join "D_TIME_PERIOD" as D_TIME_PERIOD_REF_71118 on (D_TIME_PERIOD_REF_71118.PRD_ID = LAST_TERM_PRD_ID),
+   MANY TO ONE join "D_TIME_PERIOD" as D_TIME_PERIOD_REF_71110 on (D_TIME_PERIOD_REF_71110.PRD_ID = LAST_HIRE_PRD_ID)
+)
+comment 'Employee Key Facts'
+
+
+-- end of F_EMP_KEY_FCTS
+--

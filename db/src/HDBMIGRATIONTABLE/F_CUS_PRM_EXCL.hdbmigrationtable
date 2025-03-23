@@ -1,0 +1,27 @@
+== version = 1
+
+
+
+column table F_CUS_PRM_EXCL (
+   PRM_CPGN_ID  INTEGER  NOT NULL   comment 'Promotion Campaign ID',
+   ENTY_ID  INTEGER  NOT NULL   comment 'Customer Profile ID',
+   BEGIN_DATE_PRD_ID  INTEGER  NOT NULL   comment 'Promotion Exclusion Date Period ID',
+   END_DATE_PRD_ID  INTEGER     comment 'Promotion Exclusion End Date Period ID',
+   PRM_EXCL_REASON  NVARCHAR(255)     comment 'Promotion Exclusion Reason'
+, primary key  ( 
+     PRM_CPGN_ID,
+     ENTY_ID,
+     BEGIN_DATE_PRD_ID)
+)
+with associations(
+   MANY TO ONE join "D_ENTITY" as D_ENTITY_REF_291364 on (D_ENTITY_REF_291364.ENTY_ID = ENTY_ID),
+   MANY TO ONE join "D_CORE_PRM_CPGN" as D_CORE_PRM_CPGN_REF_71031 on (D_CORE_PRM_CPGN_REF_71031.PRM_CPGN_ID = PRM_CPGN_ID),
+   MANY TO ONE join "D_TIME_PERIOD" as D_TIME_PERIOD_REF_63615 on (D_TIME_PERIOD_REF_63615.PRD_ID = END_DATE_PRD_ID),
+   MANY TO ONE join "D_TIME_PERIOD" as D_TIME_PERIOD_REF_63607 on (D_TIME_PERIOD_REF_63607.PRD_ID = BEGIN_DATE_PRD_ID),
+   MANY TO ONE join "F_ENTITY_PROFILE" as F_ENTITY_PROFILE_REF_70447 on (F_ENTITY_PROFILE_REF_70447.ENTY_PRFL_ID = ENTY_ID)
+)
+comment 'Customer Promotion Exclusion'
+
+
+-- end of F_CUS_PRM_EXCL
+--

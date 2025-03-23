@@ -1,0 +1,63 @@
+
+
+view F_INTL_ACCT_ENTR__D_INTL_ACCOUNT__REF_69288 (
+   FACT,
+   DIMENSION,
+   DIRECTION,
+   KEY,
+   COUNTER,
+   SOURCE,
+   INTEGRITYSTATE
+)
+AS
+(
+   select 
+      'F_INTL_ACCT_ENTR'                       AS FACT,
+      'D_INTL_ACCOUNT'                         AS DIMENSION,
+      'Inbound'                                AS DIRECTION,
+   	to_varchar(FACT.INTL_ACCT_ID)            AS KEY,
+   	count(*)                                 AS COUNTER,
+      'in: ' || 'D_INTL_ACCOUNT'               AS SOURCE,
+      'info' AS INTEGRITYSTATE
+   from 
+   	F_INTL_ACCT_ENTR	 FACT
+   WHERE 
+      FACT.INTL_ACCT_ID IN (select DIMENSION.INTL_ACCT_ID from D_INTL_ACCOUNT	DIMENSION)
+   GROUP BY 
+      FACT.INTL_ACCT_ID
+   
+   --
+   --
+
+UNION ALL
+
+   select 
+      'F_INTL_ACCT_ENTR'                       AS FACT,
+      'D_INTL_ACCOUNT'                         AS DIMENSION,
+      'Inbound'                                AS DIRECTION,
+   	to_varchar(FACT.INTL_ACCT_ID)            AS KEY,
+   	count(*)                                 AS COUNTER,
+      'in: ' || 'D_INTL_ACCOUNT'               AS SOURCE,
+      'error' AS INTEGRITYSTATE
+   from 
+   	F_INTL_ACCT_ENTR	 FACT
+   WHERE 
+      FACT.INTL_ACCT_ID NOT IN (select DIMENSION.INTL_ACCT_ID from D_INTL_ACCOUNT	DIMENSION)
+   GROUP BY 
+      FACT.INTL_ACCT_ID
+   
+   --
+   --
+
+)
+ORDER BY 
+   FACT DESC, 
+   DIMENSION DESC, 
+   INTEGRITYSTATE DESC, 
+   SOURCE DESC, 
+   COUNTER DESC, 
+   KEY DESC
+;
+--
+-- end of statement
+--

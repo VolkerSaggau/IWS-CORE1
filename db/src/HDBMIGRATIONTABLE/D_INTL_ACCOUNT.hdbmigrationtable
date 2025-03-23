@@ -1,0 +1,30 @@
+== version = 1
+
+
+
+column table D_INTL_ACCOUNT (
+   INTL_ACCT_ID  INTEGER  NOT NULL   comment 'Chart of Accounts ID',
+   INTL_ACCT_NBR  NVARCHAR(18),
+   ACCT_SYS_CD  NVARCHAR(3)  NOT NULL   comment 'Accounting System',
+   ACCT_SYS_NM  NVARCHAR(30),
+   ACCT_START_DT  TIMESTAMP     comment 'Start Date',
+   ACCT_END_DT  TIMESTAMP     comment 'End Date Period ID',
+   ACCT_RPT_TYPE  NVARCHAR(3)     comment 'Account Reporting Type',
+   LEDGER_NM  NVARCHAR(30)     comment 'Ledger',
+   SUBLEDGER_NM  NVARCHAR(30)     comment 'Subledger',
+   ACCT_TYPE  NVARCHAR(3)     comment 'Account Type',
+   ACCT_CLS  NVARCHAR(10)     comment 'Account Classification',
+   ACCT_CAT  NVARCHAR(35)     comment 'Account Category',
+   CPTL_PROJ_IND  NVARCHAR(1)     comment 'Capital Project  Account Indicator',
+   CPTL_PROJ_NM  NVARCHAR(30)     comment 'Capital Project Name',
+   ACCT_PROD_NAME  NVARCHAR(30)     comment 'Product Name',
+   IA_ALL_ENTR_IND  NVARCHAR(1)
+, primary key  ( 
+     INTL_ACCT_ID)
+)
+
+comment 'Company Unit Chart Of Accounts'
+
+
+-- end of D_INTL_ACCOUNT
+--

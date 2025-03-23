@@ -1,0 +1,27 @@
+
+
+view FV_PROSP_PRM_EXCL comment 'Customer Promotion Exclusion'(
+PRM_CPGN_ID,
+PROSPECT_ID,
+BEGIN_DATE_PRD_ID,
+END_DATE_PRD_ID,
+PRM_EXCL_REASON
+)
+as
+select 
+    EXCL.PRM_CPGN_ID, 
+    EXCL.ENTY_ID    PROSPECT_ID, 
+    EXCL.BEGIN_DATE_PRD_ID, 
+    EXCL.END_DATE_PRD_ID, 
+    EXCL.PRM_EXCL_REASON
+from 
+    D_ENTITY        ENT, 
+    F_CUS_PRM_EXCL  EXCL
+where 
+    ENT.ENTY_ID         = EXCL.ENTY_ID
+and ENT.ENTY_CAT_NAME   = 'Prospect'
+
+
+----
+---- End of FV_PROSP_PRM_EXCL
+----

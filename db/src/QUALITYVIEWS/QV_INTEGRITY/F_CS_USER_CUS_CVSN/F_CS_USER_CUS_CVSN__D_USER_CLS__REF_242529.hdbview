@@ -1,0 +1,63 @@
+
+
+view F_CS_USER_CUS_CVSN__D_USER_CLS__REF_242529 (
+   FACT,
+   DIMENSION,
+   DIRECTION,
+   KEY,
+   COUNTER,
+   SOURCE,
+   INTEGRITYSTATE
+)
+AS
+(
+   select 
+      'F_CS_USER_CUS_CVSN'                     AS FACT,
+      'D_USER_CLS'                             AS DIMENSION,
+      'Inbound'                                AS DIRECTION,
+   	to_varchar(FACT.USER_CLS_ID)             AS KEY,
+   	count(*)                                 AS COUNTER,
+      'in: ' || 'D_USER_CLS'                   AS SOURCE,
+      'info' AS INTEGRITYSTATE
+   from 
+   	F_CS_USER_CUS_CVSN	 FACT
+   WHERE 
+      FACT.USER_CLS_ID IN (select DIMENSION.USER_CLS_ID from D_USER_CLS	DIMENSION)
+   GROUP BY 
+      FACT.USER_CLS_ID
+   
+   --
+   --
+
+UNION ALL
+
+   select 
+      'F_CS_USER_CUS_CVSN'                     AS FACT,
+      'D_USER_CLS'                             AS DIMENSION,
+      'Inbound'                                AS DIRECTION,
+   	to_varchar(FACT.USER_CLS_ID)             AS KEY,
+   	count(*)                                 AS COUNTER,
+      'in: ' || 'D_USER_CLS'                   AS SOURCE,
+      'error' AS INTEGRITYSTATE
+   from 
+   	F_CS_USER_CUS_CVSN	 FACT
+   WHERE 
+      FACT.USER_CLS_ID NOT IN (select DIMENSION.USER_CLS_ID from D_USER_CLS	DIMENSION)
+   GROUP BY 
+      FACT.USER_CLS_ID
+   
+   --
+   --
+
+)
+ORDER BY 
+   FACT DESC, 
+   DIMENSION DESC, 
+   INTEGRITYSTATE DESC, 
+   SOURCE DESC, 
+   COUNTER DESC, 
+   KEY DESC
+;
+--
+-- end of statement
+--

@@ -1,0 +1,63 @@
+
+
+view F_CS_USER_CUS_CVSN__D_CURRENCY__REF_228548 (
+   FACT,
+   DIMENSION,
+   DIRECTION,
+   KEY,
+   COUNTER,
+   SOURCE,
+   INTEGRITYSTATE
+)
+AS
+(
+   select 
+      'F_CS_USER_CUS_CVSN'                     AS FACT,
+      'D_CURRENCY'                             AS DIMENSION,
+      'Inbound'                                AS DIRECTION,
+   	to_varchar(FACT.ISO_CRCY_ID)             AS KEY,
+   	count(*)                                 AS COUNTER,
+      'in: ' || 'D_CURRENCY'                   AS SOURCE,
+      'info' AS INTEGRITYSTATE
+   from 
+   	F_CS_USER_CUS_CVSN	 FACT
+   WHERE 
+      FACT.ISO_CRCY_ID IN (select DIMENSION.ISO_CRCY_ID from D_CURRENCY	DIMENSION)
+   GROUP BY 
+      FACT.ISO_CRCY_ID
+   
+   --
+   --
+
+UNION ALL
+
+   select 
+      'F_CS_USER_CUS_CVSN'                     AS FACT,
+      'D_CURRENCY'                             AS DIMENSION,
+      'Inbound'                                AS DIRECTION,
+   	to_varchar(FACT.ISO_CRCY_ID)             AS KEY,
+   	count(*)                                 AS COUNTER,
+      'in: ' || 'D_CURRENCY'                   AS SOURCE,
+      'error' AS INTEGRITYSTATE
+   from 
+   	F_CS_USER_CUS_CVSN	 FACT
+   WHERE 
+      FACT.ISO_CRCY_ID NOT IN (select DIMENSION.ISO_CRCY_ID from D_CURRENCY	DIMENSION)
+   GROUP BY 
+      FACT.ISO_CRCY_ID
+   
+   --
+   --
+
+)
+ORDER BY 
+   FACT DESC, 
+   DIMENSION DESC, 
+   INTEGRITYSTATE DESC, 
+   SOURCE DESC, 
+   COUNTER DESC, 
+   KEY DESC
+;
+--
+-- end of statement
+--

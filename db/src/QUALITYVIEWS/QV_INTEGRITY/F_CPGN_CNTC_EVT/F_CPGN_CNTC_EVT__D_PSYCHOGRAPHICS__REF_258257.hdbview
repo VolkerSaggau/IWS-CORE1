@@ -1,0 +1,63 @@
+
+
+view F_CPGN_CNTC_EVT__D_PSYCHOGRAPHICS__REF_258257 (
+   FACT,
+   DIMENSION,
+   DIRECTION,
+   KEY,
+   COUNTER,
+   SOURCE,
+   INTEGRITYSTATE
+)
+AS
+(
+   select 
+      'F_CPGN_CNTC_EVT'                        AS FACT,
+      'D_PSYCHOGRAPHICS'                       AS DIMENSION,
+      'Inbound'                                AS DIRECTION,
+   	to_varchar(FACT.PSYCH_ID)                AS KEY,
+   	count(*)                                 AS COUNTER,
+      'in: ' || 'D_PSYCHOGRAPHICS'             AS SOURCE,
+      'info' AS INTEGRITYSTATE
+   from 
+   	F_CPGN_CNTC_EVT	 FACT
+   WHERE 
+      FACT.PSYCH_ID IN (select DIMENSION.PSYCH_ID from D_PSYCHOGRAPHICS	DIMENSION)
+   GROUP BY 
+      FACT.PSYCH_ID
+   
+   --
+   --
+
+UNION ALL
+
+   select 
+      'F_CPGN_CNTC_EVT'                        AS FACT,
+      'D_PSYCHOGRAPHICS'                       AS DIMENSION,
+      'Inbound'                                AS DIRECTION,
+   	to_varchar(FACT.PSYCH_ID)                AS KEY,
+   	count(*)                                 AS COUNTER,
+      'in: ' || 'D_PSYCHOGRAPHICS'             AS SOURCE,
+      'error' AS INTEGRITYSTATE
+   from 
+   	F_CPGN_CNTC_EVT	 FACT
+   WHERE 
+      FACT.PSYCH_ID NOT IN (select DIMENSION.PSYCH_ID from D_PSYCHOGRAPHICS	DIMENSION)
+   GROUP BY 
+      FACT.PSYCH_ID
+   
+   --
+   --
+
+)
+ORDER BY 
+   FACT DESC, 
+   DIMENSION DESC, 
+   INTEGRITYSTATE DESC, 
+   SOURCE DESC, 
+   COUNTER DESC, 
+   KEY DESC
+;
+--
+-- end of statement
+--

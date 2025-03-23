@@ -1,0 +1,63 @@
+
+
+view D_PRSN_FNCL_STAT__D_ENTITY__REF_256387 (
+   FACT,
+   DIMENSION,
+   DIRECTION,
+   KEY,
+   COUNTER,
+   SOURCE,
+   INTEGRITYSTATE
+)
+AS
+(
+   select 
+      'D_PRSN_FNCL_STAT'                       AS FACT,
+      'D_ENTITY'                               AS DIMENSION,
+      'Inbound'                                AS DIRECTION,
+   	to_varchar(FACT.ENTY_ID)                 AS KEY,
+   	count(*)                                 AS COUNTER,
+      'in: ' || 'D_ENTITY'                     AS SOURCE,
+      'info' AS INTEGRITYSTATE
+   from 
+   	D_PRSN_FNCL_STAT	 FACT
+   WHERE 
+      FACT.ENTY_ID IN (select DIMENSION.ENTY_ID from D_ENTITY	DIMENSION)
+   GROUP BY 
+      FACT.ENTY_ID
+   
+   --
+   --
+
+UNION ALL
+
+   select 
+      'D_PRSN_FNCL_STAT'                       AS FACT,
+      'D_ENTITY'                               AS DIMENSION,
+      'Inbound'                                AS DIRECTION,
+   	to_varchar(FACT.ENTY_ID)                 AS KEY,
+   	count(*)                                 AS COUNTER,
+      'in: ' || 'D_ENTITY'                     AS SOURCE,
+      'error' AS INTEGRITYSTATE
+   from 
+   	D_PRSN_FNCL_STAT	 FACT
+   WHERE 
+      FACT.ENTY_ID NOT IN (select DIMENSION.ENTY_ID from D_ENTITY	DIMENSION)
+   GROUP BY 
+      FACT.ENTY_ID
+   
+   --
+   --
+
+)
+ORDER BY 
+   FACT DESC, 
+   DIMENSION DESC, 
+   INTEGRITYSTATE DESC, 
+   SOURCE DESC, 
+   COUNTER DESC, 
+   KEY DESC
+;
+--
+-- end of statement
+--

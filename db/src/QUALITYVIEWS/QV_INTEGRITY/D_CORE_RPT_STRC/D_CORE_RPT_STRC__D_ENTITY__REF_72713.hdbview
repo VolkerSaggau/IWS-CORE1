@@ -1,0 +1,63 @@
+
+
+view D_CORE_RPT_STRC__D_ENTITY__REF_72713 (
+   FACT,
+   DIMENSION,
+   DIRECTION,
+   KEY,
+   COUNTER,
+   SOURCE,
+   INTEGRITYSTATE
+)
+AS
+(
+   select 
+      'D_CORE_RPT_STRC'                        AS FACT,
+      'D_ENTITY'                               AS DIMENSION,
+      'Inbound'                                AS DIRECTION,
+   	to_varchar(FACT.CHNL_MGT_UNIT_ID)        AS KEY,
+   	count(*)                                 AS COUNTER,
+      'in: ' || 'D_ENTITY'                     AS SOURCE,
+      'info' AS INTEGRITYSTATE
+   from 
+   	D_CORE_RPT_STRC	 FACT
+   WHERE 
+      FACT.CHNL_MGT_UNIT_ID IN (select DIMENSION.ENTY_ID from D_ENTITY	DIMENSION)
+   GROUP BY 
+      FACT.CHNL_MGT_UNIT_ID
+   
+   --
+   --
+
+UNION ALL
+
+   select 
+      'D_CORE_RPT_STRC'                        AS FACT,
+      'D_ENTITY'                               AS DIMENSION,
+      'Inbound'                                AS DIRECTION,
+   	to_varchar(FACT.CHNL_MGT_UNIT_ID)        AS KEY,
+   	count(*)                                 AS COUNTER,
+      'in: ' || 'D_ENTITY'                     AS SOURCE,
+      'error' AS INTEGRITYSTATE
+   from 
+   	D_CORE_RPT_STRC	 FACT
+   WHERE 
+      FACT.CHNL_MGT_UNIT_ID NOT IN (select DIMENSION.ENTY_ID from D_ENTITY	DIMENSION)
+   GROUP BY 
+      FACT.CHNL_MGT_UNIT_ID
+   
+   --
+   --
+
+)
+ORDER BY 
+   FACT DESC, 
+   DIMENSION DESC, 
+   INTEGRITYSTATE DESC, 
+   SOURCE DESC, 
+   COUNTER DESC, 
+   KEY DESC
+;
+--
+-- end of statement
+--

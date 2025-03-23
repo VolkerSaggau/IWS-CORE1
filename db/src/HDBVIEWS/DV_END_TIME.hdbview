@@ -1,0 +1,27 @@
+
+
+view DV_END_TIME comment 'End Time'(
+END_TIME_ID,
+ETS_HOUR_NUMBER,
+ETS_AMPM_FLAG,
+ETS_HOUR_RANGE,
+ETS_MINUTE_IN_HOUR,
+ETS_MINUTE_RANGE,
+ETS_ALL_ENTR_IND
+)
+as
+select  
+    HOUR_ID             END_TIME_ID, 
+    HOUR_NUMBER         ETS_HOUR_NUMBER, 
+    AMPM_FLAG           ETS_AMPM_FLAG, 
+    HOUR_RANGE          ETS_HOUR_RANGE, 
+    MINUTE_IN_HOUR      ETS_MINUTE_IN_HOUR, 
+    MINUTE_RANGE        ETS_MINUTE_RANGE, 
+    H_ALL_ENTRIES_IND   ETS_ALL_ENTR_IND
+from 
+    D_HOUR
+
+
+----
+---- End of DV_END_TIME
+----

@@ -1,0 +1,27 @@
+== version = 1
+
+
+
+column table F_PD_PRM_CPGN_ASN (
+   PRM_EPSD_ID  INTEGER  NOT NULL   comment 'Promotion Episode ID',
+   PRODUCT_ID  INTEGER  NOT NULL   comment 'Product ID',
+   BEGIN_DATE_PRD_ID  INTEGER  NOT NULL   comment 'Begin Date Period ID',
+   END_DATE_PRD_ID  INTEGER     comment 'End Date Period ID',
+   PRODUCT_GROUP  NVARCHAR(35)     comment 'Product Group',
+   PRODUCT_NAME  NVARCHAR(255)     comment 'Product Name',
+   EPSD_NAME  NVARCHAR(30)     comment 'Promotional Episode Name'
+, primary key  ( 
+     PRM_EPSD_ID,
+     PRODUCT_ID)
+)
+with associations(
+   MANY TO ONE join "D_TIME_PERIOD" as D_TIME_PERIOD_REF_37915 on (D_TIME_PERIOD_REF_37915.PRD_ID = END_DATE_PRD_ID),
+   MANY TO ONE join "D_TIME_PERIOD" as D_TIME_PERIOD_REF_37909 on (D_TIME_PERIOD_REF_37909.PRD_ID = BEGIN_DATE_PRD_ID),
+   MANY TO ONE join "D_PRODUCT" as D_PRODUCT_REF_57039 on (D_PRODUCT_REF_57039.PRODUCT_ID = PRODUCT_ID),
+   MANY TO ONE join "D_PRM_CPGN_EPSD" as D_PRM_CPGN_EPSD_REF_57036 on (D_PRM_CPGN_EPSD_REF_57036.PRM_EPSD_ID = PRM_EPSD_ID)
+)
+comment 'Product Promotional Campaign Association'
+
+
+-- end of F_PD_PRM_CPGN_ASN
+--

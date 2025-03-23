@@ -1,0 +1,63 @@
+
+
+view F_CUS_CNTC_EVT__D_BHVR_SCORE__REF_270821 (
+   FACT,
+   DIMENSION,
+   DIRECTION,
+   KEY,
+   COUNTER,
+   SOURCE,
+   INTEGRITYSTATE
+)
+AS
+(
+   select 
+      'F_CUS_CNTC_EVT'                         AS FACT,
+      'D_BHVR_SCORE'                           AS DIMENSION,
+      'Inbound'                                AS DIRECTION,
+   	to_varchar(FACT.PN_BHVR_SCOR_ID)         AS KEY,
+   	count(*)                                 AS COUNTER,
+      'in: ' || 'D_BHVR_SCORE'                 AS SOURCE,
+      'info' AS INTEGRITYSTATE
+   from 
+   	F_CUS_CNTC_EVT	 FACT
+   WHERE 
+      FACT.PN_BHVR_SCOR_ID IN (select DIMENSION.PN_BHVR_SCOR_ID from D_BHVR_SCORE	DIMENSION)
+   GROUP BY 
+      FACT.PN_BHVR_SCOR_ID
+   
+   --
+   --
+
+UNION ALL
+
+   select 
+      'F_CUS_CNTC_EVT'                         AS FACT,
+      'D_BHVR_SCORE'                           AS DIMENSION,
+      'Inbound'                                AS DIRECTION,
+   	to_varchar(FACT.PN_BHVR_SCOR_ID)         AS KEY,
+   	count(*)                                 AS COUNTER,
+      'in: ' || 'D_BHVR_SCORE'                 AS SOURCE,
+      'error' AS INTEGRITYSTATE
+   from 
+   	F_CUS_CNTC_EVT	 FACT
+   WHERE 
+      FACT.PN_BHVR_SCOR_ID NOT IN (select DIMENSION.PN_BHVR_SCOR_ID from D_BHVR_SCORE	DIMENSION)
+   GROUP BY 
+      FACT.PN_BHVR_SCOR_ID
+   
+   --
+   --
+
+)
+ORDER BY 
+   FACT DESC, 
+   DIMENSION DESC, 
+   INTEGRITYSTATE DESC, 
+   SOURCE DESC, 
+   COUNTER DESC, 
+   KEY DESC
+;
+--
+-- end of statement
+--

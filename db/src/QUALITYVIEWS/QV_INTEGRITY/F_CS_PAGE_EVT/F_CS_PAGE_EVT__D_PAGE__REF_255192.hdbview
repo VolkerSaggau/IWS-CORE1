@@ -1,0 +1,63 @@
+
+
+view F_CS_PAGE_EVT__D_PAGE__REF_255192 (
+   FACT,
+   DIMENSION,
+   DIRECTION,
+   KEY,
+   COUNTER,
+   SOURCE,
+   INTEGRITYSTATE
+)
+AS
+(
+   select 
+      'F_CS_PAGE_EVT'                          AS FACT,
+      'D_PAGE'                                 AS DIMENSION,
+      'Inbound'                                AS DIRECTION,
+   	to_varchar(FACT.LINK_IN_PAGE_ID)         AS KEY,
+   	count(*)                                 AS COUNTER,
+      'in: ' || 'D_PAGE'                       AS SOURCE,
+      'info' AS INTEGRITYSTATE
+   from 
+   	F_CS_PAGE_EVT	 FACT
+   WHERE 
+      FACT.LINK_IN_PAGE_ID IN (select DIMENSION.PAGE_ID from D_PAGE	DIMENSION)
+   GROUP BY 
+      FACT.LINK_IN_PAGE_ID
+   
+   --
+   --
+
+UNION ALL
+
+   select 
+      'F_CS_PAGE_EVT'                          AS FACT,
+      'D_PAGE'                                 AS DIMENSION,
+      'Inbound'                                AS DIRECTION,
+   	to_varchar(FACT.LINK_IN_PAGE_ID)         AS KEY,
+   	count(*)                                 AS COUNTER,
+      'in: ' || 'D_PAGE'                       AS SOURCE,
+      'error' AS INTEGRITYSTATE
+   from 
+   	F_CS_PAGE_EVT	 FACT
+   WHERE 
+      FACT.LINK_IN_PAGE_ID NOT IN (select DIMENSION.PAGE_ID from D_PAGE	DIMENSION)
+   GROUP BY 
+      FACT.LINK_IN_PAGE_ID
+   
+   --
+   --
+
+)
+ORDER BY 
+   FACT DESC, 
+   DIMENSION DESC, 
+   INTEGRITYSTATE DESC, 
+   SOURCE DESC, 
+   COUNTER DESC, 
+   KEY DESC
+;
+--
+-- end of statement
+--

@@ -1,0 +1,32 @@
+
+
+view FV_PN_ORG_ASN comment 'Person Organization Association'(
+PERSON_ID,
+ORGANIZATION_ID,
+ENTY_ASN_RSN_ID,
+END_DATE_PRD_ID,
+BEGIN_DATE_PRD_ID,
+ENTY_1_ROLE_ID,
+ENTY_2_ROLE_ID
+)
+as
+select 
+    ENTY_1_ID PERSON_ID, 
+    ENTY_2_ID ORGANIZATION_ID, 
+    ENTY_ASN_RSN_ID, 
+    END_DATE_PRD_ID, 
+    BEGIN_DATE_PRD_ID, 
+    ENTY_1_ROLE_ID, 
+    ENTY_2_ROLE_ID
+from 
+    F_ENTY_ASN
+where 
+( 
+    ENTY_1_TYPE = 'PN'
+and ENTY_2_TYPE = 'ORG' 
+)
+
+
+----
+---- End of FV_PN_ORG_ASN
+----

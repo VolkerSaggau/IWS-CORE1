@@ -1,0 +1,63 @@
+
+
+view A_CUS_CNTC_SUMM__D_CNTC_RSOL__REF_23482 (
+   FACT,
+   DIMENSION,
+   DIRECTION,
+   KEY,
+   COUNTER,
+   SOURCE,
+   INTEGRITYSTATE
+)
+AS
+(
+   select 
+      'A_CUS_CNTC_SUMM'                        AS FACT,
+      'D_CNTC_RSOL'                            AS DIMENSION,
+      'Inbound'                                AS DIRECTION,
+   	to_varchar(FACT.CNTC_RSOL_ID)            AS KEY,
+   	count(*)                                 AS COUNTER,
+      'in: ' || 'D_CNTC_RSOL'                  AS SOURCE,
+      'info' AS INTEGRITYSTATE
+   from 
+   	A_CUS_CNTC_SUMM	 FACT
+   WHERE 
+      FACT.CNTC_RSOL_ID IN (select DIMENSION.CNTC_RSOL_ID from D_CNTC_RSOL	DIMENSION)
+   GROUP BY 
+      FACT.CNTC_RSOL_ID
+   
+   --
+   --
+
+UNION ALL
+
+   select 
+      'A_CUS_CNTC_SUMM'                        AS FACT,
+      'D_CNTC_RSOL'                            AS DIMENSION,
+      'Inbound'                                AS DIRECTION,
+   	to_varchar(FACT.CNTC_RSOL_ID)            AS KEY,
+   	count(*)                                 AS COUNTER,
+      'in: ' || 'D_CNTC_RSOL'                  AS SOURCE,
+      'error' AS INTEGRITYSTATE
+   from 
+   	A_CUS_CNTC_SUMM	 FACT
+   WHERE 
+      FACT.CNTC_RSOL_ID NOT IN (select DIMENSION.CNTC_RSOL_ID from D_CNTC_RSOL	DIMENSION)
+   GROUP BY 
+      FACT.CNTC_RSOL_ID
+   
+   --
+   --
+
+)
+ORDER BY 
+   FACT DESC, 
+   DIMENSION DESC, 
+   INTEGRITYSTATE DESC, 
+   SOURCE DESC, 
+   COUNTER DESC, 
+   KEY DESC
+;
+--
+-- end of statement
+--

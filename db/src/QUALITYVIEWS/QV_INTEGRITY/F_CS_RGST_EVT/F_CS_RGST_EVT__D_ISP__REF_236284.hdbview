@@ -1,0 +1,63 @@
+
+
+view F_CS_RGST_EVT__D_ISP__REF_236284 (
+   FACT,
+   DIMENSION,
+   DIRECTION,
+   KEY,
+   COUNTER,
+   SOURCE,
+   INTEGRITYSTATE
+)
+AS
+(
+   select 
+      'F_CS_RGST_EVT'                          AS FACT,
+      'D_ISP'                                  AS DIMENSION,
+      'Inbound'                                AS DIRECTION,
+   	to_varchar(FACT.ISP_ID)                  AS KEY,
+   	count(*)                                 AS COUNTER,
+      'in: ' || 'D_ISP'                        AS SOURCE,
+      'info' AS INTEGRITYSTATE
+   from 
+   	F_CS_RGST_EVT	 FACT
+   WHERE 
+      FACT.ISP_ID IN (select DIMENSION.ISP_ID from D_ISP	DIMENSION)
+   GROUP BY 
+      FACT.ISP_ID
+   
+   --
+   --
+
+UNION ALL
+
+   select 
+      'F_CS_RGST_EVT'                          AS FACT,
+      'D_ISP'                                  AS DIMENSION,
+      'Inbound'                                AS DIRECTION,
+   	to_varchar(FACT.ISP_ID)                  AS KEY,
+   	count(*)                                 AS COUNTER,
+      'in: ' || 'D_ISP'                        AS SOURCE,
+      'error' AS INTEGRITYSTATE
+   from 
+   	F_CS_RGST_EVT	 FACT
+   WHERE 
+      FACT.ISP_ID NOT IN (select DIMENSION.ISP_ID from D_ISP	DIMENSION)
+   GROUP BY 
+      FACT.ISP_ID
+   
+   --
+   --
+
+)
+ORDER BY 
+   FACT DESC, 
+   DIMENSION DESC, 
+   INTEGRITYSTATE DESC, 
+   SOURCE DESC, 
+   COUNTER DESC, 
+   KEY DESC
+;
+--
+-- end of statement
+--

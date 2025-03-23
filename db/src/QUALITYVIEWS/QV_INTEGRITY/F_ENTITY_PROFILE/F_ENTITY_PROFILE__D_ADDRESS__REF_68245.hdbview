@@ -1,0 +1,63 @@
+
+
+view F_ENTITY_PROFILE__D_ADDRESS__REF_68245 (
+   FACT,
+   DIMENSION,
+   DIRECTION,
+   KEY,
+   COUNTER,
+   SOURCE,
+   INTEGRITYSTATE
+)
+AS
+(
+   select 
+      'F_ENTITY_PROFILE'                       AS FACT,
+      'D_ADDRESS'                              AS DIMENSION,
+      'Inbound'                                AS DIRECTION,
+   	to_varchar(FACT.ADDRESS_ID)              AS KEY,
+   	count(*)                                 AS COUNTER,
+      'in: ' || 'D_ADDRESS'                    AS SOURCE,
+      'info' AS INTEGRITYSTATE
+   from 
+   	F_ENTITY_PROFILE	 FACT
+   WHERE 
+      FACT.ADDRESS_ID IN (select DIMENSION.ADDRESS_ID from D_ADDRESS	DIMENSION)
+   GROUP BY 
+      FACT.ADDRESS_ID
+   
+   --
+   --
+
+UNION ALL
+
+   select 
+      'F_ENTITY_PROFILE'                       AS FACT,
+      'D_ADDRESS'                              AS DIMENSION,
+      'Inbound'                                AS DIRECTION,
+   	to_varchar(FACT.ADDRESS_ID)              AS KEY,
+   	count(*)                                 AS COUNTER,
+      'in: ' || 'D_ADDRESS'                    AS SOURCE,
+      'error' AS INTEGRITYSTATE
+   from 
+   	F_ENTITY_PROFILE	 FACT
+   WHERE 
+      FACT.ADDRESS_ID NOT IN (select DIMENSION.ADDRESS_ID from D_ADDRESS	DIMENSION)
+   GROUP BY 
+      FACT.ADDRESS_ID
+   
+   --
+   --
+
+)
+ORDER BY 
+   FACT DESC, 
+   DIMENSION DESC, 
+   INTEGRITYSTATE DESC, 
+   SOURCE DESC, 
+   COUNTER DESC, 
+   KEY DESC
+;
+--
+-- end of statement
+--

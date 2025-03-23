@@ -1,0 +1,25 @@
+== version = 1
+
+
+
+column table F_PAGE_ASN (
+   PAGE_ID  INTEGER  NOT NULL   comment 'Page ID',
+   LINKED_PAGE_ID  INTEGER  NOT NULL   comment 'Linked to Page ID',
+   BEGIN_DATE_PRD_ID  INTEGER  NOT NULL   comment 'Begin Period ID',
+   END_DATE_PRD_ID  INTEGER  NOT NULL   comment 'End Period ID'
+, primary key  ( 
+     PAGE_ID,
+     LINKED_PAGE_ID,
+     BEGIN_DATE_PRD_ID)
+)
+with associations(
+   MANY TO ONE join "D_TIME_PERIOD" as D_TIME_PERIOD_REF_255240 on (D_TIME_PERIOD_REF_255240.PRD_ID = END_DATE_PRD_ID),
+   MANY TO ONE join "D_TIME_PERIOD" as D_TIME_PERIOD_REF_255239 on (D_TIME_PERIOD_REF_255239.PRD_ID = BEGIN_DATE_PRD_ID),
+   MANY TO ONE join "D_PAGE" as D_PAGE_REF_255231 on (D_PAGE_REF_255231.PAGE_ID = LINKED_PAGE_ID),
+   MANY TO ONE join "D_PAGE" as D_PAGE_REF_255228 on (D_PAGE_REF_255228.PAGE_ID = PAGE_ID)
+)
+comment 'Page Association'
+
+
+-- end of F_PAGE_ASN
+--

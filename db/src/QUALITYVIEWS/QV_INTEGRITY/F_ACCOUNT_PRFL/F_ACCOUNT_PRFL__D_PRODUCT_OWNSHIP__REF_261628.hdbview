@@ -1,0 +1,63 @@
+
+
+view F_ACCOUNT_PRFL__D_PRODUCT_OWNSHIP__REF_261628 (
+   FACT,
+   DIMENSION,
+   DIRECTION,
+   KEY,
+   COUNTER,
+   SOURCE,
+   INTEGRITYSTATE
+)
+AS
+(
+   select 
+      'F_ACCOUNT_PRFL'                         AS FACT,
+      'D_PRODUCT_OWNSHIP'                      AS DIMENSION,
+      'Inbound'                                AS DIRECTION,
+   	to_varchar(FACT.PD_OWNERSHIP_ID)         AS KEY,
+   	count(*)                                 AS COUNTER,
+      'in: ' || 'D_PRODUCT_OWNSHIP'            AS SOURCE,
+      'info' AS INTEGRITYSTATE
+   from 
+   	F_ACCOUNT_PRFL	 FACT
+   WHERE 
+      FACT.PD_OWNERSHIP_ID IN (select DIMENSION.PD_OWNERSHIP_ID from D_PRODUCT_OWNSHIP	DIMENSION)
+   GROUP BY 
+      FACT.PD_OWNERSHIP_ID
+   
+   --
+   --
+
+UNION ALL
+
+   select 
+      'F_ACCOUNT_PRFL'                         AS FACT,
+      'D_PRODUCT_OWNSHIP'                      AS DIMENSION,
+      'Inbound'                                AS DIRECTION,
+   	to_varchar(FACT.PD_OWNERSHIP_ID)         AS KEY,
+   	count(*)                                 AS COUNTER,
+      'in: ' || 'D_PRODUCT_OWNSHIP'            AS SOURCE,
+      'error' AS INTEGRITYSTATE
+   from 
+   	F_ACCOUNT_PRFL	 FACT
+   WHERE 
+      FACT.PD_OWNERSHIP_ID NOT IN (select DIMENSION.PD_OWNERSHIP_ID from D_PRODUCT_OWNSHIP	DIMENSION)
+   GROUP BY 
+      FACT.PD_OWNERSHIP_ID
+   
+   --
+   --
+
+)
+ORDER BY 
+   FACT DESC, 
+   DIMENSION DESC, 
+   INTEGRITYSTATE DESC, 
+   SOURCE DESC, 
+   COUNTER DESC, 
+   KEY DESC
+;
+--
+-- end of statement
+--

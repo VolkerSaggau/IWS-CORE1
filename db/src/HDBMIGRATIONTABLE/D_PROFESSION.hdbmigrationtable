@@ -1,0 +1,21 @@
+== version = 1
+
+
+
+column table D_PROFESSION (
+   PROFESSION_ID  INTEGER  NOT NULL   comment 'Profession ID',
+   PROFESSION_GRP  NVARCHAR(35)     comment 'Profession Group',
+   PROFESSION_IDST  NVARCHAR(35)     comment 'Profession Industry',
+   PROFESSION_NAME  NVARCHAR(35)     comment 'Profession Name',
+   PROFESSION_CD  NVARCHAR(3)     comment 'Profession Code',
+   PROFESSION_TITLE  NVARCHAR(15)     comment 'Profession Title',
+   PRF_ALL_ENTRIES_IN  NVARCHAR(1)     comment 'All Entries Indicator'
+, primary key  ( 
+     PROFESSION_ID)
+)
+
+comment 'Profession'
+
+
+-- end of D_PROFESSION
+--

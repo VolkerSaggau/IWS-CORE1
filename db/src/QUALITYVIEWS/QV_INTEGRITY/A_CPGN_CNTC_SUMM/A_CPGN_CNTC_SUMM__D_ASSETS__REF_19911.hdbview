@@ -1,0 +1,63 @@
+
+
+view A_CPGN_CNTC_SUMM__D_ASSETS__REF_19911 (
+   FACT,
+   DIMENSION,
+   DIRECTION,
+   KEY,
+   COUNTER,
+   SOURCE,
+   INTEGRITYSTATE
+)
+AS
+(
+   select 
+      'A_CPGN_CNTC_SUMM'                       AS FACT,
+      'D_ASSETS'                               AS DIMENSION,
+      'Inbound'                                AS DIRECTION,
+   	to_varchar(FACT.ASSET_ID)                AS KEY,
+   	count(*)                                 AS COUNTER,
+      'in: ' || 'D_ASSETS'                     AS SOURCE,
+      'info' AS INTEGRITYSTATE
+   from 
+   	A_CPGN_CNTC_SUMM	 FACT
+   WHERE 
+      FACT.ASSET_ID IN (select DIMENSION.ASSET_ID from D_ASSETS	DIMENSION)
+   GROUP BY 
+      FACT.ASSET_ID
+   
+   --
+   --
+
+UNION ALL
+
+   select 
+      'A_CPGN_CNTC_SUMM'                       AS FACT,
+      'D_ASSETS'                               AS DIMENSION,
+      'Inbound'                                AS DIRECTION,
+   	to_varchar(FACT.ASSET_ID)                AS KEY,
+   	count(*)                                 AS COUNTER,
+      'in: ' || 'D_ASSETS'                     AS SOURCE,
+      'error' AS INTEGRITYSTATE
+   from 
+   	A_CPGN_CNTC_SUMM	 FACT
+   WHERE 
+      FACT.ASSET_ID NOT IN (select DIMENSION.ASSET_ID from D_ASSETS	DIMENSION)
+   GROUP BY 
+      FACT.ASSET_ID
+   
+   --
+   --
+
+)
+ORDER BY 
+   FACT DESC, 
+   DIMENSION DESC, 
+   INTEGRITYSTATE DESC, 
+   SOURCE DESC, 
+   COUNTER DESC, 
+   KEY DESC
+;
+--
+-- end of statement
+--

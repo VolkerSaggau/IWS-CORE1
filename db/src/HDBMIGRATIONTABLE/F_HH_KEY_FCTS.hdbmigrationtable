@@ -1,0 +1,20 @@
+== version = 1
+
+
+
+column table F_HH_KEY_FCTS (
+   HOUSEHOLD_ID  INTEGER  NOT NULL   comment 'Household ID',
+   CUS_SINCE_PRD_ID  INTEGER     comment 'Customer Since Date Period ID',
+   PYMT_MTHD  NVARCHAR(35)
+, primary key  ( 
+     HOUSEHOLD_ID)
+)
+with associations(
+   MANY TO ONE join "D_TIME_PERIOD" as D_TIME_PERIOD_REF_63593 on (D_TIME_PERIOD_REF_63593.PRD_ID = CUS_SINCE_PRD_ID),
+   MANY TO ONE join "D_ENTITY" as D_ENTITY_REF_64114 on (D_ENTITY_REF_64114.ENTY_ID = HOUSEHOLD_ID)
+)
+comment 'Household Key Facts'
+
+
+-- end of F_HH_KEY_FCTS
+--

@@ -1,0 +1,24 @@
+== version = 1
+
+
+
+column table F_ISP_USAGE (
+   USER_ID  INTEGER  NOT NULL   comment 'User ID',
+   MONTH_ID  INTEGER  NOT NULL   comment 'Month ID',
+   ISP_ID  INTEGER  NOT NULL   comment 'ISP ID',
+   USAGE_TIME  INTEGER     comment 'Usage Time'
+, primary key  ( 
+     USER_ID,
+     MONTH_ID,
+     ISP_ID)
+)
+with associations(
+   MANY TO ONE join "D_MONTH" as D_MONTH_REF_251019 on (D_MONTH_REF_251019.MONTH_ID = MONTH_ID),
+   MANY TO ONE join "D_USER" as D_USER_REF_217979 on (D_USER_REF_217979.USER_ID = USER_ID),
+   MANY TO ONE join "D_ISP" as D_ISP_REF_241771 on (D_ISP_REF_241771.ISP_ID = ISP_ID)
+)
+comment 'ISP Usage'
+
+
+-- end of F_ISP_USAGE
+--

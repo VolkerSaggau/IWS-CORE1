@@ -1,0 +1,43 @@
+== version = 1
+
+
+
+column table F_CS_RGST_EVT (
+   USER_ID  INTEGER  NOT NULL   comment 'User ID',
+   RGST_EVT_SEQ_NBR  INTEGER  NOT NULL   comment 'Registration Event Sequence Number',
+   PRD_ID  INTEGER  NOT NULL   comment 'Registration Date Period',
+   HOUR_ID  INTEGER  NOT NULL   comment 'Hour ID',
+   RGST_INFO_CAT_ID  INTEGER     comment 'Registration Info Cat ID',
+   ENTRY_PAGE_ID  INTEGER     comment 'Entry Page ID',
+   EXIT_PAGE_ID  INTEGER     comment 'Exit Page ID',
+   REFERRAL_ID  INTEGER     comment 'Referral ID',
+   ISP_ID  INTEGER     comment 'ISP ID',
+   BANNER_AD_ID  INTEGER     comment 'Banner Ad ID',
+   CUSTOMER_ID  INTEGER     comment 'Customer ID',
+   RGST_CPLT_IND  NVARCHAR(1)     comment 'Registration Completed Indicator',
+   RGST_DRTN  INTEGER     comment 'Registration Duration',
+   SUBSCRIBED_IND  NVARCHAR(1)     comment 'Subscribed to Newsletter Indicator',
+   VST_DRTN_BEF_RGST  INTEGER     comment 'Vistit Duration Before Registration',
+   NBR_VISITS  INTEGER     comment 'Number of Visits',
+   DAYS_FROM_FST_VST  INTEGER     comment 'Days From First Visit'
+, primary key  ( 
+     USER_ID,
+     RGST_EVT_SEQ_NBR)
+)
+with associations(
+   MANY TO ONE join "D_PAGE" as D_PAGE_REF_255255 on (D_PAGE_REF_255255.PAGE_ID = EXIT_PAGE_ID),
+   MANY TO ONE join "D_PAGE" as D_PAGE_REF_255254 on (D_PAGE_REF_255254.PAGE_ID = ENTRY_PAGE_ID),
+   MANY TO ONE join "D_ENTITY" as D_ENTITY_REF_255249 on (D_ENTITY_REF_255249.ENTY_ID = CUSTOMER_ID),
+   MANY TO ONE join "D_HOUR" as D_HOUR_REF_238516 on (D_HOUR_REF_238516.HOUR_ID = HOUR_ID),
+   MANY TO ONE join "D_BANNER_AD" as D_BANNER_AD_REF_238514 on (D_BANNER_AD_REF_238514.BANNER_AD_ID = BANNER_AD_ID),
+   MANY TO ONE join "D_USER" as D_USER_REF_218039 on (D_USER_REF_218039.USER_ID = USER_ID),
+   MANY TO ONE join "D_TIME_PERIOD" as D_TIME_PERIOD_REF_241644 on (D_TIME_PERIOD_REF_241644.PRD_ID = PRD_ID),
+   MANY TO ONE join "D_RGST_INFO_CAT" as D_RGST_INFO_CAT_REF_241641 on (D_RGST_INFO_CAT_REF_241641.RGST_INFO_CAT_ID = RGST_INFO_CAT_ID),
+   MANY TO ONE join "D_REFERRAL" as D_REFERRAL_REF_241629 on (D_REFERRAL_REF_241629.REFERRAL_ID = REFERRAL_ID),
+   MANY TO ONE join "D_ISP" as D_ISP_REF_236284 on (D_ISP_REF_236284.ISP_ID = ISP_ID)
+)
+comment 'Registration Event'
+
+
+-- end of F_CS_RGST_EVT
+--

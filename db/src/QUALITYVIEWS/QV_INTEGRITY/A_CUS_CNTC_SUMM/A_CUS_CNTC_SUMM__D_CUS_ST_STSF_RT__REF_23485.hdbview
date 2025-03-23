@@ -1,0 +1,63 @@
+
+
+view A_CUS_CNTC_SUMM__D_CUS_ST_STSF_RT__REF_23485 (
+   FACT,
+   DIMENSION,
+   DIRECTION,
+   KEY,
+   COUNTER,
+   SOURCE,
+   INTEGRITYSTATE
+)
+AS
+(
+   select 
+      'A_CUS_CNTC_SUMM'                        AS FACT,
+      'D_CUS_ST_STSF_RT'                       AS DIMENSION,
+      'Inbound'                                AS DIRECTION,
+   	to_varchar(FACT.CUS_STSF_RT_ID)          AS KEY,
+   	count(*)                                 AS COUNTER,
+      'in: ' || 'D_CUS_ST_STSF_RT'             AS SOURCE,
+      'info' AS INTEGRITYSTATE
+   from 
+   	A_CUS_CNTC_SUMM	 FACT
+   WHERE 
+      FACT.CUS_STSF_RT_ID IN (select DIMENSION.CUS_STSF_RT_ID from D_CUS_ST_STSF_RT	DIMENSION)
+   GROUP BY 
+      FACT.CUS_STSF_RT_ID
+   
+   --
+   --
+
+UNION ALL
+
+   select 
+      'A_CUS_CNTC_SUMM'                        AS FACT,
+      'D_CUS_ST_STSF_RT'                       AS DIMENSION,
+      'Inbound'                                AS DIRECTION,
+   	to_varchar(FACT.CUS_STSF_RT_ID)          AS KEY,
+   	count(*)                                 AS COUNTER,
+      'in: ' || 'D_CUS_ST_STSF_RT'             AS SOURCE,
+      'error' AS INTEGRITYSTATE
+   from 
+   	A_CUS_CNTC_SUMM	 FACT
+   WHERE 
+      FACT.CUS_STSF_RT_ID NOT IN (select DIMENSION.CUS_STSF_RT_ID from D_CUS_ST_STSF_RT	DIMENSION)
+   GROUP BY 
+      FACT.CUS_STSF_RT_ID
+   
+   --
+   --
+
+)
+ORDER BY 
+   FACT DESC, 
+   DIMENSION DESC, 
+   INTEGRITYSTATE DESC, 
+   SOURCE DESC, 
+   COUNTER DESC, 
+   KEY DESC
+;
+--
+-- end of statement
+--

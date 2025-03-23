@@ -1,0 +1,63 @@
+
+
+view F_CUS_PLCY_RLT__D_PLCY__REF_87047 (
+   FACT,
+   DIMENSION,
+   DIRECTION,
+   KEY,
+   COUNTER,
+   SOURCE,
+   INTEGRITYSTATE
+)
+AS
+(
+   select 
+      'F_CUS_PLCY_RLT'                         AS FACT,
+      'D_PLCY'                                 AS DIMENSION,
+      'Inbound'                                AS DIRECTION,
+   	to_varchar(FACT.PLCY_ID)                 AS KEY,
+   	count(*)                                 AS COUNTER,
+      'in: ' || 'D_PLCY'                       AS SOURCE,
+      'info' AS INTEGRITYSTATE
+   from 
+   	F_CUS_PLCY_RLT	 FACT
+   WHERE 
+      FACT.PLCY_ID IN (select DIMENSION.PLCY_ID from D_PLCY	DIMENSION)
+   GROUP BY 
+      FACT.PLCY_ID
+   
+   --
+   --
+
+UNION ALL
+
+   select 
+      'F_CUS_PLCY_RLT'                         AS FACT,
+      'D_PLCY'                                 AS DIMENSION,
+      'Inbound'                                AS DIRECTION,
+   	to_varchar(FACT.PLCY_ID)                 AS KEY,
+   	count(*)                                 AS COUNTER,
+      'in: ' || 'D_PLCY'                       AS SOURCE,
+      'error' AS INTEGRITYSTATE
+   from 
+   	F_CUS_PLCY_RLT	 FACT
+   WHERE 
+      FACT.PLCY_ID NOT IN (select DIMENSION.PLCY_ID from D_PLCY	DIMENSION)
+   GROUP BY 
+      FACT.PLCY_ID
+   
+   --
+   --
+
+)
+ORDER BY 
+   FACT DESC, 
+   DIMENSION DESC, 
+   INTEGRITYSTATE DESC, 
+   SOURCE DESC, 
+   COUNTER DESC, 
+   KEY DESC
+;
+--
+-- end of statement
+--

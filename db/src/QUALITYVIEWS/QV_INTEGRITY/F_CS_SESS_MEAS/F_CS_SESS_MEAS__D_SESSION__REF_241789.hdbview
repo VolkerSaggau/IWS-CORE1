@@ -1,0 +1,63 @@
+
+
+view F_CS_SESS_MEAS__D_SESSION__REF_241789 (
+   FACT,
+   DIMENSION,
+   DIRECTION,
+   KEY,
+   COUNTER,
+   SOURCE,
+   INTEGRITYSTATE
+)
+AS
+(
+   select 
+      'F_CS_SESS_MEAS'                         AS FACT,
+      'D_SESSION'                              AS DIMENSION,
+      'Inbound'                                AS DIRECTION,
+   	to_varchar(FACT.SESSION_ID)              AS KEY,
+   	count(*)                                 AS COUNTER,
+      'in: ' || 'D_SESSION'                    AS SOURCE,
+      'info' AS INTEGRITYSTATE
+   from 
+   	F_CS_SESS_MEAS	 FACT
+   WHERE 
+      FACT.SESSION_ID IN (select DIMENSION.SESSION_ID from D_SESSION	DIMENSION)
+   GROUP BY 
+      FACT.SESSION_ID
+   
+   --
+   --
+
+UNION ALL
+
+   select 
+      'F_CS_SESS_MEAS'                         AS FACT,
+      'D_SESSION'                              AS DIMENSION,
+      'Inbound'                                AS DIRECTION,
+   	to_varchar(FACT.SESSION_ID)              AS KEY,
+   	count(*)                                 AS COUNTER,
+      'in: ' || 'D_SESSION'                    AS SOURCE,
+      'error' AS INTEGRITYSTATE
+   from 
+   	F_CS_SESS_MEAS	 FACT
+   WHERE 
+      FACT.SESSION_ID NOT IN (select DIMENSION.SESSION_ID from D_SESSION	DIMENSION)
+   GROUP BY 
+      FACT.SESSION_ID
+   
+   --
+   --
+
+)
+ORDER BY 
+   FACT DESC, 
+   DIMENSION DESC, 
+   INTEGRITYSTATE DESC, 
+   SOURCE DESC, 
+   COUNTER DESC, 
+   KEY DESC
+;
+--
+-- end of statement
+--

@@ -1,0 +1,63 @@
+
+
+view F_CS_SESS_MEAS__D_SESSION_PRFL__REF_251011 (
+   FACT,
+   DIMENSION,
+   DIRECTION,
+   KEY,
+   COUNTER,
+   SOURCE,
+   INTEGRITYSTATE
+)
+AS
+(
+   select 
+      'F_CS_SESS_MEAS'                         AS FACT,
+      'D_SESSION_PRFL'                         AS DIMENSION,
+      'Inbound'                                AS DIRECTION,
+   	to_varchar(FACT.SESSION_PRFL_ID)         AS KEY,
+   	count(*)                                 AS COUNTER,
+      'in: ' || 'D_SESSION_PRFL'               AS SOURCE,
+      'info' AS INTEGRITYSTATE
+   from 
+   	F_CS_SESS_MEAS	 FACT
+   WHERE 
+      FACT.SESSION_PRFL_ID IN (select DIMENSION.SESSION_PRFL_ID from D_SESSION_PRFL	DIMENSION)
+   GROUP BY 
+      FACT.SESSION_PRFL_ID
+   
+   --
+   --
+
+UNION ALL
+
+   select 
+      'F_CS_SESS_MEAS'                         AS FACT,
+      'D_SESSION_PRFL'                         AS DIMENSION,
+      'Inbound'                                AS DIRECTION,
+   	to_varchar(FACT.SESSION_PRFL_ID)         AS KEY,
+   	count(*)                                 AS COUNTER,
+      'in: ' || 'D_SESSION_PRFL'               AS SOURCE,
+      'error' AS INTEGRITYSTATE
+   from 
+   	F_CS_SESS_MEAS	 FACT
+   WHERE 
+      FACT.SESSION_PRFL_ID NOT IN (select DIMENSION.SESSION_PRFL_ID from D_SESSION_PRFL	DIMENSION)
+   GROUP BY 
+      FACT.SESSION_PRFL_ID
+   
+   --
+   --
+
+)
+ORDER BY 
+   FACT DESC, 
+   DIMENSION DESC, 
+   INTEGRITYSTATE DESC, 
+   SOURCE DESC, 
+   COUNTER DESC, 
+   KEY DESC
+;
+--
+-- end of statement
+--

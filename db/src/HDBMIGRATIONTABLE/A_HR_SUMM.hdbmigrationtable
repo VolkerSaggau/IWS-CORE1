@@ -1,0 +1,32 @@
+== version = 1
+
+
+
+column table A_HR_SUMM (
+   EVT_EMP_DEMO_ID  INTEGER  NOT NULL   comment 'DEMO_ID',
+   EVT_ADMIN_DEMO_ID  INTEGER  NOT NULL   comment 'DEMO_ID',
+   COR_RPT_STRC_ID  INTEGER  NOT NULL   comment 'CORE RPTG STRUCT ID',
+   MEASURE_UNIT_ID  INTEGER  NOT NULL   comment 'Measurement Unit ID',
+   EVT_TYP_ID  INTEGER     comment 'Core Data Warehouse Event Type ID',
+   GEO_ID  INTEGER     comment 'Geographic ID',
+   MONTH_ID  INTEGER     comment 'Month ID',
+   HEX_QUANTITY  DECIMAL     comment 'QUANTITY',
+   SUMM_RECORD_COUNT  INTEGER     comment 'Summary Record Count'
+, primary key  ( 
+     EVT_EMP_DEMO_ID,
+     EVT_ADMIN_DEMO_ID,
+     COR_RPT_STRC_ID,
+     MEASURE_UNIT_ID)
+)
+with associations(
+   MANY TO ONE join "D_MONTH" as D_MONTH_REF_94398 on (D_MONTH_REF_94398.MONTH_ID = MONTH_ID),
+   MANY TO ONE join "D_GEOGRAPHY" as D_GEOGRAPHY_REF_23535 on (D_GEOGRAPHY_REF_23535.GEO_ID = GEO_ID),
+   MANY TO ONE join "D_CORE_EVT_TYP" as D_CORE_EVT_TYP_REF_23551 on (D_CORE_EVT_TYP_REF_23551.EVT_TYP_ID = EVT_TYP_ID),
+   MANY TO ONE join "D_MSR_UNIT" as D_MSR_UNIT_REF_23541 on (D_MSR_UNIT_REF_23541.MEASURE_UNIT_ID = MEASURE_UNIT_ID),
+   MANY TO ONE join "D_CORE_RPT_STRC" as D_CORE_RPT_STRC_REF_23538 on (D_CORE_RPT_STRC_REF_23538.COR_RPT_STRC_ID = COR_RPT_STRC_ID)
+)
+comment 'Human Resources Event Summary'
+
+
+-- end of A_HR_SUMM
+--

@@ -1,0 +1,63 @@
+
+
+view F_CS_RGST_EVT__D_RGST_INFO_CAT__REF_241641 (
+   FACT,
+   DIMENSION,
+   DIRECTION,
+   KEY,
+   COUNTER,
+   SOURCE,
+   INTEGRITYSTATE
+)
+AS
+(
+   select 
+      'F_CS_RGST_EVT'                          AS FACT,
+      'D_RGST_INFO_CAT'                        AS DIMENSION,
+      'Inbound'                                AS DIRECTION,
+   	to_varchar(FACT.RGST_INFO_CAT_ID)        AS KEY,
+   	count(*)                                 AS COUNTER,
+      'in: ' || 'D_RGST_INFO_CAT'              AS SOURCE,
+      'info' AS INTEGRITYSTATE
+   from 
+   	F_CS_RGST_EVT	 FACT
+   WHERE 
+      FACT.RGST_INFO_CAT_ID IN (select DIMENSION.RGST_INFO_CAT_ID from D_RGST_INFO_CAT	DIMENSION)
+   GROUP BY 
+      FACT.RGST_INFO_CAT_ID
+   
+   --
+   --
+
+UNION ALL
+
+   select 
+      'F_CS_RGST_EVT'                          AS FACT,
+      'D_RGST_INFO_CAT'                        AS DIMENSION,
+      'Inbound'                                AS DIRECTION,
+   	to_varchar(FACT.RGST_INFO_CAT_ID)        AS KEY,
+   	count(*)                                 AS COUNTER,
+      'in: ' || 'D_RGST_INFO_CAT'              AS SOURCE,
+      'error' AS INTEGRITYSTATE
+   from 
+   	F_CS_RGST_EVT	 FACT
+   WHERE 
+      FACT.RGST_INFO_CAT_ID NOT IN (select DIMENSION.RGST_INFO_CAT_ID from D_RGST_INFO_CAT	DIMENSION)
+   GROUP BY 
+      FACT.RGST_INFO_CAT_ID
+   
+   --
+   --
+
+)
+ORDER BY 
+   FACT DESC, 
+   DIMENSION DESC, 
+   INTEGRITYSTATE DESC, 
+   SOURCE DESC, 
+   COUNTER DESC, 
+   KEY DESC
+;
+--
+-- end of statement
+--

@@ -1,0 +1,24 @@
+
+
+view FV_PN_PRM_EXCL comment 'Person Promotion Exclusion'(
+PRM_CPGN_ID,
+PERSON_ID,
+BEGIN_DATE_PRD_ID,
+END_DATE_PRD_ID,
+PRM_EXCL_REASON
+)
+as
+select 
+    EXCL.PRM_CPGN_ID, EXCL.ENTY_ID PERSON_ID, EXCL.BEGIN_DATE_PRD_ID, 
+EXCL.END_DATE_PRD_ID, EXCL.PRM_EXCL_REASON
+from 
+    D_ENTITY        ENT, 
+    F_CUS_PRM_EXCL  EXCL
+where 
+    ENT.ENTY_ID     = EXCL.ENTY_ID
+and ENT.ENTY_TYPE   = 'PN'
+
+
+----
+---- End of FV_PN_PRM_EXCL
+----

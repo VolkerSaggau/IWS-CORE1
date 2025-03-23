@@ -1,0 +1,63 @@
+
+
+view F_CUS_CNTC_EVT__D_ENTITY__REF_57433 (
+   FACT,
+   DIMENSION,
+   DIRECTION,
+   KEY,
+   COUNTER,
+   SOURCE,
+   INTEGRITYSTATE
+)
+AS
+(
+   select 
+      'F_CUS_CNTC_EVT'                         AS FACT,
+      'D_ENTITY'                               AS DIMENSION,
+      'Inbound'                                AS DIRECTION,
+   	to_varchar(FACT.RSOL_CNTC_EMP_ID)        AS KEY,
+   	count(*)                                 AS COUNTER,
+      'in: ' || 'D_ENTITY'                     AS SOURCE,
+      'info' AS INTEGRITYSTATE
+   from 
+   	F_CUS_CNTC_EVT	 FACT
+   WHERE 
+      FACT.RSOL_CNTC_EMP_ID IN (select DIMENSION.ENTY_ID from D_ENTITY	DIMENSION)
+   GROUP BY 
+      FACT.RSOL_CNTC_EMP_ID
+   
+   --
+   --
+
+UNION ALL
+
+   select 
+      'F_CUS_CNTC_EVT'                         AS FACT,
+      'D_ENTITY'                               AS DIMENSION,
+      'Inbound'                                AS DIRECTION,
+   	to_varchar(FACT.RSOL_CNTC_EMP_ID)        AS KEY,
+   	count(*)                                 AS COUNTER,
+      'in: ' || 'D_ENTITY'                     AS SOURCE,
+      'error' AS INTEGRITYSTATE
+   from 
+   	F_CUS_CNTC_EVT	 FACT
+   WHERE 
+      FACT.RSOL_CNTC_EMP_ID NOT IN (select DIMENSION.ENTY_ID from D_ENTITY	DIMENSION)
+   GROUP BY 
+      FACT.RSOL_CNTC_EMP_ID
+   
+   --
+   --
+
+)
+ORDER BY 
+   FACT DESC, 
+   DIMENSION DESC, 
+   INTEGRITYSTATE DESC, 
+   SOURCE DESC, 
+   COUNTER DESC, 
+   KEY DESC
+;
+--
+-- end of statement
+--

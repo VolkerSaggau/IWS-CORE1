@@ -1,0 +1,33 @@
+
+
+view FV_PN_PD_USAGE comment 'Person Product Usage'(
+PRODUCT_ID,
+PERSON_ID,
+BEGIN_DATE_PRD_ID,
+END_DATE_PRD_ID,
+MEASURE_UNIT_ID,
+PD_USE_SCOR,
+PD_USE_AMT,
+PRODUCT_NAME
+)
+as
+select 
+    PD_US.PRODUCT_ID, 
+    PD_US.CUSTOMER_ID       PERSON_ID, 
+    PD_US.BEGIN_DATE_PRD_ID, 
+    PD_US.END_DATE_PRD_ID, 
+    PD_US.MEASURE_UNIT_ID, 
+    PD_US.ENTY_PD_USE_SCOR  PD_USE_SCOR, 
+    PD_US.ENTY_PD_USE_AMT   PD_USE_AMT, 
+    PD_US.PRODUCT_NAME
+from 
+    F_PD_USAGE      PD_US, 
+    D_ENTITY        ENT
+where 
+    ENT.ENTY_ID     = PD_US.CUSTOMER_ID
+and ENT.ENTY_TYPE   = 'PN'
+
+
+----
+---- End of FV_PN_PD_USAGE
+----

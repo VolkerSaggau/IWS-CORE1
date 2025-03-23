@@ -1,0 +1,63 @@
+
+
+view F_NEW_BUS_TARGET__D_PREM_CAT__REF_162 (
+   FACT,
+   DIMENSION,
+   DIRECTION,
+   KEY,
+   COUNTER,
+   SOURCE,
+   INTEGRITYSTATE
+)
+AS
+(
+   select 
+      'F_NEW_BUS_TARGET'                       AS FACT,
+      'D_PREM_CAT'                             AS DIMENSION,
+      'Inbound'                                AS DIRECTION,
+   	to_varchar(FACT.PREM_CAT_ID)             AS KEY,
+   	count(*)                                 AS COUNTER,
+      'in: ' || 'D_PREM_CAT'                   AS SOURCE,
+      'info' AS INTEGRITYSTATE
+   from 
+   	F_NEW_BUS_TARGET	 FACT
+   WHERE 
+      FACT.PREM_CAT_ID IN (select DIMENSION.PREM_CAT_ID from D_PREM_CAT	DIMENSION)
+   GROUP BY 
+      FACT.PREM_CAT_ID
+   
+   --
+   --
+
+UNION ALL
+
+   select 
+      'F_NEW_BUS_TARGET'                       AS FACT,
+      'D_PREM_CAT'                             AS DIMENSION,
+      'Inbound'                                AS DIRECTION,
+   	to_varchar(FACT.PREM_CAT_ID)             AS KEY,
+   	count(*)                                 AS COUNTER,
+      'in: ' || 'D_PREM_CAT'                   AS SOURCE,
+      'error' AS INTEGRITYSTATE
+   from 
+   	F_NEW_BUS_TARGET	 FACT
+   WHERE 
+      FACT.PREM_CAT_ID NOT IN (select DIMENSION.PREM_CAT_ID from D_PREM_CAT	DIMENSION)
+   GROUP BY 
+      FACT.PREM_CAT_ID
+   
+   --
+   --
+
+)
+ORDER BY 
+   FACT DESC, 
+   DIMENSION DESC, 
+   INTEGRITYSTATE DESC, 
+   SOURCE DESC, 
+   COUNTER DESC, 
+   KEY DESC
+;
+--
+-- end of statement
+--

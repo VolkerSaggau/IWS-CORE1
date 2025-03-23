@@ -1,0 +1,63 @@
+
+
+view F_UNQUAL_PROFILE__D_GEOGRAPHY__REF_258177 (
+   FACT,
+   DIMENSION,
+   DIRECTION,
+   KEY,
+   COUNTER,
+   SOURCE,
+   INTEGRITYSTATE
+)
+AS
+(
+   select 
+      'F_UNQUAL_PROFILE'                       AS FACT,
+      'D_GEOGRAPHY'                            AS DIMENSION,
+      'Inbound'                                AS DIRECTION,
+   	to_varchar(FACT.GEO_ID)                  AS KEY,
+   	count(*)                                 AS COUNTER,
+      'in: ' || 'D_GEOGRAPHY'                  AS SOURCE,
+      'info' AS INTEGRITYSTATE
+   from 
+   	F_UNQUAL_PROFILE	 FACT
+   WHERE 
+      FACT.GEO_ID IN (select DIMENSION.GEO_ID from D_GEOGRAPHY	DIMENSION)
+   GROUP BY 
+      FACT.GEO_ID
+   
+   --
+   --
+
+UNION ALL
+
+   select 
+      'F_UNQUAL_PROFILE'                       AS FACT,
+      'D_GEOGRAPHY'                            AS DIMENSION,
+      'Inbound'                                AS DIRECTION,
+   	to_varchar(FACT.GEO_ID)                  AS KEY,
+   	count(*)                                 AS COUNTER,
+      'in: ' || 'D_GEOGRAPHY'                  AS SOURCE,
+      'error' AS INTEGRITYSTATE
+   from 
+   	F_UNQUAL_PROFILE	 FACT
+   WHERE 
+      FACT.GEO_ID NOT IN (select DIMENSION.GEO_ID from D_GEOGRAPHY	DIMENSION)
+   GROUP BY 
+      FACT.GEO_ID
+   
+   --
+   --
+
+)
+ORDER BY 
+   FACT DESC, 
+   DIMENSION DESC, 
+   INTEGRITYSTATE DESC, 
+   SOURCE DESC, 
+   COUNTER DESC, 
+   KEY DESC
+;
+--
+-- end of statement
+--

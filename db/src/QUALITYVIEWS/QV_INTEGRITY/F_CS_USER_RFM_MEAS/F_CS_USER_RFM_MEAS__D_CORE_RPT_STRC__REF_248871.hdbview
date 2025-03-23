@@ -1,0 +1,63 @@
+
+
+view F_CS_USER_RFM_MEAS__D_CORE_RPT_STRC__REF_248871 (
+   FACT,
+   DIMENSION,
+   DIRECTION,
+   KEY,
+   COUNTER,
+   SOURCE,
+   INTEGRITYSTATE
+)
+AS
+(
+   select 
+      'F_CS_USER_RFM_MEAS'                     AS FACT,
+      'D_CORE_RPT_STRC'                        AS DIMENSION,
+      'Inbound'                                AS DIRECTION,
+   	to_varchar(FACT.COR_RPT_STRC_ID)         AS KEY,
+   	count(*)                                 AS COUNTER,
+      'in: ' || 'D_CORE_RPT_STRC'              AS SOURCE,
+      'info' AS INTEGRITYSTATE
+   from 
+   	F_CS_USER_RFM_MEAS	 FACT
+   WHERE 
+      FACT.COR_RPT_STRC_ID IN (select DIMENSION.COR_RPT_STRC_ID from D_CORE_RPT_STRC	DIMENSION)
+   GROUP BY 
+      FACT.COR_RPT_STRC_ID
+   
+   --
+   --
+
+UNION ALL
+
+   select 
+      'F_CS_USER_RFM_MEAS'                     AS FACT,
+      'D_CORE_RPT_STRC'                        AS DIMENSION,
+      'Inbound'                                AS DIRECTION,
+   	to_varchar(FACT.COR_RPT_STRC_ID)         AS KEY,
+   	count(*)                                 AS COUNTER,
+      'in: ' || 'D_CORE_RPT_STRC'              AS SOURCE,
+      'error' AS INTEGRITYSTATE
+   from 
+   	F_CS_USER_RFM_MEAS	 FACT
+   WHERE 
+      FACT.COR_RPT_STRC_ID NOT IN (select DIMENSION.COR_RPT_STRC_ID from D_CORE_RPT_STRC	DIMENSION)
+   GROUP BY 
+      FACT.COR_RPT_STRC_ID
+   
+   --
+   --
+
+)
+ORDER BY 
+   FACT DESC, 
+   DIMENSION DESC, 
+   INTEGRITYSTATE DESC, 
+   SOURCE DESC, 
+   COUNTER DESC, 
+   KEY DESC
+;
+--
+-- end of statement
+--

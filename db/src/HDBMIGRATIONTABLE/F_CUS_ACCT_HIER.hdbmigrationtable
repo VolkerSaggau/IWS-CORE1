@@ -1,0 +1,34 @@
+== version = 1
+
+
+
+column table F_CUS_ACCT_HIER (
+   CUSTOMER_ID  INTEGER  NOT NULL   comment 'Superior Customer ID',
+   SBRD_CUS_ID  INTEGER  NOT NULL   comment 'Subordinate Customer ID',
+   ACCOUNT_ID  INTEGER  NOT NULL   comment 'Superior Account ID',
+   SBRD_ACCT_ID  INTEGER  NOT NULL   comment 'Subordinate Account ID',
+   BEGIN_DATE_PRD_ID  INTEGER  NOT NULL   comment 'Effective Date Period ID',
+   END_DATE_PRD_ID  INTEGER  NOT NULL   comment 'End Date Period ID',
+   SBRD_CUS_NAME  NVARCHAR(30)     comment 'Subordinate Customer Name',
+   CUSTOMER_NAME  NVARCHAR(30)     comment 'Superior Customer Name',
+   HIERARCHY_TYPE  NVARCHAR(3)     comment 'Hierarchy Type'
+, primary key  ( 
+     CUSTOMER_ID,
+     SBRD_CUS_ID,
+     ACCOUNT_ID,
+     SBRD_ACCT_ID,
+     BEGIN_DATE_PRD_ID)
+)
+with associations(
+   MANY TO ONE join "D_TIME_PERIOD" as D_TIME_PERIOD_REF_108936 on (D_TIME_PERIOD_REF_108936.PRD_ID = END_DATE_PRD_ID),
+   MANY TO ONE join "D_TIME_PERIOD" as D_TIME_PERIOD_REF_108935 on (D_TIME_PERIOD_REF_108935.PRD_ID = BEGIN_DATE_PRD_ID),
+   MANY TO ONE join "D_ENTITY" as D_ENTITY_REF_108926 on (D_ENTITY_REF_108926.ENTY_ID = SBRD_CUS_ID),
+   MANY TO ONE join "D_ENTITY" as D_ENTITY_REF_57313 on (D_ENTITY_REF_57313.ENTY_ID = CUSTOMER_ID),
+   MANY TO ONE join "D_ACCOUNT" as D_ACCOUNT_REF_208525 on (D_ACCOUNT_REF_208525.ACCOUNT_ID = SBRD_ACCT_ID),
+   MANY TO ONE join "D_ACCOUNT" as D_ACCOUNT_REF_412 on (D_ACCOUNT_REF_412.ACCOUNT_ID = ACCOUNT_ID)
+)
+comment 'Customer Account Hierarchy'
+
+
+-- end of F_CUS_ACCT_HIER
+--

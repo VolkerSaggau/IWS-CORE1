@@ -1,0 +1,63 @@
+
+
+view F_INTL_ACCT_ENTR__D_ASSET_TYPE__REF_202366 (
+   FACT,
+   DIMENSION,
+   DIRECTION,
+   KEY,
+   COUNTER,
+   SOURCE,
+   INTEGRITYSTATE
+)
+AS
+(
+   select 
+      'F_INTL_ACCT_ENTR'                       AS FACT,
+      'D_ASSET_TYPE'                           AS DIMENSION,
+      'Inbound'                                AS DIRECTION,
+   	to_varchar(FACT.ASSET_TYPE_ID)           AS KEY,
+   	count(*)                                 AS COUNTER,
+      'in: ' || 'D_ASSET_TYPE'                 AS SOURCE,
+      'info' AS INTEGRITYSTATE
+   from 
+   	F_INTL_ACCT_ENTR	 FACT
+   WHERE 
+      FACT.ASSET_TYPE_ID IN (select DIMENSION.ASSET_TYPE_ID from D_ASSET_TYPE	DIMENSION)
+   GROUP BY 
+      FACT.ASSET_TYPE_ID
+   
+   --
+   --
+
+UNION ALL
+
+   select 
+      'F_INTL_ACCT_ENTR'                       AS FACT,
+      'D_ASSET_TYPE'                           AS DIMENSION,
+      'Inbound'                                AS DIRECTION,
+   	to_varchar(FACT.ASSET_TYPE_ID)           AS KEY,
+   	count(*)                                 AS COUNTER,
+      'in: ' || 'D_ASSET_TYPE'                 AS SOURCE,
+      'error' AS INTEGRITYSTATE
+   from 
+   	F_INTL_ACCT_ENTR	 FACT
+   WHERE 
+      FACT.ASSET_TYPE_ID NOT IN (select DIMENSION.ASSET_TYPE_ID from D_ASSET_TYPE	DIMENSION)
+   GROUP BY 
+      FACT.ASSET_TYPE_ID
+   
+   --
+   --
+
+)
+ORDER BY 
+   FACT DESC, 
+   DIMENSION DESC, 
+   INTEGRITYSTATE DESC, 
+   SOURCE DESC, 
+   COUNTER DESC, 
+   KEY DESC
+;
+--
+-- end of statement
+--

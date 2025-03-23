@@ -1,0 +1,63 @@
+
+
+view F_ENTITY_PROFILE__D_CPGN_CNTC_ISTR__REF_68282 (
+   FACT,
+   DIMENSION,
+   DIRECTION,
+   KEY,
+   COUNTER,
+   SOURCE,
+   INTEGRITYSTATE
+)
+AS
+(
+   select 
+      'F_ENTITY_PROFILE'                       AS FACT,
+      'D_CPGN_CNTC_ISTR'                       AS DIMENSION,
+      'Inbound'                                AS DIRECTION,
+   	to_varchar(FACT.CNTC_ISTR_ID)            AS KEY,
+   	count(*)                                 AS COUNTER,
+      'in: ' || 'D_CPGN_CNTC_ISTR'             AS SOURCE,
+      'info' AS INTEGRITYSTATE
+   from 
+   	F_ENTITY_PROFILE	 FACT
+   WHERE 
+      FACT.CNTC_ISTR_ID IN (select DIMENSION.CNTC_ISTR_ID from D_CPGN_CNTC_ISTR	DIMENSION)
+   GROUP BY 
+      FACT.CNTC_ISTR_ID
+   
+   --
+   --
+
+UNION ALL
+
+   select 
+      'F_ENTITY_PROFILE'                       AS FACT,
+      'D_CPGN_CNTC_ISTR'                       AS DIMENSION,
+      'Inbound'                                AS DIRECTION,
+   	to_varchar(FACT.CNTC_ISTR_ID)            AS KEY,
+   	count(*)                                 AS COUNTER,
+      'in: ' || 'D_CPGN_CNTC_ISTR'             AS SOURCE,
+      'error' AS INTEGRITYSTATE
+   from 
+   	F_ENTITY_PROFILE	 FACT
+   WHERE 
+      FACT.CNTC_ISTR_ID NOT IN (select DIMENSION.CNTC_ISTR_ID from D_CPGN_CNTC_ISTR	DIMENSION)
+   GROUP BY 
+      FACT.CNTC_ISTR_ID
+   
+   --
+   --
+
+)
+ORDER BY 
+   FACT DESC, 
+   DIMENSION DESC, 
+   INTEGRITYSTATE DESC, 
+   SOURCE DESC, 
+   COUNTER DESC, 
+   KEY DESC
+;
+--
+-- end of statement
+--

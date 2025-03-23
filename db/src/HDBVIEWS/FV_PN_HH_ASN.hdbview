@@ -1,0 +1,33 @@
+
+
+view FV_PN_HH_ASN comment 'Person Household Association'(
+PERSON_ID,
+HOUSEHOLD_ID,
+BEGIN_DATE_PRD_ID,
+END_DATE_PRD_ID,
+ENTY_ASN_RSN_ID,
+ENTY_1_ROLE_ID,
+ENTY_2_ROLE_ID
+)
+as
+select 
+    ENTY_1_ID 
+    PERSON_ID, 
+    ENTY_2_ID HOUSEHOLD_ID, 
+    BEGIN_DATE_PRD_ID, 
+    END_DATE_PRD_ID, 
+    ENTY_ASN_RSN_ID, 
+    ENTY_1_ROLE_ID, 
+    ENTY_2_ROLE_ID
+from 
+    F_ENTY_ASN
+where 
+    ( 
+        ENTY_1_TYPE = 'PN'
+    and ENTY_2_TYPE = 'HH' 
+    )
+
+
+----
+---- End of FV_PN_HH_ASN
+----

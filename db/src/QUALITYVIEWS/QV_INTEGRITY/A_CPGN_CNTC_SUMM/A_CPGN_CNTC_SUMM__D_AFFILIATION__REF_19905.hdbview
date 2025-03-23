@@ -1,0 +1,63 @@
+
+
+view A_CPGN_CNTC_SUMM__D_AFFILIATION__REF_19905 (
+   FACT,
+   DIMENSION,
+   DIRECTION,
+   KEY,
+   COUNTER,
+   SOURCE,
+   INTEGRITYSTATE
+)
+AS
+(
+   select 
+      'A_CPGN_CNTC_SUMM'                       AS FACT,
+      'D_AFFILIATION'                          AS DIMENSION,
+      'Inbound'                                AS DIRECTION,
+   	to_varchar(FACT.AFFILIATION_ID)          AS KEY,
+   	count(*)                                 AS COUNTER,
+      'in: ' || 'D_AFFILIATION'                AS SOURCE,
+      'info' AS INTEGRITYSTATE
+   from 
+   	A_CPGN_CNTC_SUMM	 FACT
+   WHERE 
+      FACT.AFFILIATION_ID IN (select DIMENSION.AFFILIATION_ID from D_AFFILIATION	DIMENSION)
+   GROUP BY 
+      FACT.AFFILIATION_ID
+   
+   --
+   --
+
+UNION ALL
+
+   select 
+      'A_CPGN_CNTC_SUMM'                       AS FACT,
+      'D_AFFILIATION'                          AS DIMENSION,
+      'Inbound'                                AS DIRECTION,
+   	to_varchar(FACT.AFFILIATION_ID)          AS KEY,
+   	count(*)                                 AS COUNTER,
+      'in: ' || 'D_AFFILIATION'                AS SOURCE,
+      'error' AS INTEGRITYSTATE
+   from 
+   	A_CPGN_CNTC_SUMM	 FACT
+   WHERE 
+      FACT.AFFILIATION_ID NOT IN (select DIMENSION.AFFILIATION_ID from D_AFFILIATION	DIMENSION)
+   GROUP BY 
+      FACT.AFFILIATION_ID
+   
+   --
+   --
+
+)
+ORDER BY 
+   FACT DESC, 
+   DIMENSION DESC, 
+   INTEGRITYSTATE DESC, 
+   SOURCE DESC, 
+   COUNTER DESC, 
+   KEY DESC
+;
+--
+-- end of statement
+--

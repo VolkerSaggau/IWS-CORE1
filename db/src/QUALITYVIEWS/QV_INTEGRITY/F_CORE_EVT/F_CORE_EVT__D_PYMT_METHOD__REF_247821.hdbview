@@ -1,0 +1,63 @@
+
+
+view F_CORE_EVT__D_PYMT_METHOD__REF_247821 (
+   FACT,
+   DIMENSION,
+   DIRECTION,
+   KEY,
+   COUNTER,
+   SOURCE,
+   INTEGRITYSTATE
+)
+AS
+(
+   select 
+      'F_CORE_EVT'                             AS FACT,
+      'D_PYMT_METHOD'                          AS DIMENSION,
+      'Inbound'                                AS DIRECTION,
+   	to_varchar(FACT.PYMT_METHOD_ID)          AS KEY,
+   	count(*)                                 AS COUNTER,
+      'in: ' || 'D_PYMT_METHOD'                AS SOURCE,
+      'info' AS INTEGRITYSTATE
+   from 
+   	F_CORE_EVT	 FACT
+   WHERE 
+      FACT.PYMT_METHOD_ID IN (select DIMENSION.PYMT_METHOD_ID from D_PYMT_METHOD	DIMENSION)
+   GROUP BY 
+      FACT.PYMT_METHOD_ID
+   
+   --
+   --
+
+UNION ALL
+
+   select 
+      'F_CORE_EVT'                             AS FACT,
+      'D_PYMT_METHOD'                          AS DIMENSION,
+      'Inbound'                                AS DIRECTION,
+   	to_varchar(FACT.PYMT_METHOD_ID)          AS KEY,
+   	count(*)                                 AS COUNTER,
+      'in: ' || 'D_PYMT_METHOD'                AS SOURCE,
+      'error' AS INTEGRITYSTATE
+   from 
+   	F_CORE_EVT	 FACT
+   WHERE 
+      FACT.PYMT_METHOD_ID NOT IN (select DIMENSION.PYMT_METHOD_ID from D_PYMT_METHOD	DIMENSION)
+   GROUP BY 
+      FACT.PYMT_METHOD_ID
+   
+   --
+   --
+
+)
+ORDER BY 
+   FACT DESC, 
+   DIMENSION DESC, 
+   INTEGRITYSTATE DESC, 
+   SOURCE DESC, 
+   COUNTER DESC, 
+   KEY DESC
+;
+--
+-- end of statement
+--

@@ -1,0 +1,63 @@
+
+
+view F_CPGN_CNTC_EVT__D_AFFILIATION__REF_258269 (
+   FACT,
+   DIMENSION,
+   DIRECTION,
+   KEY,
+   COUNTER,
+   SOURCE,
+   INTEGRITYSTATE
+)
+AS
+(
+   select 
+      'F_CPGN_CNTC_EVT'                        AS FACT,
+      'D_AFFILIATION'                          AS DIMENSION,
+      'Inbound'                                AS DIRECTION,
+   	to_varchar(FACT.AFFILIATION_ID)          AS KEY,
+   	count(*)                                 AS COUNTER,
+      'in: ' || 'D_AFFILIATION'                AS SOURCE,
+      'info' AS INTEGRITYSTATE
+   from 
+   	F_CPGN_CNTC_EVT	 FACT
+   WHERE 
+      FACT.AFFILIATION_ID IN (select DIMENSION.AFFILIATION_ID from D_AFFILIATION	DIMENSION)
+   GROUP BY 
+      FACT.AFFILIATION_ID
+   
+   --
+   --
+
+UNION ALL
+
+   select 
+      'F_CPGN_CNTC_EVT'                        AS FACT,
+      'D_AFFILIATION'                          AS DIMENSION,
+      'Inbound'                                AS DIRECTION,
+   	to_varchar(FACT.AFFILIATION_ID)          AS KEY,
+   	count(*)                                 AS COUNTER,
+      'in: ' || 'D_AFFILIATION'                AS SOURCE,
+      'error' AS INTEGRITYSTATE
+   from 
+   	F_CPGN_CNTC_EVT	 FACT
+   WHERE 
+      FACT.AFFILIATION_ID NOT IN (select DIMENSION.AFFILIATION_ID from D_AFFILIATION	DIMENSION)
+   GROUP BY 
+      FACT.AFFILIATION_ID
+   
+   --
+   --
+
+)
+ORDER BY 
+   FACT DESC, 
+   DIMENSION DESC, 
+   INTEGRITYSTATE DESC, 
+   SOURCE DESC, 
+   COUNTER DESC, 
+   KEY DESC
+;
+--
+-- end of statement
+--

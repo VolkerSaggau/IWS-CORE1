@@ -1,0 +1,18 @@
+== version = 1
+
+
+
+column table D_PYMT_CAT (
+   PYMT_CAT_ID  INTEGER  NOT NULL   comment 'Payment Category ID',
+   PYMT_MTHD  NVARCHAR(35)     comment 'Payment Method',
+   PYMT_FREQ  NVARCHAR(3)     comment 'Payment Frequency',
+   PY_ALL_ENTRIES_IND  NVARCHAR(1)     comment 'All Entries Indicator'
+, primary key  ( 
+     PYMT_CAT_ID)
+)
+
+comment 'Payment Category'
+
+
+-- end of D_PYMT_CAT
+--

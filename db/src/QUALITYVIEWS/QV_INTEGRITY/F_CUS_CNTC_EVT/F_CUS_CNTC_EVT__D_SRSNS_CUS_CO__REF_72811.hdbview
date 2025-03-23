@@ -1,0 +1,63 @@
+
+
+view F_CUS_CNTC_EVT__D_SRSNS_CUS_CO__REF_72811 (
+   FACT,
+   DIMENSION,
+   DIRECTION,
+   KEY,
+   COUNTER,
+   SOURCE,
+   INTEGRITYSTATE
+)
+AS
+(
+   select 
+      'F_CUS_CNTC_EVT'                         AS FACT,
+      'D_SRSNS_CUS_CO'                         AS DIMENSION,
+      'Inbound'                                AS DIRECTION,
+   	to_varchar(FACT.SRSNS_CUS_CO_ID)         AS KEY,
+   	count(*)                                 AS COUNTER,
+      'in: ' || 'D_SRSNS_CUS_CO'               AS SOURCE,
+      'info' AS INTEGRITYSTATE
+   from 
+   	F_CUS_CNTC_EVT	 FACT
+   WHERE 
+      FACT.SRSNS_CUS_CO_ID IN (select DIMENSION.SRSNS_CUS_CO_ID from D_SRSNS_CUS_CO	DIMENSION)
+   GROUP BY 
+      FACT.SRSNS_CUS_CO_ID
+   
+   --
+   --
+
+UNION ALL
+
+   select 
+      'F_CUS_CNTC_EVT'                         AS FACT,
+      'D_SRSNS_CUS_CO'                         AS DIMENSION,
+      'Inbound'                                AS DIRECTION,
+   	to_varchar(FACT.SRSNS_CUS_CO_ID)         AS KEY,
+   	count(*)                                 AS COUNTER,
+      'in: ' || 'D_SRSNS_CUS_CO'               AS SOURCE,
+      'error' AS INTEGRITYSTATE
+   from 
+   	F_CUS_CNTC_EVT	 FACT
+   WHERE 
+      FACT.SRSNS_CUS_CO_ID NOT IN (select DIMENSION.SRSNS_CUS_CO_ID from D_SRSNS_CUS_CO	DIMENSION)
+   GROUP BY 
+      FACT.SRSNS_CUS_CO_ID
+   
+   --
+   --
+
+)
+ORDER BY 
+   FACT DESC, 
+   DIMENSION DESC, 
+   INTEGRITYSTATE DESC, 
+   SOURCE DESC, 
+   COUNTER DESC, 
+   KEY DESC
+;
+--
+-- end of statement
+--

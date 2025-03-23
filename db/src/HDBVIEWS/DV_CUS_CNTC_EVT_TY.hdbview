@@ -1,0 +1,21 @@
+
+
+view DV_CUS_CNTC_EVT_TY comment 'Customer Contact Event Type'(
+CNTC_EVT_TYP_ID,
+CNTC_EVT_TYP_SNM,
+CNTC_EVT_TYP_LNM,
+CNTC_EVT_SUBTYP_NM
+)
+as
+select 
+    EVT_TYP_ID CNTC_EVT_TYP_ID, EVT_TYP_SHRT_NAM CNTC_EVT_TYP_SNM, 
+    EVT_TYP_LONG_NAM CNTC_EVT_TYP_LNM, EVT_TYP_SUBTYP_NAM CNTC_EVT_SUBTYP_NM
+from 
+    D_CORE_EVT_TYP
+where 
+    EVT_TYP_CAT_SNM = 'Contact'
+
+
+----
+---- End of DV_CUS_CNTC_EVT_TY
+----

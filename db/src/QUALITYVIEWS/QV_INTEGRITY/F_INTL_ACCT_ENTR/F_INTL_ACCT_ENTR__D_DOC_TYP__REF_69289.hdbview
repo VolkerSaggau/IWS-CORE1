@@ -1,0 +1,63 @@
+
+
+view F_INTL_ACCT_ENTR__D_DOC_TYP__REF_69289 (
+   FACT,
+   DIMENSION,
+   DIRECTION,
+   KEY,
+   COUNTER,
+   SOURCE,
+   INTEGRITYSTATE
+)
+AS
+(
+   select 
+      'F_INTL_ACCT_ENTR'                       AS FACT,
+      'D_DOC_TYP'                              AS DIMENSION,
+      'Inbound'                                AS DIRECTION,
+   	to_varchar(FACT.DOC_TYPE_ID)             AS KEY,
+   	count(*)                                 AS COUNTER,
+      'in: ' || 'D_DOC_TYP'                    AS SOURCE,
+      'info' AS INTEGRITYSTATE
+   from 
+   	F_INTL_ACCT_ENTR	 FACT
+   WHERE 
+      FACT.DOC_TYPE_ID IN (select DIMENSION.DOC_TYPE_ID from D_DOC_TYP	DIMENSION)
+   GROUP BY 
+      FACT.DOC_TYPE_ID
+   
+   --
+   --
+
+UNION ALL
+
+   select 
+      'F_INTL_ACCT_ENTR'                       AS FACT,
+      'D_DOC_TYP'                              AS DIMENSION,
+      'Inbound'                                AS DIRECTION,
+   	to_varchar(FACT.DOC_TYPE_ID)             AS KEY,
+   	count(*)                                 AS COUNTER,
+      'in: ' || 'D_DOC_TYP'                    AS SOURCE,
+      'error' AS INTEGRITYSTATE
+   from 
+   	F_INTL_ACCT_ENTR	 FACT
+   WHERE 
+      FACT.DOC_TYPE_ID NOT IN (select DIMENSION.DOC_TYPE_ID from D_DOC_TYP	DIMENSION)
+   GROUP BY 
+      FACT.DOC_TYPE_ID
+   
+   --
+   --
+
+)
+ORDER BY 
+   FACT DESC, 
+   DIMENSION DESC, 
+   INTEGRITYSTATE DESC, 
+   SOURCE DESC, 
+   COUNTER DESC, 
+   KEY DESC
+;
+--
+-- end of statement
+--

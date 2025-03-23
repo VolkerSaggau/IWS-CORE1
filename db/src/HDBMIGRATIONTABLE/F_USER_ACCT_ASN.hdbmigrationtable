@@ -1,0 +1,22 @@
+== version = 1
+
+
+
+column table F_USER_ACCT_ASN (
+   USER_ID  INTEGER  NOT NULL   comment 'User ID',
+   ACCOUNT_ID  INTEGER  NOT NULL   comment 'Account ID',
+   END_DATE_PRD_ID  INTEGER  NOT NULL   comment 'End Date Period ID',
+   BEGIN_DATE_PRD_ID  INTEGER  NOT NULL   comment 'Begin Date Period ID'
+, primary key  ( 
+     USER_ID,
+     ACCOUNT_ID)
+)
+with associations(
+   MANY TO ONE join "D_USER" as D_USER_REF_241807 on (D_USER_REF_241807.USER_ID = USER_ID),
+   MANY TO ONE join "D_ACCOUNT" as D_ACCOUNT_REF_241804 on (D_ACCOUNT_REF_241804.ACCOUNT_ID = ACCOUNT_ID)
+)
+comment 'User Account Association'
+
+
+-- end of F_USER_ACCT_ASN
+--

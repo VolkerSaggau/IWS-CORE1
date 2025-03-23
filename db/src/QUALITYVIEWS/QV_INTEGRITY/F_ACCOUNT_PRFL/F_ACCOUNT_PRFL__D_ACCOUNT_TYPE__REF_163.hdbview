@@ -1,0 +1,63 @@
+
+
+view F_ACCOUNT_PRFL__D_ACCOUNT_TYPE__REF_163 (
+   FACT,
+   DIMENSION,
+   DIRECTION,
+   KEY,
+   COUNTER,
+   SOURCE,
+   INTEGRITYSTATE
+)
+AS
+(
+   select 
+      'F_ACCOUNT_PRFL'                         AS FACT,
+      'D_ACCOUNT_TYPE'                         AS DIMENSION,
+      'Inbound'                                AS DIRECTION,
+   	to_varchar(FACT.ACCOUNT_TYPE_ID)         AS KEY,
+   	count(*)                                 AS COUNTER,
+      'in: ' || 'D_ACCOUNT_TYPE'               AS SOURCE,
+      'info' AS INTEGRITYSTATE
+   from 
+   	F_ACCOUNT_PRFL	 FACT
+   WHERE 
+      FACT.ACCOUNT_TYPE_ID IN (select DIMENSION.ACCOUNT_TYPE_ID from D_ACCOUNT_TYPE	DIMENSION)
+   GROUP BY 
+      FACT.ACCOUNT_TYPE_ID
+   
+   --
+   --
+
+UNION ALL
+
+   select 
+      'F_ACCOUNT_PRFL'                         AS FACT,
+      'D_ACCOUNT_TYPE'                         AS DIMENSION,
+      'Inbound'                                AS DIRECTION,
+   	to_varchar(FACT.ACCOUNT_TYPE_ID)         AS KEY,
+   	count(*)                                 AS COUNTER,
+      'in: ' || 'D_ACCOUNT_TYPE'               AS SOURCE,
+      'error' AS INTEGRITYSTATE
+   from 
+   	F_ACCOUNT_PRFL	 FACT
+   WHERE 
+      FACT.ACCOUNT_TYPE_ID NOT IN (select DIMENSION.ACCOUNT_TYPE_ID from D_ACCOUNT_TYPE	DIMENSION)
+   GROUP BY 
+      FACT.ACCOUNT_TYPE_ID
+   
+   --
+   --
+
+)
+ORDER BY 
+   FACT DESC, 
+   DIMENSION DESC, 
+   INTEGRITYSTATE DESC, 
+   SOURCE DESC, 
+   COUNTER DESC, 
+   KEY DESC
+;
+--
+-- end of statement
+--

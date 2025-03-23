@@ -1,0 +1,63 @@
+
+
+view F_CS_SESS_MEAS__D_DEMOGRAPHICS__REF_214950 (
+   FACT,
+   DIMENSION,
+   DIRECTION,
+   KEY,
+   COUNTER,
+   SOURCE,
+   INTEGRITYSTATE
+)
+AS
+(
+   select 
+      'F_CS_SESS_MEAS'                         AS FACT,
+      'D_DEMOGRAPHICS'                         AS DIMENSION,
+      'Inbound'                                AS DIRECTION,
+   	to_varchar(FACT.DEMO_ID)                 AS KEY,
+   	count(*)                                 AS COUNTER,
+      'in: ' || 'D_DEMOGRAPHICS'               AS SOURCE,
+      'info' AS INTEGRITYSTATE
+   from 
+   	F_CS_SESS_MEAS	 FACT
+   WHERE 
+      FACT.DEMO_ID IN (select DIMENSION.DEMO_ID from D_DEMOGRAPHICS	DIMENSION)
+   GROUP BY 
+      FACT.DEMO_ID
+   
+   --
+   --
+
+UNION ALL
+
+   select 
+      'F_CS_SESS_MEAS'                         AS FACT,
+      'D_DEMOGRAPHICS'                         AS DIMENSION,
+      'Inbound'                                AS DIRECTION,
+   	to_varchar(FACT.DEMO_ID)                 AS KEY,
+   	count(*)                                 AS COUNTER,
+      'in: ' || 'D_DEMOGRAPHICS'               AS SOURCE,
+      'error' AS INTEGRITYSTATE
+   from 
+   	F_CS_SESS_MEAS	 FACT
+   WHERE 
+      FACT.DEMO_ID NOT IN (select DIMENSION.DEMO_ID from D_DEMOGRAPHICS	DIMENSION)
+   GROUP BY 
+      FACT.DEMO_ID
+   
+   --
+   --
+
+)
+ORDER BY 
+   FACT DESC, 
+   DIMENSION DESC, 
+   INTEGRITYSTATE DESC, 
+   SOURCE DESC, 
+   COUNTER DESC, 
+   KEY DESC
+;
+--
+-- end of statement
+--

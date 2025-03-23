@@ -1,0 +1,22 @@
+== version = 1
+
+
+
+column table D_CPGN_CNTC_ISTR (
+   CNTC_ISTR_ID  INTEGER  NOT NULL   comment 'Contact Instruction ID',
+   PREF_CONTACT_MTHD  NVARCHAR(15)     comment 'Preferred Contact Method',
+   PREF_CNTC_TIME  NVARCHAR(50)     comment 'Preferred Contact Time Band',
+   MAIL_PRMSN_IND  NVARCHAR(1)     comment 'Mail Permission IND',
+   TELMKT_PRMSN_IND  NVARCHAR(1)     comment 'Telemarketing Permission Indicator',
+   EMAIL_PRMSN  NVARCHAR(1)     comment 'E Mail Permission Indicator',
+   FAX_PRMSN  NVARCHAR(1)     comment 'FAX Permission Indicator',
+   CCI_ALL_ENTRIES_IN  NVARCHAR(1)     comment 'All Entries Indicator'
+, primary key  ( 
+     CNTC_ISTR_ID)
+)
+
+comment 'Campaign Contact Instructions'
+
+
+-- end of D_CPGN_CNTC_ISTR
+--

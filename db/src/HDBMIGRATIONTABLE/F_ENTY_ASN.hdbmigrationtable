@@ -1,0 +1,37 @@
+== version = 1
+
+
+
+column table F_ENTY_ASN (
+   ENTY_1_ID  INTEGER  NOT NULL   comment 'Entity 1 ID',
+   ENTY_2_ID  INTEGER  NOT NULL   comment 'Entity 2 ID',
+   BEGIN_DATE_PRD_ID  INTEGER  NOT NULL   comment 'Entity Association Begin Date',
+   ENTY_ASN_RSN_ID  INTEGER  NOT NULL   comment 'Entity Association Reason ID',
+   END_DATE_PRD_ID  INTEGER     comment 'Entity Association End Date',
+   ENTY_1_ROLE_ID  INTEGER     comment 'Entity 1 Role ID',
+   ENTY_2_ROLE_ID  INTEGER     comment 'Entity 2 Role ID',
+   MEASURE_UNIT_ID  INTEGER     comment 'Measurement Unit ID',
+   ENTY_ASN_AMT  DECIMAL,
+   ENTY_1_TYPE  NVARCHAR(3)     comment 'Entity 1 Type',
+   ENTY_2_TYPE  NVARCHAR(3)     comment 'Entity 2 Type'
+, primary key  ( 
+     ENTY_1_ID,
+     ENTY_2_ID,
+     BEGIN_DATE_PRD_ID,
+     ENTY_ASN_RSN_ID)
+)
+with associations(
+   MANY TO ONE join "D_MSR_UNIT" as D_MSR_UNIT_REF_247243 on (D_MSR_UNIT_REF_247243.MEASURE_UNIT_ID = MEASURE_UNIT_ID),
+   MANY TO ONE join "D_ENTY_ASN_ROLE" as D_ENTY_ASN_ROLE_REF_57345 on (D_ENTY_ASN_ROLE_REF_57345.ROLE_ID = ENTY_2_ROLE_ID),
+   MANY TO ONE join "D_ENTY_ASN_ROLE" as D_ENTY_ASN_ROLE_REF_57341 on (D_ENTY_ASN_ROLE_REF_57341.ROLE_ID = ENTY_1_ROLE_ID),
+   MANY TO ONE join "D_ENTITY" as D_ENTITY_REF_62082 on (D_ENTITY_REF_62082.ENTY_ID = ENTY_2_ID),
+   MANY TO ONE join "D_ENTITY" as D_ENTITY_REF_62076 on (D_ENTITY_REF_62076.ENTY_ID = ENTY_1_ID),
+   MANY TO ONE join "D_ENTY_ASN_REASON" as D_ENTY_ASN_REASON_REF_61617 on (D_ENTY_ASN_REASON_REF_61617.ENTY_ASN_RSN_ID = ENTY_ASN_RSN_ID),
+   MANY TO ONE join "D_TIME_PERIOD" as D_TIME_PERIOD_REF_62070 on (D_TIME_PERIOD_REF_62070.PRD_ID = END_DATE_PRD_ID),
+   MANY TO ONE join "D_TIME_PERIOD" as D_TIME_PERIOD_REF_62060 on (D_TIME_PERIOD_REF_62060.PRD_ID = BEGIN_DATE_PRD_ID)
+)
+comment 'Entity Association'
+
+
+-- end of F_ENTY_ASN
+--

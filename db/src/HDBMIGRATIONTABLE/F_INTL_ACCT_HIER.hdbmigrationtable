@@ -1,0 +1,26 @@
+== version = 1
+
+
+
+column table F_INTL_ACCT_HIER (
+   INTL_ACCT_ID  INTEGER  NOT NULL   comment 'Chart of Accounts Hierachy ID',
+   SBRD_INTL_ACCT_ID  INTEGER  NOT NULL   comment 'Subordinate Account ID',
+   BEGIN_DATE_PRD_ID  INTEGER  NOT NULL   comment 'Start Date',
+   END_DATE_PRD_ID  INTEGER     comment 'End Date Period ID',
+   SBRD_ACCT_RSN  NVARCHAR(255)
+, primary key  ( 
+     INTL_ACCT_ID,
+     SBRD_INTL_ACCT_ID,
+     BEGIN_DATE_PRD_ID)
+)
+with associations(
+   MANY TO ONE join "D_INTL_ACCOUNT" as D_INTL_ACCOUNT_REF_206015 on (D_INTL_ACCOUNT_REF_206015.INTL_ACCT_ID = INTL_ACCT_ID),
+   MANY TO ONE join "D_TIME_PERIOD" as D_TIME_PERIOD_REF_109248 on (D_TIME_PERIOD_REF_109248.PRD_ID = END_DATE_PRD_ID),
+   MANY TO ONE join "D_TIME_PERIOD" as D_TIME_PERIOD_REF_109247 on (D_TIME_PERIOD_REF_109247.PRD_ID = BEGIN_DATE_PRD_ID),
+   MANY TO ONE join "D_INTL_ACCOUNT" as D_INTL_ACCOUNT_REF_109240 on (D_INTL_ACCOUNT_REF_109240.INTL_ACCT_ID = SBRD_INTL_ACCT_ID)
+)
+comment 'Company Internal Account Hierarchy'
+
+
+-- end of F_INTL_ACCT_HIER
+--

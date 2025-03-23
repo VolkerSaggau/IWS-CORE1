@@ -1,0 +1,63 @@
+
+
+view D_CPGN_PD_GRP__D_PRODUCT__REF_75961 (
+   FACT,
+   DIMENSION,
+   DIRECTION,
+   KEY,
+   COUNTER,
+   SOURCE,
+   INTEGRITYSTATE
+)
+AS
+(
+   select 
+      'D_CPGN_PD_GRP'                          AS FACT,
+      'D_PRODUCT'                              AS DIMENSION,
+      'Inbound'                                AS DIRECTION,
+   	to_varchar(FACT.PRODUCT_ID)              AS KEY,
+   	count(*)                                 AS COUNTER,
+      'in: ' || 'D_PRODUCT'                    AS SOURCE,
+      'info' AS INTEGRITYSTATE
+   from 
+   	D_CPGN_PD_GRP	 FACT
+   WHERE 
+      FACT.PRODUCT_ID IN (select DIMENSION.PRODUCT_ID from D_PRODUCT	DIMENSION)
+   GROUP BY 
+      FACT.PRODUCT_ID
+   
+   --
+   --
+
+UNION ALL
+
+   select 
+      'D_CPGN_PD_GRP'                          AS FACT,
+      'D_PRODUCT'                              AS DIMENSION,
+      'Inbound'                                AS DIRECTION,
+   	to_varchar(FACT.PRODUCT_ID)              AS KEY,
+   	count(*)                                 AS COUNTER,
+      'in: ' || 'D_PRODUCT'                    AS SOURCE,
+      'error' AS INTEGRITYSTATE
+   from 
+   	D_CPGN_PD_GRP	 FACT
+   WHERE 
+      FACT.PRODUCT_ID NOT IN (select DIMENSION.PRODUCT_ID from D_PRODUCT	DIMENSION)
+   GROUP BY 
+      FACT.PRODUCT_ID
+   
+   --
+   --
+
+)
+ORDER BY 
+   FACT DESC, 
+   DIMENSION DESC, 
+   INTEGRITYSTATE DESC, 
+   SOURCE DESC, 
+   COUNTER DESC, 
+   KEY DESC
+;
+--
+-- end of statement
+--

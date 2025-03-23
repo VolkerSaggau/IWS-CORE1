@@ -1,0 +1,18 @@
+== version = 1
+
+
+
+column table D_PLCY_STAT (
+   PLCY_STAT_ID  INTEGER  NOT NULL   comment 'Policy Life Cycle Status ID',
+   STAT_NAME  NVARCHAR(30),
+   STAT_DESC  NVARCHAR(255)     comment 'Description',
+   PS_ALL_ENTRIES_IND  NVARCHAR(1)     comment 'All Entries Indicator'
+, primary key  ( 
+     PLCY_STAT_ID)
+)
+
+comment 'Policy Life Cycle Status'
+
+
+-- end of D_PLCY_STAT
+--

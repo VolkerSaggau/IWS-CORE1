@@ -1,0 +1,63 @@
+
+
+view F_CS_USER_CUS_CVSN__D_FNCL_SCOR__REF_218122 (
+   FACT,
+   DIMENSION,
+   DIRECTION,
+   KEY,
+   COUNTER,
+   SOURCE,
+   INTEGRITYSTATE
+)
+AS
+(
+   select 
+      'F_CS_USER_CUS_CVSN'                     AS FACT,
+      'D_FNCL_SCOR'                            AS DIMENSION,
+      'Inbound'                                AS DIRECTION,
+   	to_varchar(FACT.FNCL_SCOR_ID)            AS KEY,
+   	count(*)                                 AS COUNTER,
+      'in: ' || 'D_FNCL_SCOR'                  AS SOURCE,
+      'info' AS INTEGRITYSTATE
+   from 
+   	F_CS_USER_CUS_CVSN	 FACT
+   WHERE 
+      FACT.FNCL_SCOR_ID IN (select DIMENSION.FNCL_SCOR_ID from D_FNCL_SCOR	DIMENSION)
+   GROUP BY 
+      FACT.FNCL_SCOR_ID
+   
+   --
+   --
+
+UNION ALL
+
+   select 
+      'F_CS_USER_CUS_CVSN'                     AS FACT,
+      'D_FNCL_SCOR'                            AS DIMENSION,
+      'Inbound'                                AS DIRECTION,
+   	to_varchar(FACT.FNCL_SCOR_ID)            AS KEY,
+   	count(*)                                 AS COUNTER,
+      'in: ' || 'D_FNCL_SCOR'                  AS SOURCE,
+      'error' AS INTEGRITYSTATE
+   from 
+   	F_CS_USER_CUS_CVSN	 FACT
+   WHERE 
+      FACT.FNCL_SCOR_ID NOT IN (select DIMENSION.FNCL_SCOR_ID from D_FNCL_SCOR	DIMENSION)
+   GROUP BY 
+      FACT.FNCL_SCOR_ID
+   
+   --
+   --
+
+)
+ORDER BY 
+   FACT DESC, 
+   DIMENSION DESC, 
+   INTEGRITYSTATE DESC, 
+   SOURCE DESC, 
+   COUNTER DESC, 
+   KEY DESC
+;
+--
+-- end of statement
+--

@@ -1,0 +1,29 @@
+
+
+view DV_PERSON_IDENT comment 'Person Identifier'(
+PERSON_ID,
+PN_SYS_SEQ_NBR,
+PN_OPER_SYS_NAME,
+PN_LEGACY_ID,
+PN_ID_START_DATE,
+PN_ID_END_DATE
+)
+as
+select 
+    IDENT.ENTY_ID           PERSON_ID, 
+    IDENT.SYS_SEQ_NBR       PN_SYS_SEQ_NBR, 
+    IDENT.OPER_SYS_NAME     PN_OPER_SYS_NAME, 
+    IDENT.ENTY_LEGACY_ID    PN_LEGACY_ID, 
+    IDENT.ID_START_DATE     PN_ID_START_DATE, 
+    IDENT.ID_END_DATE       PN_ID_END_DATE
+from 
+    D_ENTY_LGCY_IDENT       IDENT, 
+    D_ENTITY                ENT
+where 
+    ENT.ENTY_ID     = IDENT.ENTY_ID
+and ENT.ENTY_TYPE   = 'PN'
+
+
+----
+---- End of DV_PERSON_IDENT
+----

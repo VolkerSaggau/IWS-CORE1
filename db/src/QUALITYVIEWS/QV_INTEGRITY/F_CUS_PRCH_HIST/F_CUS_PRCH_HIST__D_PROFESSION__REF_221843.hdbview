@@ -1,0 +1,63 @@
+
+
+view F_CUS_PRCH_HIST__D_PROFESSION__REF_221843 (
+   FACT,
+   DIMENSION,
+   DIRECTION,
+   KEY,
+   COUNTER,
+   SOURCE,
+   INTEGRITYSTATE
+)
+AS
+(
+   select 
+      'F_CUS_PRCH_HIST'                        AS FACT,
+      'D_PROFESSION'                           AS DIMENSION,
+      'Inbound'                                AS DIRECTION,
+   	to_varchar(FACT.PROFESSION_ID)           AS KEY,
+   	count(*)                                 AS COUNTER,
+      'in: ' || 'D_PROFESSION'                 AS SOURCE,
+      'info' AS INTEGRITYSTATE
+   from 
+   	F_CUS_PRCH_HIST	 FACT
+   WHERE 
+      FACT.PROFESSION_ID IN (select DIMENSION.PROFESSION_ID from D_PROFESSION	DIMENSION)
+   GROUP BY 
+      FACT.PROFESSION_ID
+   
+   --
+   --
+
+UNION ALL
+
+   select 
+      'F_CUS_PRCH_HIST'                        AS FACT,
+      'D_PROFESSION'                           AS DIMENSION,
+      'Inbound'                                AS DIRECTION,
+   	to_varchar(FACT.PROFESSION_ID)           AS KEY,
+   	count(*)                                 AS COUNTER,
+      'in: ' || 'D_PROFESSION'                 AS SOURCE,
+      'error' AS INTEGRITYSTATE
+   from 
+   	F_CUS_PRCH_HIST	 FACT
+   WHERE 
+      FACT.PROFESSION_ID NOT IN (select DIMENSION.PROFESSION_ID from D_PROFESSION	DIMENSION)
+   GROUP BY 
+      FACT.PROFESSION_ID
+   
+   --
+   --
+
+)
+ORDER BY 
+   FACT DESC, 
+   DIMENSION DESC, 
+   INTEGRITYSTATE DESC, 
+   SOURCE DESC, 
+   COUNTER DESC, 
+   KEY DESC
+;
+--
+-- end of statement
+--

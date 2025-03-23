@@ -1,0 +1,36 @@
+{
+   "format_version" : 1,   
+   "imports" :[
+      {
+         "target_table": "D_INDUSTRY_CLS",
+         "source_data": {
+            "data_type": "CSV",
+            "file_name": "D_INDUSTRY_CLS.csv", 
+            "has_header": false,
+            "type_config": {
+               "delimiter": ","
+            }
+         },
+         "import_settings" : { 
+            "import_columns" : [
+               "IDSTY_CLS_ID",
+               "MJR_IDSTY_CLS",
+               "MJR_IDSTY_DESC",
+               "SEC_IDSTY_CLS",
+               "SEC_IDSTY_DESC",
+               "IC_ALL_ENTRIES_IND"
+            ],
+            "include_filter" : []
+         },
+         "column_mappings": {
+            "IDSTY_CLS_ID" : 1,
+            "MJR_IDSTY_CLS" : 2,
+            "MJR_IDSTY_DESC" : 3,
+            "SEC_IDSTY_CLS" : 4,
+            "SEC_IDSTY_DESC" : 5,
+            "IC_ALL_ENTRIES_IND" : 6
+         
+         }
+      }
+   ]
+}

@@ -1,0 +1,63 @@
+
+
+view F_UNQUAL_PROFILE__D_UNQUAL_PROSPECT__REF_258190 (
+   FACT,
+   DIMENSION,
+   DIRECTION,
+   KEY,
+   COUNTER,
+   SOURCE,
+   INTEGRITYSTATE
+)
+AS
+(
+   select 
+      'F_UNQUAL_PROFILE'                       AS FACT,
+      'D_UNQUAL_PROSPECT'                      AS DIMENSION,
+      'Inbound'                                AS DIRECTION,
+   	to_varchar(FACT.UNQUAL_PROSPECT_ID)      AS KEY,
+   	count(*)                                 AS COUNTER,
+      'in: ' || 'D_UNQUAL_PROSPECT'            AS SOURCE,
+      'info' AS INTEGRITYSTATE
+   from 
+   	F_UNQUAL_PROFILE	 FACT
+   WHERE 
+      FACT.UNQUAL_PROSPECT_ID IN (select DIMENSION.UNQUAL_PROSPECT_ID from D_UNQUAL_PROSPECT	DIMENSION)
+   GROUP BY 
+      FACT.UNQUAL_PROSPECT_ID
+   
+   --
+   --
+
+UNION ALL
+
+   select 
+      'F_UNQUAL_PROFILE'                       AS FACT,
+      'D_UNQUAL_PROSPECT'                      AS DIMENSION,
+      'Inbound'                                AS DIRECTION,
+   	to_varchar(FACT.UNQUAL_PROSPECT_ID)      AS KEY,
+   	count(*)                                 AS COUNTER,
+      'in: ' || 'D_UNQUAL_PROSPECT'            AS SOURCE,
+      'error' AS INTEGRITYSTATE
+   from 
+   	F_UNQUAL_PROFILE	 FACT
+   WHERE 
+      FACT.UNQUAL_PROSPECT_ID NOT IN (select DIMENSION.UNQUAL_PROSPECT_ID from D_UNQUAL_PROSPECT	DIMENSION)
+   GROUP BY 
+      FACT.UNQUAL_PROSPECT_ID
+   
+   --
+   --
+
+)
+ORDER BY 
+   FACT DESC, 
+   DIMENSION DESC, 
+   INTEGRITYSTATE DESC, 
+   SOURCE DESC, 
+   COUNTER DESC, 
+   KEY DESC
+;
+--
+-- end of statement
+--

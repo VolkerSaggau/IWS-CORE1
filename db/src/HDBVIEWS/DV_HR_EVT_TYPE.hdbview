@@ -1,0 +1,23 @@
+
+
+view DV_HR_EVT_TYPE comment 'Human Resources Event Type'(
+EVT_TYP_ID,
+EVT_TYP_SHRT_NAM,
+EVT_TYP_LONG_NAM,
+EVT_TYP_SUBTYP_NAM
+)
+as
+select 
+    EVT_TYP_ID, 
+    EVT_TYP_SHRT_NAM, 
+    EVT_TYP_LONG_NAM, 
+    EVT_TYP_SUBTYP_NAM
+from 
+    D_CORE_EVT_TYP
+where 
+    EVT_TYP_CAT_SNM = 'HR'
+
+
+----
+---- End of DV_HR_EVT_TYPE
+----

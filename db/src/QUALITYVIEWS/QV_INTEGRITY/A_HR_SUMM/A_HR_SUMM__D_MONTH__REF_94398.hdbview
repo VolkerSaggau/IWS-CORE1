@@ -1,0 +1,63 @@
+
+
+view A_HR_SUMM__D_MONTH__REF_94398 (
+   FACT,
+   DIMENSION,
+   DIRECTION,
+   KEY,
+   COUNTER,
+   SOURCE,
+   INTEGRITYSTATE
+)
+AS
+(
+   select 
+      'A_HR_SUMM'                              AS FACT,
+      'D_MONTH'                                AS DIMENSION,
+      'Inbound'                                AS DIRECTION,
+   	to_varchar(FACT.MONTH_ID)                AS KEY,
+   	count(*)                                 AS COUNTER,
+      'in: ' || 'D_MONTH'                      AS SOURCE,
+      'info' AS INTEGRITYSTATE
+   from 
+   	A_HR_SUMM	 FACT
+   WHERE 
+      FACT.MONTH_ID IN (select DIMENSION.MONTH_ID from D_MONTH	DIMENSION)
+   GROUP BY 
+      FACT.MONTH_ID
+   
+   --
+   --
+
+UNION ALL
+
+   select 
+      'A_HR_SUMM'                              AS FACT,
+      'D_MONTH'                                AS DIMENSION,
+      'Inbound'                                AS DIRECTION,
+   	to_varchar(FACT.MONTH_ID)                AS KEY,
+   	count(*)                                 AS COUNTER,
+      'in: ' || 'D_MONTH'                      AS SOURCE,
+      'error' AS INTEGRITYSTATE
+   from 
+   	A_HR_SUMM	 FACT
+   WHERE 
+      FACT.MONTH_ID NOT IN (select DIMENSION.MONTH_ID from D_MONTH	DIMENSION)
+   GROUP BY 
+      FACT.MONTH_ID
+   
+   --
+   --
+
+)
+ORDER BY 
+   FACT DESC, 
+   DIMENSION DESC, 
+   INTEGRITYSTATE DESC, 
+   SOURCE DESC, 
+   COUNTER DESC, 
+   KEY DESC
+;
+--
+-- end of statement
+--

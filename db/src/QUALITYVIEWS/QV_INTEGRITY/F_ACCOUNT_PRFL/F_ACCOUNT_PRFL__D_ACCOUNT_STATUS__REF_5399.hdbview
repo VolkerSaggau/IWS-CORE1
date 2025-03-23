@@ -1,0 +1,63 @@
+
+
+view F_ACCOUNT_PRFL__D_ACCOUNT_STATUS__REF_5399 (
+   FACT,
+   DIMENSION,
+   DIRECTION,
+   KEY,
+   COUNTER,
+   SOURCE,
+   INTEGRITYSTATE
+)
+AS
+(
+   select 
+      'F_ACCOUNT_PRFL'                         AS FACT,
+      'D_ACCOUNT_STATUS'                       AS DIMENSION,
+      'Inbound'                                AS DIRECTION,
+   	to_varchar(FACT.ACCT_STATUS_ID)          AS KEY,
+   	count(*)                                 AS COUNTER,
+      'in: ' || 'D_ACCOUNT_STATUS'             AS SOURCE,
+      'info' AS INTEGRITYSTATE
+   from 
+   	F_ACCOUNT_PRFL	 FACT
+   WHERE 
+      FACT.ACCT_STATUS_ID IN (select DIMENSION.ACCT_STATUS_ID from D_ACCOUNT_STATUS	DIMENSION)
+   GROUP BY 
+      FACT.ACCT_STATUS_ID
+   
+   --
+   --
+
+UNION ALL
+
+   select 
+      'F_ACCOUNT_PRFL'                         AS FACT,
+      'D_ACCOUNT_STATUS'                       AS DIMENSION,
+      'Inbound'                                AS DIRECTION,
+   	to_varchar(FACT.ACCT_STATUS_ID)          AS KEY,
+   	count(*)                                 AS COUNTER,
+      'in: ' || 'D_ACCOUNT_STATUS'             AS SOURCE,
+      'error' AS INTEGRITYSTATE
+   from 
+   	F_ACCOUNT_PRFL	 FACT
+   WHERE 
+      FACT.ACCT_STATUS_ID NOT IN (select DIMENSION.ACCT_STATUS_ID from D_ACCOUNT_STATUS	DIMENSION)
+   GROUP BY 
+      FACT.ACCT_STATUS_ID
+   
+   --
+   --
+
+)
+ORDER BY 
+   FACT DESC, 
+   DIMENSION DESC, 
+   INTEGRITYSTATE DESC, 
+   SOURCE DESC, 
+   COUNTER DESC, 
+   KEY DESC
+;
+--
+-- end of statement
+--

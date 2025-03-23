@@ -1,0 +1,63 @@
+
+
+view F_ACCOUNT_PRFL__D_STMT_CYCLE__REF_247135 (
+   FACT,
+   DIMENSION,
+   DIRECTION,
+   KEY,
+   COUNTER,
+   SOURCE,
+   INTEGRITYSTATE
+)
+AS
+(
+   select 
+      'F_ACCOUNT_PRFL'                         AS FACT,
+      'D_STMT_CYCLE'                           AS DIMENSION,
+      'Inbound'                                AS DIRECTION,
+   	to_varchar(FACT.STMT_CYCLE_ID)           AS KEY,
+   	count(*)                                 AS COUNTER,
+      'in: ' || 'D_STMT_CYCLE'                 AS SOURCE,
+      'info' AS INTEGRITYSTATE
+   from 
+   	F_ACCOUNT_PRFL	 FACT
+   WHERE 
+      FACT.STMT_CYCLE_ID IN (select DIMENSION.STMT_CYCLE_ID from D_STMT_CYCLE	DIMENSION)
+   GROUP BY 
+      FACT.STMT_CYCLE_ID
+   
+   --
+   --
+
+UNION ALL
+
+   select 
+      'F_ACCOUNT_PRFL'                         AS FACT,
+      'D_STMT_CYCLE'                           AS DIMENSION,
+      'Inbound'                                AS DIRECTION,
+   	to_varchar(FACT.STMT_CYCLE_ID)           AS KEY,
+   	count(*)                                 AS COUNTER,
+      'in: ' || 'D_STMT_CYCLE'                 AS SOURCE,
+      'error' AS INTEGRITYSTATE
+   from 
+   	F_ACCOUNT_PRFL	 FACT
+   WHERE 
+      FACT.STMT_CYCLE_ID NOT IN (select DIMENSION.STMT_CYCLE_ID from D_STMT_CYCLE	DIMENSION)
+   GROUP BY 
+      FACT.STMT_CYCLE_ID
+   
+   --
+   --
+
+)
+ORDER BY 
+   FACT DESC, 
+   DIMENSION DESC, 
+   INTEGRITYSTATE DESC, 
+   SOURCE DESC, 
+   COUNTER DESC, 
+   KEY DESC
+;
+--
+-- end of statement
+--

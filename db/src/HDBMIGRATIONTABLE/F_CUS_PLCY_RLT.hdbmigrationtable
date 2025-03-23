@@ -1,0 +1,26 @@
+== version = 1
+
+
+
+column table F_CUS_PLCY_RLT (
+   CUSTOMER_ID  INTEGER  NOT NULL   comment 'Insured Party ID',
+   PLCY_ID  INTEGER  NOT NULL   comment 'Policy ID',
+   BEGIN_DATE_PRD_ID  INTEGER  NOT NULL   comment 'Effective Date Period ID',
+   END_DATE_PRD_ID  INTEGER  NOT NULL   comment 'End Date Period ID',
+   PLCY_RLT_DESC  NVARCHAR(255)     comment 'POLICY RELATIONSHIP TEXT'
+, primary key  ( 
+     CUSTOMER_ID,
+     PLCY_ID,
+     BEGIN_DATE_PRD_ID)
+)
+with associations(
+   MANY TO ONE join "D_ENTITY" as D_ENTITY_REF_214648 on (D_ENTITY_REF_214648.ENTY_ID = CUSTOMER_ID),
+   MANY TO ONE join "D_PLCY" as D_PLCY_REF_87047 on (D_PLCY_REF_87047.PLCY_ID = PLCY_ID),
+   MANY TO ONE join "D_TIME_PERIOD" as D_TIME_PERIOD_REF_213310 on (D_TIME_PERIOD_REF_213310.PRD_ID = END_DATE_PRD_ID),
+   MANY TO ONE join "D_TIME_PERIOD" as D_TIME_PERIOD_REF_213311 on (D_TIME_PERIOD_REF_213311.PRD_ID = BEGIN_DATE_PRD_ID)
+)
+comment 'Customer Policy Relationship'
+
+
+-- end of F_CUS_PLCY_RLT
+--

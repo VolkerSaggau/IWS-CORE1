@@ -1,0 +1,19 @@
+
+
+view DV_ORG_ASSETS (
+ASSET_ID,
+NBR_VHCL_BAND,
+PROP_VAL_BAND
+)
+as
+select 
+    ASSET_ID, 
+    NBR_VHCL_BAND, 
+    PROP_VAL_BAND
+from 
+    D_ASSETS
+
+
+----
+---- End of DV_ORG_ASSETS
+----

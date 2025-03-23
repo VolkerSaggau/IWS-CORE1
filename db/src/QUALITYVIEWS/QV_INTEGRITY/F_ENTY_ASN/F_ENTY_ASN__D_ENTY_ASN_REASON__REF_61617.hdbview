@@ -1,0 +1,63 @@
+
+
+view F_ENTY_ASN__D_ENTY_ASN_REASON__REF_61617 (
+   FACT,
+   DIMENSION,
+   DIRECTION,
+   KEY,
+   COUNTER,
+   SOURCE,
+   INTEGRITYSTATE
+)
+AS
+(
+   select 
+      'F_ENTY_ASN'                             AS FACT,
+      'D_ENTY_ASN_REASON'                      AS DIMENSION,
+      'Inbound'                                AS DIRECTION,
+   	to_varchar(FACT.ENTY_ASN_RSN_ID)         AS KEY,
+   	count(*)                                 AS COUNTER,
+      'in: ' || 'D_ENTY_ASN_REASON'            AS SOURCE,
+      'info' AS INTEGRITYSTATE
+   from 
+   	F_ENTY_ASN	 FACT
+   WHERE 
+      FACT.ENTY_ASN_RSN_ID IN (select DIMENSION.ENTY_ASN_RSN_ID from D_ENTY_ASN_REASON	DIMENSION)
+   GROUP BY 
+      FACT.ENTY_ASN_RSN_ID
+   
+   --
+   --
+
+UNION ALL
+
+   select 
+      'F_ENTY_ASN'                             AS FACT,
+      'D_ENTY_ASN_REASON'                      AS DIMENSION,
+      'Inbound'                                AS DIRECTION,
+   	to_varchar(FACT.ENTY_ASN_RSN_ID)         AS KEY,
+   	count(*)                                 AS COUNTER,
+      'in: ' || 'D_ENTY_ASN_REASON'            AS SOURCE,
+      'error' AS INTEGRITYSTATE
+   from 
+   	F_ENTY_ASN	 FACT
+   WHERE 
+      FACT.ENTY_ASN_RSN_ID NOT IN (select DIMENSION.ENTY_ASN_RSN_ID from D_ENTY_ASN_REASON	DIMENSION)
+   GROUP BY 
+      FACT.ENTY_ASN_RSN_ID
+   
+   --
+   --
+
+)
+ORDER BY 
+   FACT DESC, 
+   DIMENSION DESC, 
+   INTEGRITYSTATE DESC, 
+   SOURCE DESC, 
+   COUNTER DESC, 
+   KEY DESC
+;
+--
+-- end of statement
+--

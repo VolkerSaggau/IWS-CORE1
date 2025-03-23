@@ -1,0 +1,62 @@
+== version = 1
+
+
+
+column table F_CS_PAGE_EVT (
+   PAGE_EVENT_ID  INTEGER  NOT NULL   comment 'Page Event ID',
+   RECORD_SEQ_NBR  INTEGER  NOT NULL   comment 'Record Sequence Number',
+   PAGE_EVT_TYPE_ID  INTEGER  NOT NULL   comment 'Page Event ID',
+   PAGE_ID  INTEGER  NOT NULL   comment 'Page ID',
+   PRD_ID  INTEGER  NOT NULL   comment 'Page Event Date Period ID',
+   HOUR_ID  INTEGER  NOT NULL   comment 'Hour ID',
+   USER_ID  INTEGER  NOT NULL   comment 'User ID',
+   CUSTOMER_ID  INTEGER  NOT NULL   comment 'Customer ID',
+   PRODUCT_ID  INTEGER  NOT NULL   comment 'Product ID',
+   LINK_IN_PAGE_ID  INTEGER  NOT NULL   comment 'Link In Page ID',
+   LINK_OUT_PAGE_ID  INTEGER  NOT NULL   comment 'Link Out Page ID',
+   SESSION_ID  INTEGER  NOT NULL   comment 'Session ID',
+   REFERRAL_ID  INTEGER  NOT NULL   comment 'Referral ID',
+   BANNER_AD_ID  INTEGER  NOT NULL   comment 'Banner Ad ID',
+   ISP_ID  INTEGER  NOT NULL   comment 'ISP ID',
+   GEO_ID  INTEGER  NOT NULL   comment 'Geography ID',
+   ISO_CRCY_ID  INTEGER  NOT NULL   comment 'ISO Currency ID',
+   REF_ISO_CRCY_ID  INTEGER  NOT NULL   comment 'Reference ISO Currency ID',
+   USER_CLS_ID  INTEGER  NOT NULL   comment 'User Classification ID',
+   PAGE_EVT_SEQ_NBR  INTEGER     comment 'Page Event Sequence Number',
+   PAGE_EVT_TS  TIMESTAMP     comment 'Page Event Timestamp',
+   HTTP_SESSION_ID  NVARCHAR(18)  NOT NULL   comment 'HTTP Session ID',
+   ORDER_NUMBER  NVARCHAR(18)     comment 'Order Number',
+   KB_TRANSFERRED  INTEGER     comment 'KB Transferred',
+   DWELL_TIME  INTEGER     comment 'Dwell Time',
+   UNITS_ORDERED  INTEGER     comment 'Units Ordered',
+   EVENT_AMT  DECIMAL(22,4)     comment 'Event Amount',
+   REF_EVENT_AMT  DECIMAL(22,4)     comment 'Reference Event Amount',
+   FIRST_PRCH_IND  NVARCHAR(1)     comment 'First Purchase Indicator'
+, primary key  ( 
+     PAGE_EVENT_ID,
+     RECORD_SEQ_NBR)
+)
+with associations(
+   MANY TO ONE join "D_PAGE" as D_PAGE_REF_255225 on (D_PAGE_REF_255225.PAGE_ID = PAGE_ID),
+   MANY TO ONE join "D_CURRENCY" as D_CURRENCY_REF_255218 on (D_CURRENCY_REF_255218.ISO_CRCY_ID = REF_ISO_CRCY_ID),
+   MANY TO ONE join "D_CURRENCY" as D_CURRENCY_REF_255215 on (D_CURRENCY_REF_255215.ISO_CRCY_ID = ISO_CRCY_ID),
+   MANY TO ONE join "D_ENTITY" as D_ENTITY_REF_255210 on (D_ENTITY_REF_255210.ENTY_ID = CUSTOMER_ID),
+   MANY TO ONE join "D_PAGE" as D_PAGE_REF_255195 on (D_PAGE_REF_255195.PAGE_ID = LINK_OUT_PAGE_ID),
+   MANY TO ONE join "D_PAGE" as D_PAGE_REF_255192 on (D_PAGE_REF_255192.PAGE_ID = LINK_IN_PAGE_ID),
+   MANY TO ONE join "D_CORE_EVT_TYP" as D_CORE_EVT_TYP_REF_255187 on (D_CORE_EVT_TYP_REF_255187.EVT_TYP_ID = PAGE_EVT_TYPE_ID),
+   MANY TO ONE join "D_BANNER_AD" as D_BANNER_AD_REF_238497 on (D_BANNER_AD_REF_238497.BANNER_AD_ID = BANNER_AD_ID),
+   MANY TO ONE join "D_USER_CLS" as D_USER_CLS_REF_238495 on (D_USER_CLS_REF_238495.USER_CLS_ID = USER_CLS_ID),
+   MANY TO ONE join "D_TIME_PERIOD" as D_TIME_PERIOD_REF_241623 on (D_TIME_PERIOD_REF_241623.PRD_ID = PRD_ID),
+   MANY TO ONE join "D_USER" as D_USER_REF_241613 on (D_USER_REF_241613.USER_ID = USER_ID),
+   MANY TO ONE join "D_PRODUCT" as D_PRODUCT_REF_241607 on (D_PRODUCT_REF_241607.PRODUCT_ID = PRODUCT_ID),
+   MANY TO ONE join "D_SESSION" as D_SESSION_REF_241589 on (D_SESSION_REF_241589.SESSION_ID = SESSION_ID),
+   MANY TO ONE join "D_HOUR" as D_HOUR_REF_241586 on (D_HOUR_REF_241586.HOUR_ID = HOUR_ID),
+   MANY TO ONE join "D_REFERRAL" as D_REFERRAL_REF_211639 on (D_REFERRAL_REF_211639.REFERRAL_ID = REFERRAL_ID),
+   MANY TO ONE join "D_ISP" as D_ISP_REF_211571 on (D_ISP_REF_211571.ISP_ID = ISP_ID),
+   MANY TO ONE join "D_GEOGRAPHY" as D_GEOGRAPHY_REF_211558 on (D_GEOGRAPHY_REF_211558.GEO_ID = GEO_ID)
+)
+comment 'Click Stream Page Event'
+
+
+-- end of F_CS_PAGE_EVT
+--

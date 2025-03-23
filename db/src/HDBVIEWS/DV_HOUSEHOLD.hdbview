@@ -1,0 +1,27 @@
+
+
+view DV_HOUSEHOLD comment 'Household'(
+HOUSEHOLD_ID,
+HH_SURNAME,
+HH_FIRST_NAME,
+HH_CAT_NAME,
+HH_SUBCAT_NAME,
+HH_UNIQUE_ID
+)
+as
+select 
+    ENTY_ID             HOUSEHOLD_ID, 
+    THIRD_NAME          HH_SURNAME, 
+    FIRST_NAME          HH_FIRST_NAME, 
+    ENTY_CAT_NAME       HH_CAT_NAME, 
+    ENTY_SUBCAT_NAME    HH_SUBCAT_NAME, 
+    ENTY_UNIQUE_ID      HH_UNIQUE_ID
+from 
+    D_ENTITY
+where 
+    D_ENTITY.ENTY_TYPE = 'HH'
+
+
+----
+---- End of DV_HOUSEHOLD
+----

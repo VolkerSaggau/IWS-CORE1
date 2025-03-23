@@ -1,0 +1,63 @@
+
+
+view F_CPGN_CNTC_EVT__D_CORE_PRM_CPGN__REF_72698 (
+   FACT,
+   DIMENSION,
+   DIRECTION,
+   KEY,
+   COUNTER,
+   SOURCE,
+   INTEGRITYSTATE
+)
+AS
+(
+   select 
+      'F_CPGN_CNTC_EVT'                        AS FACT,
+      'D_CORE_PRM_CPGN'                        AS DIMENSION,
+      'Inbound'                                AS DIRECTION,
+   	to_varchar(FACT.PRM_CPGN_ID)             AS KEY,
+   	count(*)                                 AS COUNTER,
+      'in: ' || 'D_CORE_PRM_CPGN'              AS SOURCE,
+      'info' AS INTEGRITYSTATE
+   from 
+   	F_CPGN_CNTC_EVT	 FACT
+   WHERE 
+      FACT.PRM_CPGN_ID IN (select DIMENSION.PRM_CPGN_ID from D_CORE_PRM_CPGN	DIMENSION)
+   GROUP BY 
+      FACT.PRM_CPGN_ID
+   
+   --
+   --
+
+UNION ALL
+
+   select 
+      'F_CPGN_CNTC_EVT'                        AS FACT,
+      'D_CORE_PRM_CPGN'                        AS DIMENSION,
+      'Inbound'                                AS DIRECTION,
+   	to_varchar(FACT.PRM_CPGN_ID)             AS KEY,
+   	count(*)                                 AS COUNTER,
+      'in: ' || 'D_CORE_PRM_CPGN'              AS SOURCE,
+      'error' AS INTEGRITYSTATE
+   from 
+   	F_CPGN_CNTC_EVT	 FACT
+   WHERE 
+      FACT.PRM_CPGN_ID NOT IN (select DIMENSION.PRM_CPGN_ID from D_CORE_PRM_CPGN	DIMENSION)
+   GROUP BY 
+      FACT.PRM_CPGN_ID
+   
+   --
+   --
+
+)
+ORDER BY 
+   FACT DESC, 
+   DIMENSION DESC, 
+   INTEGRITYSTATE DESC, 
+   SOURCE DESC, 
+   COUNTER DESC, 
+   KEY DESC
+;
+--
+-- end of statement
+--

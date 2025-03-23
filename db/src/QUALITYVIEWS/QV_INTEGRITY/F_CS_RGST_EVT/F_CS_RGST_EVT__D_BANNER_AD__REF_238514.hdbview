@@ -1,0 +1,63 @@
+
+
+view F_CS_RGST_EVT__D_BANNER_AD__REF_238514 (
+   FACT,
+   DIMENSION,
+   DIRECTION,
+   KEY,
+   COUNTER,
+   SOURCE,
+   INTEGRITYSTATE
+)
+AS
+(
+   select 
+      'F_CS_RGST_EVT'                          AS FACT,
+      'D_BANNER_AD'                            AS DIMENSION,
+      'Inbound'                                AS DIRECTION,
+   	to_varchar(FACT.BANNER_AD_ID)            AS KEY,
+   	count(*)                                 AS COUNTER,
+      'in: ' || 'D_BANNER_AD'                  AS SOURCE,
+      'info' AS INTEGRITYSTATE
+   from 
+   	F_CS_RGST_EVT	 FACT
+   WHERE 
+      FACT.BANNER_AD_ID IN (select DIMENSION.BANNER_AD_ID from D_BANNER_AD	DIMENSION)
+   GROUP BY 
+      FACT.BANNER_AD_ID
+   
+   --
+   --
+
+UNION ALL
+
+   select 
+      'F_CS_RGST_EVT'                          AS FACT,
+      'D_BANNER_AD'                            AS DIMENSION,
+      'Inbound'                                AS DIRECTION,
+   	to_varchar(FACT.BANNER_AD_ID)            AS KEY,
+   	count(*)                                 AS COUNTER,
+      'in: ' || 'D_BANNER_AD'                  AS SOURCE,
+      'error' AS INTEGRITYSTATE
+   from 
+   	F_CS_RGST_EVT	 FACT
+   WHERE 
+      FACT.BANNER_AD_ID NOT IN (select DIMENSION.BANNER_AD_ID from D_BANNER_AD	DIMENSION)
+   GROUP BY 
+      FACT.BANNER_AD_ID
+   
+   --
+   --
+
+)
+ORDER BY 
+   FACT DESC, 
+   DIMENSION DESC, 
+   INTEGRITYSTATE DESC, 
+   SOURCE DESC, 
+   COUNTER DESC, 
+   KEY DESC
+;
+--
+-- end of statement
+--

@@ -1,0 +1,63 @@
+
+
+view F_CS_USER_CUS_CVSN__D_REFERRAL__REF_218082 (
+   FACT,
+   DIMENSION,
+   DIRECTION,
+   KEY,
+   COUNTER,
+   SOURCE,
+   INTEGRITYSTATE
+)
+AS
+(
+   select 
+      'F_CS_USER_CUS_CVSN'                     AS FACT,
+      'D_REFERRAL'                             AS DIMENSION,
+      'Inbound'                                AS DIRECTION,
+   	to_varchar(FACT.REFERRAL_ID)             AS KEY,
+   	count(*)                                 AS COUNTER,
+      'in: ' || 'D_REFERRAL'                   AS SOURCE,
+      'info' AS INTEGRITYSTATE
+   from 
+   	F_CS_USER_CUS_CVSN	 FACT
+   WHERE 
+      FACT.REFERRAL_ID IN (select DIMENSION.REFERRAL_ID from D_REFERRAL	DIMENSION)
+   GROUP BY 
+      FACT.REFERRAL_ID
+   
+   --
+   --
+
+UNION ALL
+
+   select 
+      'F_CS_USER_CUS_CVSN'                     AS FACT,
+      'D_REFERRAL'                             AS DIMENSION,
+      'Inbound'                                AS DIRECTION,
+   	to_varchar(FACT.REFERRAL_ID)             AS KEY,
+   	count(*)                                 AS COUNTER,
+      'in: ' || 'D_REFERRAL'                   AS SOURCE,
+      'error' AS INTEGRITYSTATE
+   from 
+   	F_CS_USER_CUS_CVSN	 FACT
+   WHERE 
+      FACT.REFERRAL_ID NOT IN (select DIMENSION.REFERRAL_ID from D_REFERRAL	DIMENSION)
+   GROUP BY 
+      FACT.REFERRAL_ID
+   
+   --
+   --
+
+)
+ORDER BY 
+   FACT DESC, 
+   DIMENSION DESC, 
+   INTEGRITYSTATE DESC, 
+   SOURCE DESC, 
+   COUNTER DESC, 
+   KEY DESC
+;
+--
+-- end of statement
+--

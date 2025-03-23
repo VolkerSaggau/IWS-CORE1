@@ -1,0 +1,28 @@
+
+
+view FV_PN_EPSD_EXCL comment 'Person Campaign Episode Exclusion'(
+PRM_EPSD_ID,
+PERSON_ID,
+BEGIN_DATE_PRD_ID,
+END_DATE_PRD_ID,
+PRM_EXCL_REASON
+)
+as
+select 
+    EXCL.PRM_EPSD_ID, 
+    EXCL.ENTY_ID PERSON_ID, 
+    EXCL.BEGIN_DATE_PRD_ID, 
+    EXCL.END_DATE_PRD_ID, 
+    EXCL.PRM_EXCL_REASON
+from 
+    D_ENTITY ENT, 
+    F_CPGN_EPSD_EXCL EXCL
+where 
+    ENT.ENTY_ID = EXCL.ENTY_ID
+and 
+    ENT.ENTY_TYPE = 'PN'
+
+
+----
+---- End of FV_PN_EPSD_EXCL
+----

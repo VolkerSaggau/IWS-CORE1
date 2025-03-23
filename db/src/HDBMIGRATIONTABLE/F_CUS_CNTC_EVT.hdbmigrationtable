@@ -1,0 +1,57 @@
+== version = 1
+
+
+
+column table F_CUS_CNTC_EVT (
+   CUS_CNTC_ID  INTEGER  NOT NULL   comment 'Customer Contact ID',
+   COR_EVT_SEQ_NBR  INTEGER  NOT NULL,
+   CNTC_INIT_PRD_ID  INTEGER     comment 'Contact Initiation Date Period ID',
+   CNTC_RSOL_PRD_ID  INTEGER     comment 'Contact Resolution Date Period ID',
+   INIT_CNTC_EMP_ID  INTEGER     comment 'ENTITY ID',
+   RSOL_CNTC_EMP_ID  INTEGER     comment 'Resolution Contact Employee ID',
+   FNCL_SCOR_ID  INTEGER     comment 'Financial Scores ID',
+   LANGUAGE_ID  INTEGER     comment 'Language ID',
+   PN_BHVR_SCOR_ID  INTEGER     comment 'Person Behavior Score ID',
+   PRODUCT_ID  INTEGER     comment 'Product ID',
+   SRSNS_CUS_CO_ID  INTEGER     comment 'Seriousness Customer Company ID',
+   MEDIA_ID  INTEGER     comment 'Media Type ID',
+   CUS_STSF_RT_ID  INTEGER     comment 'Customer Satisfaction Rating ID',
+   CNTC_RSOL_ID  INTEGER     comment 'Contact Resolution ID',
+   HOUR_ID  INTEGER     comment 'HOUR ID',
+   CNTC_EVT_TYP_ID  INTEGER     comment 'Customer Contact Event Type ID',
+   COR_RPT_STRC_ID  INTEGER     comment 'Core Reporting Structure ID',
+   GEO_ID  INTEGER     comment 'Geographic ID',
+   CUSTOMER_ID  INTEGER     comment 'Customer ID',
+   DEMO_ID  INTEGER     comment 'Demographics ID',
+   OPER_SYS_CUS_CNTC  NVARCHAR(18)     comment 'Legacy System Customer Contact Transaction ID',
+   CUS_CNTC_REF  NVARCHAR(30)     comment 'Customer Contact Reference',
+   CUS_CNTC_EVT_DRTN  DECIMAL     comment 'Customer Contact Transaction Duration'
+, primary key  ( 
+     CUS_CNTC_ID,
+     COR_EVT_SEQ_NBR)
+)
+with associations(
+   MANY TO ONE join "D_PRODUCT" as D_PRODUCT_REF_246750 on (D_PRODUCT_REF_246750.PRODUCT_ID = PRODUCT_ID),
+   MANY TO ONE join "D_CNTC_RSOL" as D_CNTC_RSOL_REF_246735 on (D_CNTC_RSOL_REF_246735.CNTC_RSOL_ID = CNTC_RSOL_ID),
+   MANY TO ONE join "D_FNCL_SCOR" as D_FNCL_SCOR_REF_270824 on (D_FNCL_SCOR_REF_270824.FNCL_SCOR_ID = FNCL_SCOR_ID),
+   MANY TO ONE join "D_BHVR_SCORE" as D_BHVR_SCORE_REF_270821 on (D_BHVR_SCORE_REF_270821.PN_BHVR_SCOR_ID = PN_BHVR_SCOR_ID),
+   MANY TO ONE join "D_LANGUAGE" as D_LANGUAGE_REF_270818 on (D_LANGUAGE_REF_270818.LANGUAGE_ID = LANGUAGE_ID),
+   MANY TO ONE join "D_DEMOGRAPHICS" as D_DEMOGRAPHICS_REF_392452 on (D_DEMOGRAPHICS_REF_392452.DEMO_ID = DEMO_ID),
+   MANY TO ONE join "D_TIME_PERIOD" as D_TIME_PERIOD_REF_90664 on (D_TIME_PERIOD_REF_90664.PRD_ID = CNTC_RSOL_PRD_ID),
+   MANY TO ONE join "D_CORE_EVT_TYP" as D_CORE_EVT_TYP_REF_66340 on (D_CORE_EVT_TYP_REF_66340.EVT_TYP_ID = CNTC_EVT_TYP_ID),
+   MANY TO ONE join "D_ENTITY" as D_ENTITY_REF_57433 on (D_ENTITY_REF_57433.ENTY_ID = RSOL_CNTC_EMP_ID),
+   MANY TO ONE join "D_ENTITY" as D_ENTITY_REF_57427 on (D_ENTITY_REF_57427.ENTY_ID = INIT_CNTC_EMP_ID),
+   MANY TO ONE join "D_ENTITY" as D_ENTITY_REF_57421 on (D_ENTITY_REF_57421.ENTY_ID = CUSTOMER_ID),
+   MANY TO ONE join "D_GEOGRAPHY" as D_GEOGRAPHY_REF_57409 on (D_GEOGRAPHY_REF_57409.GEO_ID = GEO_ID),
+   MANY TO ONE join "D_CORE_RPT_STRC" as D_CORE_RPT_STRC_REF_72855 on (D_CORE_RPT_STRC_REF_72855.COR_RPT_STRC_ID = COR_RPT_STRC_ID),
+   MANY TO ONE join "D_TIME_PERIOD" as D_TIME_PERIOD_REF_72847 on (D_TIME_PERIOD_REF_72847.PRD_ID = CNTC_INIT_PRD_ID),
+   MANY TO ONE join "D_HOUR" as D_HOUR_REF_72839 on (D_HOUR_REF_72839.HOUR_ID = HOUR_ID),
+   MANY TO ONE join "D_CUS_ST_STSF_RT" as D_CUS_ST_STSF_RT_REF_72827 on (D_CUS_ST_STSF_RT_REF_72827.CUS_STSF_RT_ID = CUS_STSF_RT_ID),
+   MANY TO ONE join "D_MEDIA" as D_MEDIA_REF_72815 on (D_MEDIA_REF_72815.MEDIA_ID = MEDIA_ID),
+   MANY TO ONE join "D_SRSNS_CUS_CO" as D_SRSNS_CUS_CO_REF_72811 on (D_SRSNS_CUS_CO_REF_72811.SRSNS_CUS_CO_ID = SRSNS_CUS_CO_ID)
+)
+comment 'Customer Contact Event'
+
+
+-- end of F_CUS_CNTC_EVT
+--

@@ -1,0 +1,63 @@
+
+
+view F_CS_USER_RFM_MEAS__D_ACCOUNT__REF_248867 (
+   FACT,
+   DIMENSION,
+   DIRECTION,
+   KEY,
+   COUNTER,
+   SOURCE,
+   INTEGRITYSTATE
+)
+AS
+(
+   select 
+      'F_CS_USER_RFM_MEAS'                     AS FACT,
+      'D_ACCOUNT'                              AS DIMENSION,
+      'Inbound'                                AS DIRECTION,
+   	to_varchar(FACT.ACCOUNT_ID)              AS KEY,
+   	count(*)                                 AS COUNTER,
+      'in: ' || 'D_ACCOUNT'                    AS SOURCE,
+      'info' AS INTEGRITYSTATE
+   from 
+   	F_CS_USER_RFM_MEAS	 FACT
+   WHERE 
+      FACT.ACCOUNT_ID IN (select DIMENSION.ACCOUNT_ID from D_ACCOUNT	DIMENSION)
+   GROUP BY 
+      FACT.ACCOUNT_ID
+   
+   --
+   --
+
+UNION ALL
+
+   select 
+      'F_CS_USER_RFM_MEAS'                     AS FACT,
+      'D_ACCOUNT'                              AS DIMENSION,
+      'Inbound'                                AS DIRECTION,
+   	to_varchar(FACT.ACCOUNT_ID)              AS KEY,
+   	count(*)                                 AS COUNTER,
+      'in: ' || 'D_ACCOUNT'                    AS SOURCE,
+      'error' AS INTEGRITYSTATE
+   from 
+   	F_CS_USER_RFM_MEAS	 FACT
+   WHERE 
+      FACT.ACCOUNT_ID NOT IN (select DIMENSION.ACCOUNT_ID from D_ACCOUNT	DIMENSION)
+   GROUP BY 
+      FACT.ACCOUNT_ID
+   
+   --
+   --
+
+)
+ORDER BY 
+   FACT DESC, 
+   DIMENSION DESC, 
+   INTEGRITYSTATE DESC, 
+   SOURCE DESC, 
+   COUNTER DESC, 
+   KEY DESC
+;
+--
+-- end of statement
+--

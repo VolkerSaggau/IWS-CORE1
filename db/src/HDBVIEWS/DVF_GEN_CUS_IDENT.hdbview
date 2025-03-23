@@ -1,0 +1,25 @@
+
+
+view DVF_GEN_CUS_IDENT comment 'F Generic Customer Identifier'(
+CUSTOMER_ID,
+GC_SYS_SEQ_NBR,
+GC_OPER_SYS_NAME,
+GC_LEGACY_ID,
+GC_ID_START_DATE,
+GC_ID_END_DATE
+)
+as
+select 
+    IDENT.ENTY_ID           CUSTOMER_ID, 
+    IDENT.SYS_SEQ_NBR       GC_SYS_SEQ_NBR, 
+    IDENT.OPER_SYS_NAME     GC_OPER_SYS_NAME, 
+    IDENT.ENTY_LEGACY_ID    GC_LEGACY_ID, 
+    IDENT.ID_START_DATE     GC_ID_START_DATE, 
+    IDENT.ID_END_DATE       GC_ID_END_DATE
+from 
+    D_ENTY_LGCY_IDENT       IDENT
+
+
+----
+---- End of DVF_GEN_CUS_IDENT
+----

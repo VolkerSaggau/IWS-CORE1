@@ -1,0 +1,63 @@
+
+
+view F_INTL_ACCT_ENTR__D_CURRENCY__REF_98295 (
+   FACT,
+   DIMENSION,
+   DIRECTION,
+   KEY,
+   COUNTER,
+   SOURCE,
+   INTEGRITYSTATE
+)
+AS
+(
+   select 
+      'F_INTL_ACCT_ENTR'                       AS FACT,
+      'D_CURRENCY'                             AS DIMENSION,
+      'Inbound'                                AS DIRECTION,
+   	to_varchar(FACT.REF_ISO_CRCY_ID)         AS KEY,
+   	count(*)                                 AS COUNTER,
+      'in: ' || 'D_CURRENCY'                   AS SOURCE,
+      'info' AS INTEGRITYSTATE
+   from 
+   	F_INTL_ACCT_ENTR	 FACT
+   WHERE 
+      FACT.REF_ISO_CRCY_ID IN (select DIMENSION.ISO_CRCY_ID from D_CURRENCY	DIMENSION)
+   GROUP BY 
+      FACT.REF_ISO_CRCY_ID
+   
+   --
+   --
+
+UNION ALL
+
+   select 
+      'F_INTL_ACCT_ENTR'                       AS FACT,
+      'D_CURRENCY'                             AS DIMENSION,
+      'Inbound'                                AS DIRECTION,
+   	to_varchar(FACT.REF_ISO_CRCY_ID)         AS KEY,
+   	count(*)                                 AS COUNTER,
+      'in: ' || 'D_CURRENCY'                   AS SOURCE,
+      'error' AS INTEGRITYSTATE
+   from 
+   	F_INTL_ACCT_ENTR	 FACT
+   WHERE 
+      FACT.REF_ISO_CRCY_ID NOT IN (select DIMENSION.ISO_CRCY_ID from D_CURRENCY	DIMENSION)
+   GROUP BY 
+      FACT.REF_ISO_CRCY_ID
+   
+   --
+   --
+
+)
+ORDER BY 
+   FACT DESC, 
+   DIMENSION DESC, 
+   INTEGRITYSTATE DESC, 
+   SOURCE DESC, 
+   COUNTER DESC, 
+   KEY DESC
+;
+--
+-- end of statement
+--

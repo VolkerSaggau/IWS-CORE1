@@ -1,0 +1,27 @@
+== version = 1
+
+
+
+column table F_CPGN_EPSD_EXCL (
+   PRM_EPSD_ID  INTEGER  NOT NULL   comment 'Promotional Episode ID',
+   ENTY_ID  INTEGER  NOT NULL   comment 'Entity ID',
+   BEGIN_DATE_PRD_ID  INTEGER  NOT NULL   comment 'Promotion Exclusion Begin Date',
+   END_DATE_PRD_ID  INTEGER     comment 'Promotion Exclusion End Date',
+   PRM_EXCL_REASON  NVARCHAR(255)     comment 'Promotion Exclusion Reason'
+, primary key  ( 
+     PRM_EPSD_ID,
+     ENTY_ID,
+     BEGIN_DATE_PRD_ID)
+)
+with associations(
+   MANY TO ONE join "D_ENTITY" as D_ENTITY_REF_291361 on (D_ENTITY_REF_291361.ENTY_ID = ENTY_ID),
+   MANY TO ONE join "D_PRM_CPGN_EPSD" as D_PRM_CPGN_EPSD_REF_35200 on (D_PRM_CPGN_EPSD_REF_35200.PRM_EPSD_ID = PRM_EPSD_ID),
+   MANY TO ONE join "D_TIME_PERIOD" as D_TIME_PERIOD_REF_64683 on (D_TIME_PERIOD_REF_64683.PRD_ID = BEGIN_DATE_PRD_ID),
+   MANY TO ONE join "D_TIME_PERIOD" as D_TIME_PERIOD_REF_63601 on (D_TIME_PERIOD_REF_63601.PRD_ID = END_DATE_PRD_ID),
+   MANY TO ONE join "F_ENTITY_PROFILE" as F_ENTITY_PROFILE_REF_70443 on (F_ENTITY_PROFILE_REF_70443.ENTY_PRFL_ID = ENTY_ID)
+)
+comment 'Household Campaign Episode Exclusion'
+
+
+-- end of F_CPGN_EPSD_EXCL
+--

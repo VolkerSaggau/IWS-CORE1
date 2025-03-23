@@ -1,0 +1,63 @@
+
+
+view F_CPGN_CNTC_EVT__D_PRM_CPGN_EPSD__REF_59611 (
+   FACT,
+   DIMENSION,
+   DIRECTION,
+   KEY,
+   COUNTER,
+   SOURCE,
+   INTEGRITYSTATE
+)
+AS
+(
+   select 
+      'F_CPGN_CNTC_EVT'                        AS FACT,
+      'D_PRM_CPGN_EPSD'                        AS DIMENSION,
+      'Inbound'                                AS DIRECTION,
+   	to_varchar(FACT.PRM_EPSD_ID)             AS KEY,
+   	count(*)                                 AS COUNTER,
+      'in: ' || 'D_PRM_CPGN_EPSD'              AS SOURCE,
+      'info' AS INTEGRITYSTATE
+   from 
+   	F_CPGN_CNTC_EVT	 FACT
+   WHERE 
+      FACT.PRM_EPSD_ID IN (select DIMENSION.PRM_EPSD_ID from D_PRM_CPGN_EPSD	DIMENSION)
+   GROUP BY 
+      FACT.PRM_EPSD_ID
+   
+   --
+   --
+
+UNION ALL
+
+   select 
+      'F_CPGN_CNTC_EVT'                        AS FACT,
+      'D_PRM_CPGN_EPSD'                        AS DIMENSION,
+      'Inbound'                                AS DIRECTION,
+   	to_varchar(FACT.PRM_EPSD_ID)             AS KEY,
+   	count(*)                                 AS COUNTER,
+      'in: ' || 'D_PRM_CPGN_EPSD'              AS SOURCE,
+      'error' AS INTEGRITYSTATE
+   from 
+   	F_CPGN_CNTC_EVT	 FACT
+   WHERE 
+      FACT.PRM_EPSD_ID NOT IN (select DIMENSION.PRM_EPSD_ID from D_PRM_CPGN_EPSD	DIMENSION)
+   GROUP BY 
+      FACT.PRM_EPSD_ID
+   
+   --
+   --
+
+)
+ORDER BY 
+   FACT DESC, 
+   DIMENSION DESC, 
+   INTEGRITYSTATE DESC, 
+   SOURCE DESC, 
+   COUNTER DESC, 
+   KEY DESC
+;
+--
+-- end of statement
+--

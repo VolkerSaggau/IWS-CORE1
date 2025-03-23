@@ -1,0 +1,63 @@
+
+
+view F_CS_USER_RFM_MEAS__D_TIME_PERIOD__REF_257516 (
+   FACT,
+   DIMENSION,
+   DIRECTION,
+   KEY,
+   COUNTER,
+   SOURCE,
+   INTEGRITYSTATE
+)
+AS
+(
+   select 
+      'F_CS_USER_RFM_MEAS'                     AS FACT,
+      'D_TIME_PERIOD'                          AS DIMENSION,
+      'Inbound'                                AS DIRECTION,
+   	to_varchar(FACT.FST_VST_DT_PRD_ID)       AS KEY,
+   	count(*)                                 AS COUNTER,
+      'in: ' || 'D_TIME_PERIOD'                AS SOURCE,
+      'info' AS INTEGRITYSTATE
+   from 
+   	F_CS_USER_RFM_MEAS	 FACT
+   WHERE 
+      FACT.FST_VST_DT_PRD_ID IN (select DIMENSION.PRD_ID from D_TIME_PERIOD	DIMENSION)
+   GROUP BY 
+      FACT.FST_VST_DT_PRD_ID
+   
+   --
+   --
+
+UNION ALL
+
+   select 
+      'F_CS_USER_RFM_MEAS'                     AS FACT,
+      'D_TIME_PERIOD'                          AS DIMENSION,
+      'Inbound'                                AS DIRECTION,
+   	to_varchar(FACT.FST_VST_DT_PRD_ID)       AS KEY,
+   	count(*)                                 AS COUNTER,
+      'in: ' || 'D_TIME_PERIOD'                AS SOURCE,
+      'error' AS INTEGRITYSTATE
+   from 
+   	F_CS_USER_RFM_MEAS	 FACT
+   WHERE 
+      FACT.FST_VST_DT_PRD_ID NOT IN (select DIMENSION.PRD_ID from D_TIME_PERIOD	DIMENSION)
+   GROUP BY 
+      FACT.FST_VST_DT_PRD_ID
+   
+   --
+   --
+
+)
+ORDER BY 
+   FACT DESC, 
+   DIMENSION DESC, 
+   INTEGRITYSTATE DESC, 
+   SOURCE DESC, 
+   COUNTER DESC, 
+   KEY DESC
+;
+--
+-- end of statement
+--

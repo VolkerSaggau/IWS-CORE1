@@ -1,0 +1,24 @@
+
+
+view FV_HH_PRM_EXCL comment 'Household Promotion Exclusion'(
+PRM_CPGN_ID,
+HOUSEHOLD_ID,
+BEGIN_DATE_PRD_ID,
+END_DATE_PRD_ID,
+PRM_EXCL_REASON
+)
+as
+select 
+    EXCL.PRM_CPGN_ID, EXCL.ENTY_ID HOUSEHOLD_ID, EXCL.BEGIN_DATE_PRD_ID, 
+EXCL.END_DATE_PRD_ID, EXCL.PRM_EXCL_REASON
+from 
+    D_ENTITY ENT, 
+    F_CUS_PRM_EXCL EXCL
+where 
+    ENT.ENTY_ID = EXCL.ENTY_ID
+and ENT.ENTY_TYPE = 'HH'
+
+
+----
+---- End of FV_HH_PRM_EXCL
+----

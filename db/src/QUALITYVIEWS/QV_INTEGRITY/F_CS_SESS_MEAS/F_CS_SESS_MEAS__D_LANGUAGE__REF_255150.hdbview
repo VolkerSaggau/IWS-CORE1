@@ -1,0 +1,63 @@
+
+
+view F_CS_SESS_MEAS__D_LANGUAGE__REF_255150 (
+   FACT,
+   DIMENSION,
+   DIRECTION,
+   KEY,
+   COUNTER,
+   SOURCE,
+   INTEGRITYSTATE
+)
+AS
+(
+   select 
+      'F_CS_SESS_MEAS'                         AS FACT,
+      'D_LANGUAGE'                             AS DIMENSION,
+      'Inbound'                                AS DIRECTION,
+   	to_varchar(FACT.LANGUAGE_ID)             AS KEY,
+   	count(*)                                 AS COUNTER,
+      'in: ' || 'D_LANGUAGE'                   AS SOURCE,
+      'info' AS INTEGRITYSTATE
+   from 
+   	F_CS_SESS_MEAS	 FACT
+   WHERE 
+      FACT.LANGUAGE_ID IN (select DIMENSION.LANGUAGE_ID from D_LANGUAGE	DIMENSION)
+   GROUP BY 
+      FACT.LANGUAGE_ID
+   
+   --
+   --
+
+UNION ALL
+
+   select 
+      'F_CS_SESS_MEAS'                         AS FACT,
+      'D_LANGUAGE'                             AS DIMENSION,
+      'Inbound'                                AS DIRECTION,
+   	to_varchar(FACT.LANGUAGE_ID)             AS KEY,
+   	count(*)                                 AS COUNTER,
+      'in: ' || 'D_LANGUAGE'                   AS SOURCE,
+      'error' AS INTEGRITYSTATE
+   from 
+   	F_CS_SESS_MEAS	 FACT
+   WHERE 
+      FACT.LANGUAGE_ID NOT IN (select DIMENSION.LANGUAGE_ID from D_LANGUAGE	DIMENSION)
+   GROUP BY 
+      FACT.LANGUAGE_ID
+   
+   --
+   --
+
+)
+ORDER BY 
+   FACT DESC, 
+   DIMENSION DESC, 
+   INTEGRITYSTATE DESC, 
+   SOURCE DESC, 
+   COUNTER DESC, 
+   KEY DESC
+;
+--
+-- end of statement
+--

@@ -1,0 +1,63 @@
+
+
+view F_CS_RGST_EVT__D_USER__REF_218039 (
+   FACT,
+   DIMENSION,
+   DIRECTION,
+   KEY,
+   COUNTER,
+   SOURCE,
+   INTEGRITYSTATE
+)
+AS
+(
+   select 
+      'F_CS_RGST_EVT'                          AS FACT,
+      'D_USER'                                 AS DIMENSION,
+      'Inbound'                                AS DIRECTION,
+   	to_varchar(FACT.USER_ID)                 AS KEY,
+   	count(*)                                 AS COUNTER,
+      'in: ' || 'D_USER'                       AS SOURCE,
+      'info' AS INTEGRITYSTATE
+   from 
+   	F_CS_RGST_EVT	 FACT
+   WHERE 
+      FACT.USER_ID IN (select DIMENSION.USER_ID from D_USER	DIMENSION)
+   GROUP BY 
+      FACT.USER_ID
+   
+   --
+   --
+
+UNION ALL
+
+   select 
+      'F_CS_RGST_EVT'                          AS FACT,
+      'D_USER'                                 AS DIMENSION,
+      'Inbound'                                AS DIRECTION,
+   	to_varchar(FACT.USER_ID)                 AS KEY,
+   	count(*)                                 AS COUNTER,
+      'in: ' || 'D_USER'                       AS SOURCE,
+      'error' AS INTEGRITYSTATE
+   from 
+   	F_CS_RGST_EVT	 FACT
+   WHERE 
+      FACT.USER_ID NOT IN (select DIMENSION.USER_ID from D_USER	DIMENSION)
+   GROUP BY 
+      FACT.USER_ID
+   
+   --
+   --
+
+)
+ORDER BY 
+   FACT DESC, 
+   DIMENSION DESC, 
+   INTEGRITYSTATE DESC, 
+   SOURCE DESC, 
+   COUNTER DESC, 
+   KEY DESC
+;
+--
+-- end of statement
+--

@@ -1,0 +1,63 @@
+
+
+view F_CS_PAGE_EVT__D_CORE_EVT_TYP__REF_255187 (
+   FACT,
+   DIMENSION,
+   DIRECTION,
+   KEY,
+   COUNTER,
+   SOURCE,
+   INTEGRITYSTATE
+)
+AS
+(
+   select 
+      'F_CS_PAGE_EVT'                          AS FACT,
+      'D_CORE_EVT_TYP'                         AS DIMENSION,
+      'Inbound'                                AS DIRECTION,
+   	to_varchar(FACT.PAGE_EVT_TYPE_ID)        AS KEY,
+   	count(*)                                 AS COUNTER,
+      'in: ' || 'D_CORE_EVT_TYP'               AS SOURCE,
+      'info' AS INTEGRITYSTATE
+   from 
+   	F_CS_PAGE_EVT	 FACT
+   WHERE 
+      FACT.PAGE_EVT_TYPE_ID IN (select DIMENSION.EVT_TYP_ID from D_CORE_EVT_TYP	DIMENSION)
+   GROUP BY 
+      FACT.PAGE_EVT_TYPE_ID
+   
+   --
+   --
+
+UNION ALL
+
+   select 
+      'F_CS_PAGE_EVT'                          AS FACT,
+      'D_CORE_EVT_TYP'                         AS DIMENSION,
+      'Inbound'                                AS DIRECTION,
+   	to_varchar(FACT.PAGE_EVT_TYPE_ID)        AS KEY,
+   	count(*)                                 AS COUNTER,
+      'in: ' || 'D_CORE_EVT_TYP'               AS SOURCE,
+      'error' AS INTEGRITYSTATE
+   from 
+   	F_CS_PAGE_EVT	 FACT
+   WHERE 
+      FACT.PAGE_EVT_TYPE_ID NOT IN (select DIMENSION.EVT_TYP_ID from D_CORE_EVT_TYP	DIMENSION)
+   GROUP BY 
+      FACT.PAGE_EVT_TYPE_ID
+   
+   --
+   --
+
+)
+ORDER BY 
+   FACT DESC, 
+   DIMENSION DESC, 
+   INTEGRITYSTATE DESC, 
+   SOURCE DESC, 
+   COUNTER DESC, 
+   KEY DESC
+;
+--
+-- end of statement
+--

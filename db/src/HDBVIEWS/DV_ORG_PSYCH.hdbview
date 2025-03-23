@@ -1,0 +1,21 @@
+
+
+view DV_ORG_PSYCH (
+PSYCH_ID,
+PSY_ALL_ENTRIES_IN,
+PURCHASING,
+CULTURE
+)
+as
+select 
+    PSYCH_ID, 
+    PSY_ALL_ENTRIES_IN, PURCHASING, CULTURE
+from 
+    D_PSYCHOGRAPHICS
+where 
+    PSYCH_ENTY_TYP = 'ORG'
+
+
+----
+---- End of DV_ORG_PSYCH
+----

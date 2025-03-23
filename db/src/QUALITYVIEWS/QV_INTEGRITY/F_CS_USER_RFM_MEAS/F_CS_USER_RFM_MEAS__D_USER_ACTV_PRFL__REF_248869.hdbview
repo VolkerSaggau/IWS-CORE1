@@ -1,0 +1,63 @@
+
+
+view F_CS_USER_RFM_MEAS__D_USER_ACTV_PRFL__REF_248869 (
+   FACT,
+   DIMENSION,
+   DIRECTION,
+   KEY,
+   COUNTER,
+   SOURCE,
+   INTEGRITYSTATE
+)
+AS
+(
+   select 
+      'F_CS_USER_RFM_MEAS'                     AS FACT,
+      'D_USER_ACTV_PRFL'                       AS DIMENSION,
+      'Inbound'                                AS DIRECTION,
+   	to_varchar(FACT.USER_ACTV_PRFL_ID)       AS KEY,
+   	count(*)                                 AS COUNTER,
+      'in: ' || 'D_USER_ACTV_PRFL'             AS SOURCE,
+      'info' AS INTEGRITYSTATE
+   from 
+   	F_CS_USER_RFM_MEAS	 FACT
+   WHERE 
+      FACT.USER_ACTV_PRFL_ID IN (select DIMENSION.USER_ACTV_PRFL_ID from D_USER_ACTV_PRFL	DIMENSION)
+   GROUP BY 
+      FACT.USER_ACTV_PRFL_ID
+   
+   --
+   --
+
+UNION ALL
+
+   select 
+      'F_CS_USER_RFM_MEAS'                     AS FACT,
+      'D_USER_ACTV_PRFL'                       AS DIMENSION,
+      'Inbound'                                AS DIRECTION,
+   	to_varchar(FACT.USER_ACTV_PRFL_ID)       AS KEY,
+   	count(*)                                 AS COUNTER,
+      'in: ' || 'D_USER_ACTV_PRFL'             AS SOURCE,
+      'error' AS INTEGRITYSTATE
+   from 
+   	F_CS_USER_RFM_MEAS	 FACT
+   WHERE 
+      FACT.USER_ACTV_PRFL_ID NOT IN (select DIMENSION.USER_ACTV_PRFL_ID from D_USER_ACTV_PRFL	DIMENSION)
+   GROUP BY 
+      FACT.USER_ACTV_PRFL_ID
+   
+   --
+   --
+
+)
+ORDER BY 
+   FACT DESC, 
+   DIMENSION DESC, 
+   INTEGRITYSTATE DESC, 
+   SOURCE DESC, 
+   COUNTER DESC, 
+   KEY DESC
+;
+--
+-- end of statement
+--

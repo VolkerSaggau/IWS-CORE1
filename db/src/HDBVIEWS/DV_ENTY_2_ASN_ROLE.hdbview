@@ -1,0 +1,19 @@
+
+
+view DV_ENTY_2_ASN_ROLE comment 'Entity 2 Association Role'(
+ENTY_2_ROLE_ID,
+ROLE_2_DESC,
+ERO2_ALL_ENTR_IND
+)
+as
+select 
+    ROLE_ID             ENTY_2_ROLE_ID, 
+    ROLE_DESCRIPTION    ROLE_2_DESC, 
+    ERO_ALL_ENTRIES_IN  ERO2_ALL_ENTR_IND
+from 
+    D_ENTY_ASN_ROLE
+
+
+----
+---- End of DV_ENTY_2_ASN_ROLE
+----

@@ -1,0 +1,63 @@
+
+
+view D_CORE_PRM_CPGN__D_STRTGC_CPGN__REF_56974 (
+   FACT,
+   DIMENSION,
+   DIRECTION,
+   KEY,
+   COUNTER,
+   SOURCE,
+   INTEGRITYSTATE
+)
+AS
+(
+   select 
+      'D_CORE_PRM_CPGN'                        AS FACT,
+      'D_STRTGC_CPGN'                          AS DIMENSION,
+      'Inbound'                                AS DIRECTION,
+   	to_varchar(FACT.STRTGC_CPGN_ID)          AS KEY,
+   	count(*)                                 AS COUNTER,
+      'in: ' || 'D_STRTGC_CPGN'                AS SOURCE,
+      'info' AS INTEGRITYSTATE
+   from 
+   	D_CORE_PRM_CPGN	 FACT
+   WHERE 
+      FACT.STRTGC_CPGN_ID IN (select DIMENSION.STRTGC_CPGN_ID from D_STRTGC_CPGN	DIMENSION)
+   GROUP BY 
+      FACT.STRTGC_CPGN_ID
+   
+   --
+   --
+
+UNION ALL
+
+   select 
+      'D_CORE_PRM_CPGN'                        AS FACT,
+      'D_STRTGC_CPGN'                          AS DIMENSION,
+      'Inbound'                                AS DIRECTION,
+   	to_varchar(FACT.STRTGC_CPGN_ID)          AS KEY,
+   	count(*)                                 AS COUNTER,
+      'in: ' || 'D_STRTGC_CPGN'                AS SOURCE,
+      'error' AS INTEGRITYSTATE
+   from 
+   	D_CORE_PRM_CPGN	 FACT
+   WHERE 
+      FACT.STRTGC_CPGN_ID NOT IN (select DIMENSION.STRTGC_CPGN_ID from D_STRTGC_CPGN	DIMENSION)
+   GROUP BY 
+      FACT.STRTGC_CPGN_ID
+   
+   --
+   --
+
+)
+ORDER BY 
+   FACT DESC, 
+   DIMENSION DESC, 
+   INTEGRITYSTATE DESC, 
+   SOURCE DESC, 
+   COUNTER DESC, 
+   KEY DESC
+;
+--
+-- end of statement
+--

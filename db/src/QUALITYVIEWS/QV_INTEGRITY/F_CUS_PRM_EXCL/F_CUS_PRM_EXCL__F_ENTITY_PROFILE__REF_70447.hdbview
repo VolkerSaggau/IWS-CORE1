@@ -1,0 +1,63 @@
+
+
+view F_CUS_PRM_EXCL__F_ENTITY_PROFILE__REF_70447 (
+   FACT,
+   DIMENSION,
+   DIRECTION,
+   KEY,
+   COUNTER,
+   SOURCE,
+   INTEGRITYSTATE
+)
+AS
+(
+   select 
+      'F_CUS_PRM_EXCL'                         AS FACT,
+      'F_ENTITY_PROFILE'                       AS DIMENSION,
+      'Inbound'                                AS DIRECTION,
+   	to_varchar(FACT.ENTY_ID)                 AS KEY,
+   	count(*)                                 AS COUNTER,
+      'in: ' || 'F_ENTITY_PROFILE'             AS SOURCE,
+      'info' AS INTEGRITYSTATE
+   from 
+   	F_CUS_PRM_EXCL	 FACT
+   WHERE 
+      FACT.ENTY_ID IN (select DIMENSION.ENTY_PRFL_ID from F_ENTITY_PROFILE	DIMENSION)
+   GROUP BY 
+      FACT.ENTY_ID
+   
+   --
+   --
+
+UNION ALL
+
+   select 
+      'F_CUS_PRM_EXCL'                         AS FACT,
+      'F_ENTITY_PROFILE'                       AS DIMENSION,
+      'Inbound'                                AS DIRECTION,
+   	to_varchar(FACT.ENTY_ID)                 AS KEY,
+   	count(*)                                 AS COUNTER,
+      'in: ' || 'F_ENTITY_PROFILE'             AS SOURCE,
+      'error' AS INTEGRITYSTATE
+   from 
+   	F_CUS_PRM_EXCL	 FACT
+   WHERE 
+      FACT.ENTY_ID NOT IN (select DIMENSION.ENTY_PRFL_ID from F_ENTITY_PROFILE	DIMENSION)
+   GROUP BY 
+      FACT.ENTY_ID
+   
+   --
+   --
+
+)
+ORDER BY 
+   FACT DESC, 
+   DIMENSION DESC, 
+   INTEGRITYSTATE DESC, 
+   SOURCE DESC, 
+   COUNTER DESC, 
+   KEY DESC
+;
+--
+-- end of statement
+--

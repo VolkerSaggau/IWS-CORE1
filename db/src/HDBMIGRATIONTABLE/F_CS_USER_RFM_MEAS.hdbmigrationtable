@@ -1,0 +1,76 @@
+== version = 1
+
+
+
+column table F_CS_USER_RFM_MEAS (
+   USER_ID  INTEGER  NOT NULL   comment 'User ID',
+   MONTH_ID  INTEGER  NOT NULL   comment 'Month ID',
+   ACCOUNT_ID  INTEGER  NOT NULL   comment 'Account ID',
+   CUSTOMER_ID  INTEGER  NOT NULL   comment 'Customer ID',
+   COR_RPT_STRC_ID  INTEGER  NOT NULL   comment 'Core Reporting Structure ID',
+   LST_VIEWED_PAGE_ID  INTEGER  NOT NULL   comment 'Last Viewed Page ID',
+   FST_VST_DT_PRD_ID  INTEGER  NOT NULL   comment 'First Visit Date ID',
+   LAST_VST_DT_PRD_ID  INTEGER  NOT NULL   comment 'Last Visit Date ID',
+   ISO_CRCY_ID  INTEGER     comment 'ISO Currency ID',
+   REF_ISO_CRCY_ID  INTEGER     comment 'Reference ISO Currency ID',
+   DEMO_ID  INTEGER     comment 'Demographics ID',
+   GEO_ID  INTEGER     comment 'Geo ID',
+   DECILE_RANK_ID  INTEGER  NOT NULL   comment 'Decile Ranking ID',
+   PN_BHVR_SCOR_ID  INTEGER  NOT NULL   comment 'Personal Behavior Score ID',
+   PSYCH_ID  INTEGER     comment 'Psychographics ID',
+   FNCL_SCOR_ID  INTEGER     comment 'Financial Scores ID',
+   PROFESSION_ID  INTEGER  NOT NULL   comment 'Profession ID',
+   LANGUAGE_ID  INTEGER  NOT NULL   comment 'Language ID',
+   USER_CLS_ID  INTEGER  NOT NULL   comment 'User Classification ID',
+   USER_ACTV_PRFL_ID  INTEGER  NOT NULL   comment 'User Activity Profile ID',
+   USER_TENURE  INTEGER     comment 'User Tenure',
+   CUR_NBR_VISITS  INTEGER     comment 'Current Number of Visits',
+   CUR_VISIT_DRTN  INTEGER     comment 'Current Visit Duration',
+   CUR_NBR_PRCH  INTEGER     comment 'Current Number of Purchases',
+   CUR_PRCH_VALUE  DECIMAL(22,4)     comment 'Current Purchase Value',
+   REF_CUR_PRCH_VAL  DECIMAL(22,4)     comment 'Reference Current Purchase Value',
+   NBR_VISITS_60DAY  INTEGER     comment 'Number of Visits in 60 Days',
+   VISIT_DRTN_60DAY  INTEGER     comment 'Visit Duration in 60 Days',
+   NBR_PRCH_60DAY  INTEGER     comment 'Number of Purchases in 60 Days',
+   PRCH_VALUE_60DAY  DECIMAL(22,4)     comment 'Purchase Value in 60 Days',
+   REF_PRCH_VAL_60DAY  DECIMAL(22,4)     comment 'Reference Purchase Value in 60 Days',
+   NBR_VISITS_90DAY  INTEGER     comment 'Number of Visits in 90 Days',
+   VISIT_DRTN_90DAY  INTEGER     comment 'Visit Duration in 90 Days',
+   NBR_PRCH_90DAY  INTEGER     comment 'Number of Purchases in 90 Days',
+   PRCH_VALUE_90DAY  DECIMAL(22,4)     comment 'Purchase Value in 90 Days',
+   REF_PRCH_VAL_90DAY  DECIMAL(22,4)     comment 'Reference Purchase Value in 90 Days',
+   LT_PRCH_VAL  DECIMAL(22,4)     comment 'Life Time Purchase Value',
+   REF_LT_PRCH_VAL  DECIMAL(22,4)     comment 'Reference Life Time Purchase Value',
+   LT_AVG_PRCH_VAL  DECIMAL(22,4)     comment 'Life Time Average Purchase Value',
+   REF_LT_AVG_PRCH  DECIMAL(22,4)     comment 'Reference Life Time Average Purchase Value'
+, primary key  ( 
+     USER_ID,
+     MONTH_ID)
+)
+with associations(
+   MANY TO ONE join "D_ENTITY" as D_ENTITY_REF_257526 on (D_ENTITY_REF_257526.ENTY_ID = CUSTOMER_ID),
+   MANY TO ONE join "D_TIME_PERIOD" as D_TIME_PERIOD_REF_257517 on (D_TIME_PERIOD_REF_257517.PRD_ID = LAST_VST_DT_PRD_ID),
+   MANY TO ONE join "D_TIME_PERIOD" as D_TIME_PERIOD_REF_257516 on (D_TIME_PERIOD_REF_257516.PRD_ID = FST_VST_DT_PRD_ID),
+   MANY TO ONE join "D_PAGE" as D_PAGE_REF_257511 on (D_PAGE_REF_257511.PAGE_ID = LST_VIEWED_PAGE_ID),
+   MANY TO ONE join "D_CURRENCY" as D_CURRENCY_REF_257504 on (D_CURRENCY_REF_257504.ISO_CRCY_ID = REF_ISO_CRCY_ID),
+   MANY TO ONE join "D_LANGUAGE" as D_LANGUAGE_REF_248900 on (D_LANGUAGE_REF_248900.LANGUAGE_ID = LANGUAGE_ID),
+   MANY TO ONE join "D_PROFESSION" as D_PROFESSION_REF_248899 on (D_PROFESSION_REF_248899.PROFESSION_ID = PROFESSION_ID),
+   MANY TO ONE join "D_CORE_RPT_STRC" as D_CORE_RPT_STRC_REF_248871 on (D_CORE_RPT_STRC_REF_248871.COR_RPT_STRC_ID = COR_RPT_STRC_ID),
+   MANY TO ONE join "D_USER_ACTV_PRFL" as D_USER_ACTV_PRFL_REF_248869 on (D_USER_ACTV_PRFL_REF_248869.USER_ACTV_PRFL_ID = USER_ACTV_PRFL_ID),
+   MANY TO ONE join "D_USER_CLS" as D_USER_CLS_REF_248868 on (D_USER_CLS_REF_248868.USER_CLS_ID = USER_CLS_ID),
+   MANY TO ONE join "D_ACCOUNT" as D_ACCOUNT_REF_248867 on (D_ACCOUNT_REF_248867.ACCOUNT_ID = ACCOUNT_ID),
+   MANY TO ONE join "D_BHVR_SCORE" as D_BHVR_SCORE_REF_234214 on (D_BHVR_SCORE_REF_234214.PN_BHVR_SCOR_ID = PN_BHVR_SCOR_ID),
+   MANY TO ONE join "D_DECILE_RANK" as D_DECILE_RANK_REF_234210 on (D_DECILE_RANK_REF_234210.DECILE_RANK_ID = DECILE_RANK_ID),
+   MANY TO ONE join "D_FNCL_SCOR" as D_FNCL_SCOR_REF_225649 on (D_FNCL_SCOR_REF_225649.FNCL_SCOR_ID = FNCL_SCOR_ID),
+   MANY TO ONE join "D_PSYCHOGRAPHICS" as D_PSYCHOGRAPHICS_REF_2143320 on (D_PSYCHOGRAPHICS_REF_2143320.PSYCH_ID = PSYCH_ID),
+   MANY TO ONE join "D_DEMOGRAPHICS" as D_DEMOGRAPHICS_REF_214331 on (D_DEMOGRAPHICS_REF_214331.DEMO_ID = DEMO_ID),
+   MANY TO ONE join "D_CURRENCY" as D_CURRENCY_REF_241734 on (D_CURRENCY_REF_241734.ISO_CRCY_ID = ISO_CRCY_ID),
+   MANY TO ONE join "D_USER" as D_USER_REF_241731 on (D_USER_REF_241731.USER_ID = USER_ID),
+   MANY TO ONE join "D_GEOGRAPHY" as D_GEOGRAPHY_REF_241719 on (D_GEOGRAPHY_REF_241719.GEO_ID = GEO_ID),
+   MANY TO ONE join "D_MONTH" as D_MONTH_REF_241716 on (D_MONTH_REF_241716.MONTH_ID = MONTH_ID)
+)
+comment 'Click Stream User RFM Key Measures'
+
+
+-- end of F_CS_USER_RFM_MEAS
+--

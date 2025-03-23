@@ -1,0 +1,42 @@
+== version = 1
+
+
+
+column table D_PRM_CPGN_EPSD (
+   PRM_EPSD_ID  INTEGER  NOT NULL   comment 'Promotional Episode ID',
+   EPS_RPT_STRC_ID  INTEGER     comment 'Episode Reporting Structure ID',
+   BEGIN_DATE_PRD_ID  INTEGER     comment 'Actual Begin Date Period ID',
+   END_DATE_PRD_ID  INTEGER     comment 'Actual End Date Period ID',
+   PRM_CPGN_ID  INTEGER     comment 'Promotion Campaign ID',
+   SCHD_BEGIN_DATE  TIMESTAMP     comment 'Scheduled Begin Date',
+   SCHD_END_DATE  TIMESTAMP     comment 'Scheduled End Date',
+   PE_ALL_ENTRIES_IND  NVARCHAR(1)     comment 'All Entries Indicator',
+   EPSD_TYPE  NVARCHAR(3)     comment 'Episode Type',
+   EPSD_NAME  NVARCHAR(30)     comment 'Episode Name',
+   EPSD_INCENTIVE  NVARCHAR(35)     comment 'Episode Incentive',
+   EPSD_DSR_CUS_CNT  INTEGER     comment 'Desired Customer Target Count',
+   EPSD_ACTL_CUS_CNT  INTEGER     comment 'Actual Customer Target Count',
+   EPSD_BDGT_COST  DECIMAL(22,4)     comment 'Budgeted Cost',
+   EPSD_ACTL_COST  DECIMAL(22,4)     comment 'Actual Cost',
+   CPGN_MEDIA_TYP  NVARCHAR(10)     comment 'Campaign Media Type',
+   RDM_MCHSM  NVARCHAR(3)     comment 'Redemption Mechanism',
+   EFF_RATING  NVARCHAR(30)     comment 'Episode Effectiveness Rating',
+   EST_REVENUE  DECIMAL(22,4)     comment 'Episode Estimated Revenue Generation',
+   EST_CUSTOMER  INTEGER     comment 'Episode Estimated Customer Generation',
+   CR_REVENUE  DECIMAL(22,4)     comment 'Credited Revenue',
+   CR_CUSTOMER  INTEGER     comment 'Credited Customer Generation',
+   SEL_CRITERIA  NVARCHAR(255)     comment 'Selection Criteria'
+, primary key  ( 
+     PRM_EPSD_ID)
+)
+with associations(
+   MANY TO ONE join "D_CORE_PRM_CPGN" as D_CORE_PRM_CPGN_REF_78615 on (D_CORE_PRM_CPGN_REF_78615.PRM_CPGN_ID = PRM_CPGN_ID),
+   MANY TO ONE join "D_TIME_PERIOD" as D_TIME_PERIOD_REF_61611 on (D_TIME_PERIOD_REF_61611.PRD_ID = END_DATE_PRD_ID),
+   MANY TO ONE join "D_TIME_PERIOD" as D_TIME_PERIOD_REF_61605 on (D_TIME_PERIOD_REF_61605.PRD_ID = BEGIN_DATE_PRD_ID),
+   MANY TO ONE join "D_CORE_RPT_STRC" as D_CORE_RPT_STRC_REF_57000 on (D_CORE_RPT_STRC_REF_57000.COR_RPT_STRC_ID = EPS_RPT_STRC_ID)
+)
+comment 'Promotional Campaign Episode'
+
+
+-- end of D_PRM_CPGN_EPSD
+--

@@ -1,0 +1,36 @@
+{
+   "format_version" : 1,   
+   "imports" :[
+      {
+         "target_table": D_BHVR_SCORE,
+         "source_data": {
+            "data_type": "CSV",
+            "file_name": "D_BHVR_SCORE.csv", 
+            "has_header": false,
+            "type_config": {
+               "delimiter": ";"
+            }
+         },
+         "import_settings" : { 
+            "import_columns" : [
+               PN_BHVR_SCOR_ID,
+               SCORE1_BAND,
+               SCORE_N_BAND,
+               BS_ALL_ENTRIES_IND,
+               RFM_CODE,
+               RFM_DESC
+            ],
+            "include_filter" : []
+         },
+         "column_mappings": {
+            PN_BHVR_SCOR_ID : 1,
+            SCORE1_BAND : 2,
+            SCORE_N_BAND : 3,
+            BS_ALL_ENTRIES_IND : 4,
+            RFM_CODE : 5,
+            RFM_DESC : 6
+         
+         }
+      }
+   ]
+}

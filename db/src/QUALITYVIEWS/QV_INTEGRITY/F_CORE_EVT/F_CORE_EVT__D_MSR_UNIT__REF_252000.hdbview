@@ -1,0 +1,63 @@
+
+
+view F_CORE_EVT__D_MSR_UNIT__REF_252000 (
+   FACT,
+   DIMENSION,
+   DIRECTION,
+   KEY,
+   COUNTER,
+   SOURCE,
+   INTEGRITYSTATE
+)
+AS
+(
+   select 
+      'F_CORE_EVT'                             AS FACT,
+      'D_MSR_UNIT'                             AS DIMENSION,
+      'Inbound'                                AS DIRECTION,
+   	to_varchar(FACT.MEASURE_UNIT_ID)         AS KEY,
+   	count(*)                                 AS COUNTER,
+      'in: ' || 'D_MSR_UNIT'                   AS SOURCE,
+      'info' AS INTEGRITYSTATE
+   from 
+   	F_CORE_EVT	 FACT
+   WHERE 
+      FACT.MEASURE_UNIT_ID IN (select DIMENSION.MEASURE_UNIT_ID from D_MSR_UNIT	DIMENSION)
+   GROUP BY 
+      FACT.MEASURE_UNIT_ID
+   
+   --
+   --
+
+UNION ALL
+
+   select 
+      'F_CORE_EVT'                             AS FACT,
+      'D_MSR_UNIT'                             AS DIMENSION,
+      'Inbound'                                AS DIRECTION,
+   	to_varchar(FACT.MEASURE_UNIT_ID)         AS KEY,
+   	count(*)                                 AS COUNTER,
+      'in: ' || 'D_MSR_UNIT'                   AS SOURCE,
+      'error' AS INTEGRITYSTATE
+   from 
+   	F_CORE_EVT	 FACT
+   WHERE 
+      FACT.MEASURE_UNIT_ID NOT IN (select DIMENSION.MEASURE_UNIT_ID from D_MSR_UNIT	DIMENSION)
+   GROUP BY 
+      FACT.MEASURE_UNIT_ID
+   
+   --
+   --
+
+)
+ORDER BY 
+   FACT DESC, 
+   DIMENSION DESC, 
+   INTEGRITYSTATE DESC, 
+   SOURCE DESC, 
+   COUNTER DESC, 
+   KEY DESC
+;
+--
+-- end of statement
+--

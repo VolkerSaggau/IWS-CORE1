@@ -1,0 +1,63 @@
+
+
+view F_CUS_PRCH_HIST__D_PRODUCT__REF_221807 (
+   FACT,
+   DIMENSION,
+   DIRECTION,
+   KEY,
+   COUNTER,
+   SOURCE,
+   INTEGRITYSTATE
+)
+AS
+(
+   select 
+      'F_CUS_PRCH_HIST'                        AS FACT,
+      'D_PRODUCT'                              AS DIMENSION,
+      'Inbound'                                AS DIRECTION,
+   	to_varchar(FACT.PRODUCT_ID)              AS KEY,
+   	count(*)                                 AS COUNTER,
+      'in: ' || 'D_PRODUCT'                    AS SOURCE,
+      'info' AS INTEGRITYSTATE
+   from 
+   	F_CUS_PRCH_HIST	 FACT
+   WHERE 
+      FACT.PRODUCT_ID IN (select DIMENSION.PRODUCT_ID from D_PRODUCT	DIMENSION)
+   GROUP BY 
+      FACT.PRODUCT_ID
+   
+   --
+   --
+
+UNION ALL
+
+   select 
+      'F_CUS_PRCH_HIST'                        AS FACT,
+      'D_PRODUCT'                              AS DIMENSION,
+      'Inbound'                                AS DIRECTION,
+   	to_varchar(FACT.PRODUCT_ID)              AS KEY,
+   	count(*)                                 AS COUNTER,
+      'in: ' || 'D_PRODUCT'                    AS SOURCE,
+      'error' AS INTEGRITYSTATE
+   from 
+   	F_CUS_PRCH_HIST	 FACT
+   WHERE 
+      FACT.PRODUCT_ID NOT IN (select DIMENSION.PRODUCT_ID from D_PRODUCT	DIMENSION)
+   GROUP BY 
+      FACT.PRODUCT_ID
+   
+   --
+   --
+
+)
+ORDER BY 
+   FACT DESC, 
+   DIMENSION DESC, 
+   INTEGRITYSTATE DESC, 
+   SOURCE DESC, 
+   COUNTER DESC, 
+   KEY DESC
+;
+--
+-- end of statement
+--

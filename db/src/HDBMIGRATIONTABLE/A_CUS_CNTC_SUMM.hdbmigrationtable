@@ -1,0 +1,42 @@
+== version = 1
+
+
+
+column table A_CUS_CNTC_SUMM (
+   CUS_CNTC_ID  INTEGER  NOT NULL   comment 'Customer Contact ID',
+   INIT_CNTC_EMP_ID  INTEGER     comment 'Initial Contact Employee ID',
+   RSOL_CNTC_EMP_ID  INTEGER     comment 'Resolution Contact Employee ID',
+   LANGUAGE_ID  INTEGER     comment 'Language ID',
+   PRODUCT_ID  INTEGER     comment 'Product ID',
+   SRSNS_CUS_CO_ID  INTEGER     comment 'Seriousness Customer Company ID',
+   MEDIA_ID  INTEGER     comment 'Media Type ID',
+   CUS_STSF_RT_ID  INTEGER     comment 'Customer Satisfaction Rating ID',
+   CNTC_RSOL_ID  INTEGER     comment 'Contact Resolution ID',
+   CNTC_EVT_TYP_ID  INTEGER     comment 'Customer Contact Event Type ID',
+   COR_RPT_STRC_ID  INTEGER     comment 'Core Reporting Structure ID',
+   GEO_ID  INTEGER     comment 'Geographic ID',
+   MONTH_ID  INTEGER     comment 'Month ID',
+   CUS_CNTC_EVT_DRTN  DECIMAL     comment 'Customer Contact Transaction Duration',
+   SUMM_RECORD_COUNT  INTEGER     comment 'Summary Record Count'
+, primary key  ( 
+     CUS_CNTC_ID)
+)
+with associations(
+   MANY TO ONE join "D_MONTH" as D_MONTH_REF_94438 on (D_MONTH_REF_94438.MONTH_ID = MONTH_ID),
+   MANY TO ONE join "D_GEOGRAPHY" as D_GEOGRAPHY_REF_23488 on (D_GEOGRAPHY_REF_23488.GEO_ID = GEO_ID),
+   MANY TO ONE join "D_CORE_RPT_STRC" as D_CORE_RPT_STRC_REF_23491 on (D_CORE_RPT_STRC_REF_23491.COR_RPT_STRC_ID = COR_RPT_STRC_ID),
+   MANY TO ONE join "D_CORE_EVT_TYP" as D_CORE_EVT_TYP_REF_66334 on (D_CORE_EVT_TYP_REF_66334.EVT_TYP_ID = CNTC_EVT_TYP_ID),
+   MANY TO ONE join "D_CNTC_RSOL" as D_CNTC_RSOL_REF_23482 on (D_CNTC_RSOL_REF_23482.CNTC_RSOL_ID = CNTC_RSOL_ID),
+   MANY TO ONE join "D_CUS_ST_STSF_RT" as D_CUS_ST_STSF_RT_REF_23485 on (D_CUS_ST_STSF_RT_REF_23485.CUS_STSF_RT_ID = CUS_STSF_RT_ID),
+   MANY TO ONE join "D_MEDIA" as D_MEDIA_REF_23502 on (D_MEDIA_REF_23502.MEDIA_ID = MEDIA_ID),
+   MANY TO ONE join "D_SRSNS_CUS_CO" as D_SRSNS_CUS_CO_REF_23505 on (D_SRSNS_CUS_CO_REF_23505.SRSNS_CUS_CO_ID = SRSNS_CUS_CO_ID),
+   MANY TO ONE join "D_PRODUCT" as D_PRODUCT_REF_23508 on (D_PRODUCT_REF_23508.PRODUCT_ID = PRODUCT_ID),
+   MANY TO ONE join "D_LANGUAGE" as D_LANGUAGE_REF_23511 on (D_LANGUAGE_REF_23511.LANGUAGE_ID = LANGUAGE_ID),
+   MANY TO ONE join "D_ENTITY" as D_ENTITY_REF_380 on (D_ENTITY_REF_380.ENTY_ID = INIT_CNTC_EMP_ID),
+   MANY TO ONE join "D_ENTITY" as D_ENTITY_REF_381 on (D_ENTITY_REF_381.ENTY_ID = RSOL_CNTC_EMP_ID)
+)
+comment 'Customer Contact Summary'
+
+
+-- end of A_CUS_CNTC_SUMM
+--

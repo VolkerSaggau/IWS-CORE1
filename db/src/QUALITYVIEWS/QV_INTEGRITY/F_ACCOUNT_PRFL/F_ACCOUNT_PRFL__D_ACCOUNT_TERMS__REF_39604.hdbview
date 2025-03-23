@@ -1,0 +1,63 @@
+
+
+view F_ACCOUNT_PRFL__D_ACCOUNT_TERMS__REF_39604 (
+   FACT,
+   DIMENSION,
+   DIRECTION,
+   KEY,
+   COUNTER,
+   SOURCE,
+   INTEGRITYSTATE
+)
+AS
+(
+   select 
+      'F_ACCOUNT_PRFL'                         AS FACT,
+      'D_ACCOUNT_TERMS'                        AS DIMENSION,
+      'Inbound'                                AS DIRECTION,
+   	to_varchar(FACT.ACCT_TERMS_ID)           AS KEY,
+   	count(*)                                 AS COUNTER,
+      'in: ' || 'D_ACCOUNT_TERMS'              AS SOURCE,
+      'info' AS INTEGRITYSTATE
+   from 
+   	F_ACCOUNT_PRFL	 FACT
+   WHERE 
+      FACT.ACCT_TERMS_ID IN (select DIMENSION.ACCT_TERMS_ID from D_ACCOUNT_TERMS	DIMENSION)
+   GROUP BY 
+      FACT.ACCT_TERMS_ID
+   
+   --
+   --
+
+UNION ALL
+
+   select 
+      'F_ACCOUNT_PRFL'                         AS FACT,
+      'D_ACCOUNT_TERMS'                        AS DIMENSION,
+      'Inbound'                                AS DIRECTION,
+   	to_varchar(FACT.ACCT_TERMS_ID)           AS KEY,
+   	count(*)                                 AS COUNTER,
+      'in: ' || 'D_ACCOUNT_TERMS'              AS SOURCE,
+      'error' AS INTEGRITYSTATE
+   from 
+   	F_ACCOUNT_PRFL	 FACT
+   WHERE 
+      FACT.ACCT_TERMS_ID NOT IN (select DIMENSION.ACCT_TERMS_ID from D_ACCOUNT_TERMS	DIMENSION)
+   GROUP BY 
+      FACT.ACCT_TERMS_ID
+   
+   --
+   --
+
+)
+ORDER BY 
+   FACT DESC, 
+   DIMENSION DESC, 
+   INTEGRITYSTATE DESC, 
+   SOURCE DESC, 
+   COUNTER DESC, 
+   KEY DESC
+;
+--
+-- end of statement
+--

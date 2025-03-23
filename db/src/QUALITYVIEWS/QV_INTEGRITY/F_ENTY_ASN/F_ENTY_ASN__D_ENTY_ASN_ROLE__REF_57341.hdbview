@@ -1,0 +1,63 @@
+
+
+view F_ENTY_ASN__D_ENTY_ASN_ROLE__REF_57341 (
+   FACT,
+   DIMENSION,
+   DIRECTION,
+   KEY,
+   COUNTER,
+   SOURCE,
+   INTEGRITYSTATE
+)
+AS
+(
+   select 
+      'F_ENTY_ASN'                             AS FACT,
+      'D_ENTY_ASN_ROLE'                        AS DIMENSION,
+      'Inbound'                                AS DIRECTION,
+   	to_varchar(FACT.ENTY_1_ROLE_ID)          AS KEY,
+   	count(*)                                 AS COUNTER,
+      'in: ' || 'D_ENTY_ASN_ROLE'              AS SOURCE,
+      'info' AS INTEGRITYSTATE
+   from 
+   	F_ENTY_ASN	 FACT
+   WHERE 
+      FACT.ENTY_1_ROLE_ID IN (select DIMENSION.ROLE_ID from D_ENTY_ASN_ROLE	DIMENSION)
+   GROUP BY 
+      FACT.ENTY_1_ROLE_ID
+   
+   --
+   --
+
+UNION ALL
+
+   select 
+      'F_ENTY_ASN'                             AS FACT,
+      'D_ENTY_ASN_ROLE'                        AS DIMENSION,
+      'Inbound'                                AS DIRECTION,
+   	to_varchar(FACT.ENTY_1_ROLE_ID)          AS KEY,
+   	count(*)                                 AS COUNTER,
+      'in: ' || 'D_ENTY_ASN_ROLE'              AS SOURCE,
+      'error' AS INTEGRITYSTATE
+   from 
+   	F_ENTY_ASN	 FACT
+   WHERE 
+      FACT.ENTY_1_ROLE_ID NOT IN (select DIMENSION.ROLE_ID from D_ENTY_ASN_ROLE	DIMENSION)
+   GROUP BY 
+      FACT.ENTY_1_ROLE_ID
+   
+   --
+   --
+
+)
+ORDER BY 
+   FACT DESC, 
+   DIMENSION DESC, 
+   INTEGRITYSTATE DESC, 
+   SOURCE DESC, 
+   COUNTER DESC, 
+   KEY DESC
+;
+--
+-- end of statement
+--

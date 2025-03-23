@@ -1,0 +1,85 @@
+== version = 1
+
+
+
+column table F_CUS_PRCH_HIST (
+   MONTH_ID  INTEGER  NOT NULL   comment 'Month ID',
+   CUSTOMER_ID  INTEGER  NOT NULL   comment 'Customer ID',
+   COR_RPT_STRC_ID  INTEGER  NOT NULL   comment 'Core Reporting Structure ID',
+   PRODUCT_ID  INTEGER  NOT NULL   comment 'Product ID',
+   DECILE_RANK_ID  INTEGER     comment 'Decile Ranking ID',
+   DEMO_ID  INTEGER     comment 'Demographics ID',
+   GEO_ID  INTEGER     comment 'Geographic ID',
+   PSYCH_ID  INTEGER     comment 'Psychographics ID',
+   ACCOUNT_ID  INTEGER     comment 'Account ID',
+   ACCOUNT_TYPE_ID  INTEGER     comment 'Account Type ID',
+   CUS_STSF_RT_ID  INTEGER     comment 'Customer Satisfaction Rating ID',
+   PROFESSION_ID  INTEGER     comment 'Profession ID',
+   PN_BHVR_SCOR_ID  INTEGER     comment 'Personal Behavior Score ID',
+   FNCL_SCOR_ID  INTEGER     comment 'Financial Scores ID',
+   LANGUAGE_ID  INTEGER     comment 'Language ID',
+   CUS_SINCE_PRD_ID  INTEGER     comment 'Period ID',
+   ISO_CRCY_ID  INTEGER     comment 'ISO Currency ID',
+   REF_ISO_CRCY_ID  INTEGER     comment 'Reference ISO Currency ID',
+   MEASURE_UNIT_ID  INTEGER     comment 'Measurement Unit ID',
+   RET_VAL  DECIMAL(22,4)     comment 'Return Value',
+   REF_RET_VAL  DECIMAL(22,4)     comment 'Reference Return Value',
+   AVG_RET_VAL  DECIMAL(22,4)     comment 'Average Return Value',
+   REF_AVG_RET_VAL  DECIMAL(22,4)     comment 'Reference Average Return Value',
+   QTY_RET  INTEGER     comment 'Quantity Returned',
+   RET_NBR  INTEGER     comment 'Number of Returns',
+   YTD_RET_VAL  DECIMAL(22,4)     comment 'YTD Return Value',
+   YTD_REF_RET_VAL  DECIMAL(22,4)     comment 'YTD Reference Return Value',
+   YTD_AVG_RET_VAL  DECIMAL(22,4)     comment 'YTD Average Return Value',
+   YTD_REF_AVG_RET  DECIMAL(22,4)     comment 'YTD Reference Average Return Value',
+   YTD_QTY_RET  INTEGER     comment 'YTD Quantity Returned',
+   YTD_NBR_RET  INTEGER     comment 'YTD Number of Returns',
+   PRCH_VAL  DECIMAL(22,4)     comment 'Purchase Value',
+   REF_PRCH_VAL  DECIMAL(22,4)     comment 'Reference Purchase Value',
+   AVG_PRCH_VAL  DECIMAL(22,4)     comment 'Average Purchase Value',
+   REF_AVG_PRCH_VAL  DECIMAL(22,4)     comment 'Reference Average Purchase Value',
+   QTY_PRCH  INTEGER     comment 'Purchase Quantity',
+   NBR_PRCH  INTEGER     comment 'Number of Purchases',
+   YTD_PRCH_VAL  DECIMAL(22,4)     comment 'YTD Purchase Value',
+   YTD_REF_PRCH_VAL  DECIMAL(22,4)     comment 'YTD Reference Purchase Value',
+   YTD_AVG_PRCH_VAL  DECIMAL(22,4)     comment 'YTD Average Purchase Value',
+   YTD_REF_AVG_PRCH  DECIMAL(22,4)     comment 'YTD Reference Average Purchase Value',
+   YTD_QTY_PRCH  INTEGER     comment 'YTD Purchase Quantity',
+   YTD_NBR_PRCH  INTEGER     comment 'YTD Number of Purchases',
+   LT_PRCH_VAL  DECIMAL(22,4)     comment 'Life Time Purchase Value',
+   LT_REF_PRCH_VAL  DECIMAL(22,4)     comment 'Life Time Reference Purchase Value',
+   LT_AVG_PRCH_VAL  DECIMAL(22,4)     comment 'Life Time Average Purchase Value',
+   LT_REF_AVG_PRCH  DECIMAL(22,4)     comment 'Life Time Reference Average Purchase Value',
+   CUS_TENURE  INTEGER     comment 'Customer Tenure'
+, primary key  ( 
+     MONTH_ID,
+     CUSTOMER_ID,
+     COR_RPT_STRC_ID,
+     PRODUCT_ID)
+)
+with associations(
+   MANY TO ONE join "D_MSR_UNIT" as D_MSR_UNIT_REF_234238 on (D_MSR_UNIT_REF_234238.MEASURE_UNIT_ID = MEASURE_UNIT_ID),
+   MANY TO ONE join "D_CURRENCY" as D_CURRENCY_REF_228498 on (D_CURRENCY_REF_228498.ISO_CRCY_ID = ISO_CRCY_ID),
+   MANY TO ONE join "D_LANGUAGE" as D_LANGUAGE_REF_221871 on (D_LANGUAGE_REF_221871.LANGUAGE_ID = LANGUAGE_ID),
+   MANY TO ONE join "D_FNCL_SCOR" as D_FNCL_SCOR_REF_221867 on (D_FNCL_SCOR_REF_221867.FNCL_SCOR_ID = FNCL_SCOR_ID),
+   MANY TO ONE join "D_BHVR_SCORE" as D_BHVR_SCORE_REF_221863 on (D_BHVR_SCORE_REF_221863.PN_BHVR_SCOR_ID = PN_BHVR_SCOR_ID),
+   MANY TO ONE join "D_PROFESSION" as D_PROFESSION_REF_221843 on (D_PROFESSION_REF_221843.PROFESSION_ID = PROFESSION_ID),
+   MANY TO ONE join "D_CUS_ST_STSF_RT" as D_CUS_ST_STSF_RT_REF_221839 on (D_CUS_ST_STSF_RT_REF_221839.CUS_STSF_RT_ID = CUS_STSF_RT_ID),
+   MANY TO ONE join "D_ACCOUNT_TYPE" as D_ACCOUNT_TYPE_REF_221835 on (D_ACCOUNT_TYPE_REF_221835.ACCOUNT_TYPE_ID = ACCOUNT_TYPE_ID),
+   MANY TO ONE join "D_ACCOUNT" as D_ACCOUNT_REF_221823 on (D_ACCOUNT_REF_221823.ACCOUNT_ID = ACCOUNT_ID),
+   MANY TO ONE join "D_PSYCHOGRAPHICS" as D_PSYCHOGRAPHICS_REF_221819 on (D_PSYCHOGRAPHICS_REF_221819.PSYCH_ID = PSYCH_ID),
+   MANY TO ONE join "D_GEOGRAPHY" as D_GEOGRAPHY_REF_221815 on (D_GEOGRAPHY_REF_221815.GEO_ID = GEO_ID),
+   MANY TO ONE join "D_DEMOGRAPHICS" as D_DEMOGRAPHICS_REF_221811 on (D_DEMOGRAPHICS_REF_221811.DEMO_ID = DEMO_ID),
+   MANY TO ONE join "D_PRODUCT" as D_PRODUCT_REF_221807 on (D_PRODUCT_REF_221807.PRODUCT_ID = PRODUCT_ID),
+   MANY TO ONE join "D_CORE_RPT_STRC" as D_CORE_RPT_STRC_REF_221803 on (D_CORE_RPT_STRC_REF_221803.COR_RPT_STRC_ID = COR_RPT_STRC_ID),
+   MANY TO ONE join "D_DECILE_RANK" as D_DECILE_RANK_REF_221799 on (D_DECILE_RANK_REF_221799.DECILE_RANK_ID = DECILE_RANK_ID),
+   MANY TO ONE join "D_MONTH" as D_MONTH_REF_221787 on (D_MONTH_REF_221787.MONTH_ID = MONTH_ID),
+   MANY TO ONE join "D_ENTITY" as D_ENTITY_REF_372 on (D_ENTITY_REF_372.ENTY_ID = CUSTOMER_ID),
+   MANY TO ONE join "D_TIME_PERIOD" as D_TIME_PERIOD_REF_373 on (D_TIME_PERIOD_REF_373.PRD_ID = CUS_SINCE_PRD_ID),
+   MANY TO ONE join "D_CURRENCY" as D_CURRENCY_REF_374 on (D_CURRENCY_REF_374.ISO_CRCY_ID = REF_ISO_CRCY_ID)
+)
+comment 'Core Customer Purchase History'
+
+
+-- end of F_CUS_PRCH_HIST
+--
