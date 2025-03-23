@@ -30,8 +30,7 @@
                END_DATE_PRD_ID,
                BEHAVIOR_SCORE_ID,
                ACCT_HIER_TYPE,
-               NBR_OF_ACCT_HOLDER,
-               TEST
+               NBR_OF_ACCT_HOLDER
             ],
             "include_filter" : []
          },
@@ -53,8 +52,7 @@
             END_DATE_PRD_ID : 15,
             BEHAVIOR_SCORE_ID : 16,
             ACCT_HIER_TYPE : 17,
-            NBR_OF_ACCT_HOLDER : 18,
-            TEST : 19
+            NBR_OF_ACCT_HOLDER : 18
          
          }
       }

@@ -20,8 +20,7 @@ column table F_ACCOUNT_PRFL (
    END_DATE_PRD_ID  INTEGER  NOT NULL   comment 'End Date Period ID',
    BEHAVIOR_SCORE_ID  INTEGER  NOT NULL   comment 'Behavior Score',
    ACCT_HIER_TYPE  NVARCHAR(3)     comment 'Account Hierarchy Type',
-   NBR_OF_ACCT_HOLDER  INTEGER     comment 'Number of Account Holders',
-   TEST  INTEGER
+   NBR_OF_ACCT_HOLDER  INTEGER     comment 'Number of Account Holders'
 , primary key  ( 
      ACCOUNT_ID,
      BEGIN_DATE_PRD_ID)
