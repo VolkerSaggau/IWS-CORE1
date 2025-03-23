@@ -1,4 +1,4 @@
-== version = 2
+== version = 1
 
 
 
@@ -45,8 +45,5 @@ with associations(
 comment 'Account Profile'
 
 
- 
-== migration = 2 
-add column Test int
 -- end of F_ACCOUNT_PRFL
 --
