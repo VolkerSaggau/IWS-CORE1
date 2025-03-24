@@ -2,13 +2,13 @@
 
 
 
-column table D_SRSNS_CUS_CO (
-   SRSNS_CUS_CO_ID  INTEGER  NOT NULL   comment 'Seriousness Customer Company ID',
-   SCC_ALL_ENTRIES_IN  NVARCHAR(1)     comment 'All Entries Indicator',
-   SRSNS_TO_CO  NVARCHAR(1)     comment 'Seriousness to Company',
-   SRSNS_TO_CUS  NVARCHAR(1)     comment 'Seriousness to Customer'
+column table "D_SRSNS_CUS_CO" (
+   "SRSNS_CUS_CO_ID"  INTEGER  NOT NULL   comment 'Seriousness Customer Company ID',
+   "SCC_ALL_ENTRIES_IN"  NVARCHAR(1)     comment 'All Entries Indicator',
+   "SRSNS_TO_CO"  NVARCHAR(1)     comment 'Seriousness to Company',
+   "SRSNS_TO_CUS"  NVARCHAR(1)     comment 'Seriousness to Customer'
 , primary key  ( 
-     SRSNS_CUS_CO_ID)
+     "SRSNS_CUS_CO_ID")
 )
 
 comment 'Seriousness to Customer and Company'

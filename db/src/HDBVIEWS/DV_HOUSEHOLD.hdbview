@@ -1,12 +1,12 @@
 
 
-view DV_HOUSEHOLD comment 'Household'(
-HOUSEHOLD_ID,
-HH_SURNAME,
-HH_FIRST_NAME,
-HH_CAT_NAME,
-HH_SUBCAT_NAME,
-HH_UNIQUE_ID
+view "DV_HOUSEHOLD" comment 'Household'(
+"HOUSEHOLD_ID",
+"HH_SURNAME",
+"HH_FIRST_NAME",
+"HH_CAT_NAME",
+"HH_SUBCAT_NAME",
+"HH_UNIQUE_ID"
 )
 as
 select 

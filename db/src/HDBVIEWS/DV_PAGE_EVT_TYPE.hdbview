@@ -1,10 +1,10 @@
 
 
-view DV_PAGE_EVT_TYPE comment 'Page Event Type'(
-PAGE_EVT_TYPE_ID,
-EVT_TYPE_NAME,
-EVT_TYPE_DESC,
-EVT_SUBTYPE_NAME
+view "DV_PAGE_EVT_TYPE" comment 'Page Event Type'(
+"PAGE_EVT_TYPE_ID",
+"EVT_TYPE_NAME",
+"EVT_TYPE_DESC",
+"EVT_SUBTYPE_NAME"
 )
 as
 select 

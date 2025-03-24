@@ -2,35 +2,35 @@
    "format_version" : 1,   
    "imports" :[
       {
-         "target_table": D_ACCOUNT,
+         "target_table": "D_ACCOUNT",
          "source_data": {
             "data_type": "CSV",
             "file_name": "D_ACCOUNT.csv", 
-            "has_header": false,
+            "has_header": "false",
             "type_config": {
                "delimiter": ";"
             }
          },
          "import_settings" : { 
             "import_columns" : [
-               ACCOUNT_ID,
-               ACCT_BEGIN_DATE,
-               ACCT_END_DATE,
-               ACCOUNT_NUMBER,
-               ACCOUNT_DESC,
-               DEROG_CODE,
-               ACCT_ALL_ENTRIES_I
+               "ACCOUNT_ID",
+               "ACCT_BEGIN_DATE",
+               "ACCT_END_DATE",
+               "ACCOUNT_NUMBER",
+               "ACCOUNT_DESC",
+               "DEROG_CODE",
+               "ACCT_ALL_ENTRIES_I"
             ],
             "include_filter" : []
          },
          "column_mappings": {
-            ACCOUNT_ID : 1,
-            ACCT_BEGIN_DATE : 2,
-            ACCT_END_DATE : 3,
-            ACCOUNT_NUMBER : 4,
-            ACCOUNT_DESC : 5,
-            DEROG_CODE : 6,
-            ACCT_ALL_ENTRIES_I : 7
+            "ACCOUNT_ID" : 1,
+            "ACCT_BEGIN_DATE" : 2,
+            "ACCT_END_DATE" : 3,
+            "ACCOUNT_NUMBER" : 4,
+            "ACCOUNT_DESC" : 5,
+            "DEROG_CODE" : 6,
+            "ACCT_ALL_ENTRIES_I" : 7
          
          }
       }

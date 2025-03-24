@@ -1,10 +1,10 @@
 
 
-view DV_CUS_CNTC_EVT_TY comment 'Customer Contact Event Type'(
-CNTC_EVT_TYP_ID,
-CNTC_EVT_TYP_SNM,
-CNTC_EVT_TYP_LNM,
-CNTC_EVT_SUBTYP_NM
+view "DV_CUS_CNTC_EVT_TY" comment 'Customer Contact Event Type'(
+"CNTC_EVT_TYP_ID",
+"CNTC_EVT_TYP_SNM",
+"CNTC_EVT_TYP_LNM",
+"CNTC_EVT_SUBTYP_NM"
 )
 as
 select 

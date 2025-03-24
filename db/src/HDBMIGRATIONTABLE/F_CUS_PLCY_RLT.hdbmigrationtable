@@ -2,16 +2,16 @@
 
 
 
-column table F_CUS_PLCY_RLT (
-   CUSTOMER_ID  INTEGER  NOT NULL   comment 'Insured Party ID',
-   PLCY_ID  INTEGER  NOT NULL   comment 'Policy ID',
-   BEGIN_DATE_PRD_ID  INTEGER  NOT NULL   comment 'Effective Date Period ID',
-   END_DATE_PRD_ID  INTEGER  NOT NULL   comment 'End Date Period ID',
-   PLCY_RLT_DESC  NVARCHAR(255)     comment 'POLICY RELATIONSHIP TEXT'
+column table "F_CUS_PLCY_RLT" (
+   "CUSTOMER_ID"  INTEGER  NOT NULL   comment 'Insured Party ID',
+   "PLCY_ID"  INTEGER  NOT NULL   comment 'Policy ID',
+   "BEGIN_DATE_PRD_ID"  INTEGER  NOT NULL   comment 'Effective Date Period ID',
+   "END_DATE_PRD_ID"  INTEGER  NOT NULL   comment 'End Date Period ID',
+   "PLCY_RLT_DESC"  NVARCHAR(255)     comment 'POLICY RELATIONSHIP TEXT'
 , primary key  ( 
-     CUSTOMER_ID,
-     PLCY_ID,
-     BEGIN_DATE_PRD_ID)
+     "CUSTOMER_ID",
+     "PLCY_ID",
+     "BEGIN_DATE_PRD_ID")
 )
 with associations(
    MANY TO ONE join "D_ENTITY" as D_ENTITY_REF_214648 on (D_ENTITY_REF_214648.ENTY_ID = CUSTOMER_ID),

@@ -1,13 +1,13 @@
 
 
-view FV_PN_HH_ASN comment 'Person Household Association'(
-PERSON_ID,
-HOUSEHOLD_ID,
-BEGIN_DATE_PRD_ID,
-END_DATE_PRD_ID,
-ENTY_ASN_RSN_ID,
-ENTY_1_ROLE_ID,
-ENTY_2_ROLE_ID
+view "FV_PN_HH_ASN" comment 'Person Household Association'(
+"PERSON_ID",
+"HOUSEHOLD_ID",
+"BEGIN_DATE_PRD_ID",
+"END_DATE_PRD_ID",
+"ENTY_ASN_RSN_ID",
+"ENTY_1_ROLE_ID",
+"ENTY_2_ROLE_ID"
 )
 as
 select 

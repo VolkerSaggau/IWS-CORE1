@@ -1,12 +1,12 @@
 
 
-view DV_HH_IDENT comment 'Household Identifier'(
-HOUSEHOLD_ID,
-HH_SYS_SEQ_NBR,
-HH_OPER_SYS_NAME,
-HH_LEGACY_ID,
-HH_ID_START_DATE,
-HH_ID_END_DATE
+view "DV_HH_IDENT" comment 'Household Identifier'(
+"HOUSEHOLD_ID",
+"HH_SYS_SEQ_NBR",
+"HH_OPER_SYS_NAME",
+"HH_LEGACY_ID",
+"HH_ID_START_DATE",
+"HH_ID_END_DATE"
 )
 as
 select 

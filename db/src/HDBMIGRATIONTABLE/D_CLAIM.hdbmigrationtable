@@ -2,16 +2,16 @@
 
 
 
-column table D_CLAIM (
-   CLAIM_ID  INTEGER  NOT NULL   comment 'Claim ID',
-   CLAIM_NBR  NVARCHAR(18)     comment 'Claim ID From External Operational Database',
-   CLAIM_DESC  NVARCHAR(255)     comment 'Claim Description',
-   CLAIM_TYPE  NVARCHAR(3)     comment 'Claim Type',
-   CLM_AMT_BND  NVARCHAR(50),
-   REINS_AMT_BND  NVARCHAR(50),
-   INSC_ALL_ENTR_IND  NVARCHAR(1)     comment 'All Entries Indicator'
+column table "D_CLAIM" (
+   "CLAIM_ID"  INTEGER  NOT NULL   comment 'Claim ID',
+   "CLAIM_NBR"  NVARCHAR(18)     comment 'Claim ID From External Operational Database',
+   "CLAIM_DESC"  NVARCHAR(255)     comment 'Claim Description',
+   "CLAIM_TYPE"  NVARCHAR(3)     comment 'Claim Type',
+   "CLM_AMT_BND"  NVARCHAR(50),
+   "REINS_AMT_BND"  NVARCHAR(50),
+   "INSC_ALL_ENTR_IND"  NVARCHAR(1)     comment 'All Entries Indicator'
 , primary key  ( 
-     CLAIM_ID)
+     "CLAIM_ID")
 )
 
 comment 'PC Claim'

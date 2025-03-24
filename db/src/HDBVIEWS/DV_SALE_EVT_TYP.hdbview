@@ -1,10 +1,10 @@
 
 
-view DV_SALE_EVT_TYP comment 'Sales Event Type'(
-SALE_EVT_TYP_ID,
-SALE_EVT_TYP_SNM,
-SALE_EVT_TYP_LNM,
-SALE_EVT_SUBTYP_NM
+view "DV_SALE_EVT_TYP" comment 'Sales Event Type'(
+"SALE_EVT_TYP_ID",
+"SALE_EVT_TYP_SNM",
+"SALE_EVT_TYP_LNM",
+"SALE_EVT_SUBTYP_NM"
 )
 as
 select 

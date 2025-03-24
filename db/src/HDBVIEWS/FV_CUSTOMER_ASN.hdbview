@@ -1,14 +1,14 @@
 
 
-view FV_CUSTOMER_ASN comment 'Customer Association'(
-CUSTOMER_ID,
-CUS_2_ID,
-BEGIN_DATE_PRD_ID,
-END_DATE_PRD_ID,
-CUS_SHR,
-CUS_ASN_RSN_SN,
-CUS_ASN_ROLE,
-CUS_2_ASN_ROLE
+view "FV_CUSTOMER_ASN" comment 'Customer Association'(
+"CUSTOMER_ID",
+"CUS_2_ID",
+"BEGIN_DATE_PRD_ID",
+"END_DATE_PRD_ID",
+"CUS_SHR",
+"CUS_ASN_RSN_SN",
+"CUS_ASN_ROLE",
+"CUS_2_ASN_ROLE"
 )
 as
 select 

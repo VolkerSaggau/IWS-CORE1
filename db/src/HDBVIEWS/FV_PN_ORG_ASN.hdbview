@@ -1,13 +1,13 @@
 
 
-view FV_PN_ORG_ASN comment 'Person Organization Association'(
-PERSON_ID,
-ORGANIZATION_ID,
-ENTY_ASN_RSN_ID,
-END_DATE_PRD_ID,
-BEGIN_DATE_PRD_ID,
-ENTY_1_ROLE_ID,
-ENTY_2_ROLE_ID
+view "FV_PN_ORG_ASN" comment 'Person Organization Association'(
+"PERSON_ID",
+"ORGANIZATION_ID",
+"ENTY_ASN_RSN_ID",
+"END_DATE_PRD_ID",
+"BEGIN_DATE_PRD_ID",
+"ENTY_1_ROLE_ID",
+"ENTY_2_ROLE_ID"
 )
 as
 select 

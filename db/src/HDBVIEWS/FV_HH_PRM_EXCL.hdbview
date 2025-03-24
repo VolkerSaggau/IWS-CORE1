@@ -1,11 +1,11 @@
 
 
-view FV_HH_PRM_EXCL comment 'Household Promotion Exclusion'(
-PRM_CPGN_ID,
-HOUSEHOLD_ID,
-BEGIN_DATE_PRD_ID,
-END_DATE_PRD_ID,
-PRM_EXCL_REASON
+view "FV_HH_PRM_EXCL" comment 'Household Promotion Exclusion'(
+"PRM_CPGN_ID",
+"HOUSEHOLD_ID",
+"BEGIN_DATE_PRD_ID",
+"END_DATE_PRD_ID",
+"PRM_EXCL_REASON"
 )
 as
 select 

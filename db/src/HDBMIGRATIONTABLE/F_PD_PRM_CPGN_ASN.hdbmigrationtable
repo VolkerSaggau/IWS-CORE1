@@ -2,17 +2,17 @@
 
 
 
-column table F_PD_PRM_CPGN_ASN (
-   PRM_EPSD_ID  INTEGER  NOT NULL   comment 'Promotion Episode ID',
-   PRODUCT_ID  INTEGER  NOT NULL   comment 'Product ID',
-   BEGIN_DATE_PRD_ID  INTEGER  NOT NULL   comment 'Begin Date Period ID',
-   END_DATE_PRD_ID  INTEGER     comment 'End Date Period ID',
-   PRODUCT_GROUP  NVARCHAR(35)     comment 'Product Group',
-   PRODUCT_NAME  NVARCHAR(255)     comment 'Product Name',
-   EPSD_NAME  NVARCHAR(30)     comment 'Promotional Episode Name'
+column table "F_PD_PRM_CPGN_ASN" (
+   "PRM_EPSD_ID"  INTEGER  NOT NULL   comment 'Promotion Episode ID',
+   "PRODUCT_ID"  INTEGER  NOT NULL   comment 'Product ID',
+   "BEGIN_DATE_PRD_ID"  INTEGER  NOT NULL   comment 'Begin Date Period ID',
+   "END_DATE_PRD_ID"  INTEGER     comment 'End Date Period ID',
+   "PRODUCT_GROUP"  NVARCHAR(35)     comment 'Product Group',
+   "PRODUCT_NAME"  NVARCHAR(255)     comment 'Product Name',
+   "EPSD_NAME"  NVARCHAR(30)     comment 'Promotional Episode Name'
 , primary key  ( 
-     PRM_EPSD_ID,
-     PRODUCT_ID)
+     "PRM_EPSD_ID",
+     "PRODUCT_ID")
 )
 with associations(
    MANY TO ONE join "D_TIME_PERIOD" as D_TIME_PERIOD_REF_37915 on (D_TIME_PERIOD_REF_37915.PRD_ID = END_DATE_PRD_ID),

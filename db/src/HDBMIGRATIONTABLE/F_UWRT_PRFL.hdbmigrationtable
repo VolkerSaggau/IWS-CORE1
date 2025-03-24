@@ -2,21 +2,21 @@
 
 
 
-column table F_UWRT_PRFL (
-   UWRT_PRFL_ID  INTEGER  NOT NULL   comment 'Underwriter Profile ID',
-   UNDERWRITER_ID  INTEGER  NOT NULL   comment 'Insurance Agent ID',
-   UWRT_RPT_STRC_ID  INTEGER  NOT NULL   comment 'External Producer Reporting Structure ID',
-   STRT_SVC_PRD_ID  INTEGER  NOT NULL   comment 'Period ID',
-   END_SVC_PRD_ID  INTEGER  NOT NULL   comment 'Period ID',
-   BEGIN_DATE_PRD_ID  INTEGER  NOT NULL   comment 'Period ID',
-   END_DATE_PRD_ID  INTEGER  NOT NULL   comment 'Period ID',
-   UWRT_SPCL_TYPE  NVARCHAR(3)     comment 'Underwriter Specialization',
-   LIC_NBR  NVARCHAR(18)     comment 'License Number',
-   LIC_AGCY  NVARCHAR(3)     comment 'License Agency',
-   EXPRC_YEAR_NBR  INTEGER     comment 'Number of Years in Underwriting',
-   OT_TRNG  NVARCHAR(35)     comment 'Other Training'
+column table "F_UWRT_PRFL" (
+   "UWRT_PRFL_ID"  INTEGER  NOT NULL   comment 'Underwriter Profile ID',
+   "UNDERWRITER_ID"  INTEGER  NOT NULL   comment 'Insurance Agent ID',
+   "UWRT_RPT_STRC_ID"  INTEGER  NOT NULL   comment 'External Producer Reporting Structure ID',
+   "STRT_SVC_PRD_ID"  INTEGER  NOT NULL   comment 'Period ID',
+   "END_SVC_PRD_ID"  INTEGER  NOT NULL   comment 'Period ID',
+   "BEGIN_DATE_PRD_ID"  INTEGER  NOT NULL   comment 'Period ID',
+   "END_DATE_PRD_ID"  INTEGER  NOT NULL   comment 'Period ID',
+   "UWRT_SPCL_TYPE"  NVARCHAR(3)     comment 'Underwriter Specialization',
+   "LIC_NBR"  NVARCHAR(18)     comment 'License Number',
+   "LIC_AGCY"  NVARCHAR(3)     comment 'License Agency',
+   "EXPRC_YEAR_NBR"  INTEGER     comment 'Number of Years in Underwriting',
+   "OT_TRNG"  NVARCHAR(35)     comment 'Other Training'
 , primary key  ( 
-     UWRT_PRFL_ID)
+     "UWRT_PRFL_ID")
 )
 with associations(
    MANY TO ONE join "D_ENTITY" as D_ENTITY_REF_245300 on (D_ENTITY_REF_245300.ENTY_ID = UNDERWRITER_ID),

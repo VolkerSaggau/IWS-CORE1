@@ -2,19 +2,19 @@
 
 
 
-column table F_PD_USAGE (
-   PRODUCT_ID  INTEGER  NOT NULL   comment 'Product ID',
-   CUSTOMER_ID  INTEGER  NOT NULL   comment 'Customer ID',
-   BEGIN_DATE_PRD_ID  INTEGER  NOT NULL   comment 'Product Usage Begin Date Period ID',
-   END_DATE_PRD_ID  INTEGER     comment 'Product Usage End Date Period ID',
-   MEASURE_UNIT_ID  INTEGER     comment 'Measurement Unit ID',
-   ENTY_PD_USE_SCOR  NVARCHAR(50)     comment 'Entity Product Usage Score',
-   ENTY_PD_USE_AMT  NVARCHAR(50)     comment 'Entity Product Usage Amount',
-   PRODUCT_NAME  NVARCHAR(255)     comment 'Product Name'
+column table "F_PD_USAGE" (
+   "PRODUCT_ID"  INTEGER  NOT NULL   comment 'Product ID',
+   "CUSTOMER_ID"  INTEGER  NOT NULL   comment 'Customer ID',
+   "BEGIN_DATE_PRD_ID"  INTEGER  NOT NULL   comment 'Product Usage Begin Date Period ID',
+   "END_DATE_PRD_ID"  INTEGER     comment 'Product Usage End Date Period ID',
+   "MEASURE_UNIT_ID"  INTEGER     comment 'Measurement Unit ID',
+   "ENTY_PD_USE_SCOR"  NVARCHAR(50)     comment 'Entity Product Usage Score',
+   "ENTY_PD_USE_AMT"  NVARCHAR(50)     comment 'Entity Product Usage Amount',
+   "PRODUCT_NAME"  NVARCHAR(255)     comment 'Product Name'
 , primary key  ( 
-     PRODUCT_ID,
-     CUSTOMER_ID,
-     BEGIN_DATE_PRD_ID)
+     "PRODUCT_ID",
+     "CUSTOMER_ID",
+     "BEGIN_DATE_PRD_ID")
 )
 with associations(
    MANY TO ONE join "D_ENTITY" as D_ENTITY_REF_258239 on (D_ENTITY_REF_258239.ENTY_ID = CUSTOMER_ID),

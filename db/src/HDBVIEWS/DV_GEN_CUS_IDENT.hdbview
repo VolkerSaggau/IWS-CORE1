@@ -1,12 +1,12 @@
 
 
-view DV_GEN_CUS_IDENT comment 'Generic Customer Identifier'(
-CUSTOMER_ID,
-GC_SYS_SEQ_NBR,
-GC_OPER_SYS_NAME,
-GC_LEGACY_ID,
-GC_ID_START_DATE,
-GC_ID_END_DATE
+view "DV_GEN_CUS_IDENT" comment 'Generic Customer Identifier'(
+"CUSTOMER_ID",
+"GC_SYS_SEQ_NBR",
+"GC_OPER_SYS_NAME",
+"GC_LEGACY_ID",
+"GC_ID_START_DATE",
+"GC_ID_END_DATE"
 )
 as
 select 

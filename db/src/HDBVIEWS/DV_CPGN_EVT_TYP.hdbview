@@ -1,10 +1,10 @@
 
 
-view DV_CPGN_EVT_TYP comment 'Campaign Communication Event Type'(
-CPGN_EVT_TYP_ID,
-CPGN_EVT_TYP_SNM,
-CPGN_EVT_TYP_LNM,
-CPGN_EVT_SUBTYP_NM
+view "DV_CPGN_EVT_TYP" comment 'Campaign Communication Event Type'(
+"CPGN_EVT_TYP_ID",
+"CPGN_EVT_TYP_SNM",
+"CPGN_EVT_TYP_LNM",
+"CPGN_EVT_SUBTYP_NM"
 )
 as
 select 

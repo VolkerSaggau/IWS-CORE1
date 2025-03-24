@@ -1,14 +1,14 @@
 
 
-view FV_PN_PD_USAGE comment 'Person Product Usage'(
-PRODUCT_ID,
-PERSON_ID,
-BEGIN_DATE_PRD_ID,
-END_DATE_PRD_ID,
-MEASURE_UNIT_ID,
-PD_USE_SCOR,
-PD_USE_AMT,
-PRODUCT_NAME
+view "FV_PN_PD_USAGE" comment 'Person Product Usage'(
+"PRODUCT_ID",
+"PERSON_ID",
+"BEGIN_DATE_PRD_ID",
+"END_DATE_PRD_ID",
+"MEASURE_UNIT_ID",
+"PD_USE_SCOR",
+"PD_USE_AMT",
+"PRODUCT_NAME"
 )
 as
 select 

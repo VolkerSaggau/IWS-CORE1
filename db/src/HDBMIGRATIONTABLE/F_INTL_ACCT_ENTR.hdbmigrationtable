@@ -2,30 +2,30 @@
 
 
 
-column table F_INTL_ACCT_ENTR (
-   INTL_ACCT_ENTR_ID  INTEGER  NOT NULL,
-   INTL_ACCT_ID  INTEGER  NOT NULL   comment 'Chart of Accounts ID',
-   PRD_ID  INTEGER  NOT NULL   comment 'Completion Date',
-   DOC_TYPE_ID  INTEGER  NOT NULL   comment 'Document Type ID',
-   REF_ISO_CRCY_ID  INTEGER  NOT NULL   comment 'Reference ISO Currency ID',
-   ISO_CRCY_ID  INTEGER  NOT NULL   comment 'Entry ISO Currency',
-   MEASURE_UNIT_ID  INTEGER  NOT NULL   comment 'Measurement Unit ID',
-   COR_RPT_STRC_ID  INTEGER  NOT NULL   comment 'Core Reporting Structure ID',
-   ASSET_TYPE_ID  INTEGER,
-   INTL_ACCT_ENTR_NBR  NVARCHAR(18),
-   ACCT_SYSTEM_CODE  NVARCHAR(3)     comment 'Accounting System',
-   ENTRY_TYPE  NVARCHAR(10)  NOT NULL   comment 'Entry Type',
-   ENTRY_DEBIT_CREDIT  NVARCHAR(1)  NOT NULL   comment 'Entry Debit Credit Indicator',
-   DOC_REF_NBR  NVARCHAR(18)  NOT NULL   comment 'Document Reference ID',
-   DOC_LINE_NUM  INTEGER  NOT NULL   comment 'Document Line Number',
-   TAXABLE_ENTRY  NVARCHAR(1)  NOT NULL   comment 'Taxable Entry IND',
-   ASSET_IND  NVARCHAR(1)  NOT NULL   comment 'Asset IND',
-   ASSET_NBR  NVARCHAR(18)     comment 'Asset ID',
-   ACE_QUANTITY  DECIMAL     comment 'QUANTITY',
-   ACCT_ENTRY_AMT  DECIMAL(22,4)     comment 'Accounting Entry Amount',
-   REF_ACCT_ENTRY_AMT  DECIMAL(22,4)
+column table "F_INTL_ACCT_ENTR" (
+   "INTL_ACCT_ENTR_ID"  INTEGER  NOT NULL,
+   "INTL_ACCT_ID"  INTEGER  NOT NULL   comment 'Chart of Accounts ID',
+   "PRD_ID"  INTEGER  NOT NULL   comment 'Completion Date',
+   "DOC_TYPE_ID"  INTEGER  NOT NULL   comment 'Document Type ID',
+   "REF_ISO_CRCY_ID"  INTEGER  NOT NULL   comment 'Reference ISO Currency ID',
+   "ISO_CRCY_ID"  INTEGER  NOT NULL   comment 'Entry ISO Currency',
+   "MEASURE_UNIT_ID"  INTEGER  NOT NULL   comment 'Measurement Unit ID',
+   "COR_RPT_STRC_ID"  INTEGER  NOT NULL   comment 'Core Reporting Structure ID',
+   "ASSET_TYPE_ID"  INTEGER,
+   "INTL_ACCT_ENTR_NBR"  NVARCHAR(18),
+   "ACCT_SYSTEM_CODE"  NVARCHAR(3)     comment 'Accounting System',
+   "ENTRY_TYPE"  NVARCHAR(10)  NOT NULL   comment 'Entry Type',
+   "ENTRY_DEBIT_CREDIT"  NVARCHAR(1)  NOT NULL   comment 'Entry Debit Credit Indicator',
+   "DOC_REF_NBR"  NVARCHAR(18)  NOT NULL   comment 'Document Reference ID',
+   "DOC_LINE_NUM"  INTEGER  NOT NULL   comment 'Document Line Number',
+   "TAXABLE_ENTRY"  NVARCHAR(1)  NOT NULL   comment 'Taxable Entry IND',
+   "ASSET_IND"  NVARCHAR(1)  NOT NULL   comment 'Asset IND',
+   "ASSET_NBR"  NVARCHAR(18)     comment 'Asset ID',
+   "ACE_QUANTITY"  DECIMAL     comment 'QUANTITY',
+   "ACCT_ENTRY_AMT"  DECIMAL(22,4)     comment 'Accounting Entry Amount',
+   "REF_ACCT_ENTRY_AMT"  DECIMAL(22,4)
 , primary key  ( 
-     INTL_ACCT_ENTR_ID)
+     "INTL_ACCT_ENTR_ID")
 )
 with associations(
    MANY TO ONE join "D_ASSET_TYPE" as D_ASSET_TYPE_REF_202366 on (D_ASSET_TYPE_REF_202366.ASSET_TYPE_ID = ASSET_TYPE_ID),

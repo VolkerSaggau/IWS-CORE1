@@ -2,16 +2,16 @@
 
 
 
-column table F_ENTY_ADDR_ASN (
-   ENTY_ID  INTEGER  NOT NULL   comment 'Entity ID',
-   ADDRESS_ID  INTEGER  NOT NULL   comment 'Address ID',
-   BEGIN_DATE_PRD_ID  INTEGER     comment 'Begin Date Period ID',
-   END_DATE_PRD_ID  INTEGER     comment 'End Date Period ID',
-   ASN_ROLE_SHRT_NM  NVARCHAR(15)     comment 'Entity Address Association Role Short Name',
-   ASN_ROLE_DESC  NVARCHAR(255)     comment 'Entity Address Association Role Description'
+column table "F_ENTY_ADDR_ASN" (
+   "ENTY_ID"  INTEGER  NOT NULL   comment 'Entity ID',
+   "ADDRESS_ID"  INTEGER  NOT NULL   comment 'Address ID',
+   "BEGIN_DATE_PRD_ID"  INTEGER     comment 'Begin Date Period ID',
+   "END_DATE_PRD_ID"  INTEGER     comment 'End Date Period ID',
+   "ASN_ROLE_SHRT_NM"  NVARCHAR(15)     comment 'Entity Address Association Role Short Name',
+   "ASN_ROLE_DESC"  NVARCHAR(255)     comment 'Entity Address Association Role Description'
 , primary key  ( 
-     ENTY_ID,
-     ADDRESS_ID)
+     "ENTY_ID",
+     "ADDRESS_ID")
 )
 with associations(
    MANY TO ONE join "D_TIME_PERIOD" as D_TIME_PERIOD_REF_128652 on (D_TIME_PERIOD_REF_128652.PRD_ID = END_DATE_PRD_ID),

@@ -2,17 +2,17 @@
 
 
 
-column table D_SESSION (
-   SESSION_ID  INTEGER  NOT NULL   comment 'Session ID',
-   SESSION_STATUS  NVARCHAR(30)     comment 'Session Status',
-   DEVICE_TYPE  NVARCHAR(30)     comment 'Device Type',
-   PLATFORM  NVARCHAR(30)     comment 'Client Platform',
-   COOKIE_AVL_IND  NVARCHAR(1)     comment 'Cookie Available Indicator',
-   BROWSER  NVARCHAR(30)     comment 'Client Browser',
-   SESSION_CONTEXT  NVARCHAR(30)     comment 'Overall Session Context',
-   PAGE_DRVD_CNTXT  NVARCHAR(30)     comment 'Page Derived Context'
+column table "D_SESSION" (
+   "SESSION_ID"  INTEGER  NOT NULL   comment 'Session ID',
+   "SESSION_STATUS"  NVARCHAR(30)     comment 'Session Status',
+   "DEVICE_TYPE"  NVARCHAR(30)     comment 'Device Type',
+   "PLATFORM"  NVARCHAR(30)     comment 'Client Platform',
+   "COOKIE_AVL_IND"  NVARCHAR(1)     comment 'Cookie Available Indicator',
+   "BROWSER"  NVARCHAR(30)     comment 'Client Browser',
+   "SESSION_CONTEXT"  NVARCHAR(30)     comment 'Overall Session Context',
+   "PAGE_DRVD_CNTXT"  NVARCHAR(30)     comment 'Page Derived Context'
 , primary key  ( 
-     SESSION_ID)
+     "SESSION_ID")
 )
 
 comment 'Session'

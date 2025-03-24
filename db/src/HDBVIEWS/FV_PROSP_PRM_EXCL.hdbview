@@ -1,11 +1,11 @@
 
 
-view FV_PROSP_PRM_EXCL comment 'Customer Promotion Exclusion'(
-PRM_CPGN_ID,
-PROSPECT_ID,
-BEGIN_DATE_PRD_ID,
-END_DATE_PRD_ID,
-PRM_EXCL_REASON
+view "FV_PROSP_PRM_EXCL" comment 'Customer Promotion Exclusion'(
+"PRM_CPGN_ID",
+"PROSPECT_ID",
+"BEGIN_DATE_PRD_ID",
+"END_DATE_PRD_ID",
+"PRM_EXCL_REASON"
 )
 as
 select 

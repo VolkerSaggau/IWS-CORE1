@@ -2,17 +2,17 @@
 
 
 
-column table D_USER_CVSN_PRFL (
-   USER_CVSN_PRFL_ID  INTEGER  NOT NULL   comment 'User Conversion Profile ID',
-   CTLG_RQST_IND  NVARCHAR(1)     comment 'Catalog Requested Indicator',
-   PD_INFO_RQST_IND  NVARCHAR(1)     comment 'Product Info Requested Indicator',
-   SVC_RQST_IND  NVARCHAR(1)     comment 'Customer Service Requested Indicator',
-   NBR_VISITS_BAND  NVARCHAR(50)     comment 'Number of Visits Band',
-   DAY_CTLG_RQST_BAND  NVARCHAR(50)     comment 'Days Since Catalog Requested Band',
-   DAY_SVC_RQST_BAND  NVARCHAR(50)     comment 'Days Since Service Requested Band',
-   DAY_INFO_RQST_BAND  NVARCHAR(50)     comment 'Days Since Product Info Requested Band'
+column table "D_USER_CVSN_PRFL" (
+   "USER_CVSN_PRFL_ID"  INTEGER  NOT NULL   comment 'User Conversion Profile ID',
+   "CTLG_RQST_IND"  NVARCHAR(1)     comment 'Catalog Requested Indicator',
+   "PD_INFO_RQST_IND"  NVARCHAR(1)     comment 'Product Info Requested Indicator',
+   "SVC_RQST_IND"  NVARCHAR(1)     comment 'Customer Service Requested Indicator',
+   "NBR_VISITS_BAND"  NVARCHAR(50)     comment 'Number of Visits Band',
+   "DAY_CTLG_RQST_BAND"  NVARCHAR(50)     comment 'Days Since Catalog Requested Band',
+   "DAY_SVC_RQST_BAND"  NVARCHAR(50)     comment 'Days Since Service Requested Band',
+   "DAY_INFO_RQST_BAND"  NVARCHAR(50)     comment 'Days Since Product Info Requested Band'
 , primary key  ( 
-     USER_CVSN_PRFL_ID)
+     "USER_CVSN_PRFL_ID")
 )
 
 comment 'User to Conversion Profile'

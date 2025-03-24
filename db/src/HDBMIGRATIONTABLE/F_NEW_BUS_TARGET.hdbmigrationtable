@@ -2,20 +2,20 @@
 
 
 
-column table F_NEW_BUS_TARGET (
-   COR_RPT_STRC_ID  INTEGER  NOT NULL   comment 'CORE REPORTING STRUCTURE ID',
-   BEGIN_DATE_PRD_ID  INTEGER  NOT NULL   comment 'Period ID',
-   END_DATE_PRD_ID  INTEGER     comment 'End Date Period ID',
-   PRODUCT_ID  INTEGER  NOT NULL   comment 'Product ID',
-   PREM_CAT_ID  INTEGER  NOT NULL   comment 'Premium Category ID',
-   EVT_TYP_ID  INTEGER  NOT NULL   comment 'Policy Life Cycle Transaction Type ID',
-   EAP_TARGET  DECIMAL(22,4)     comment 'EAP Target'
+column table "F_NEW_BUS_TARGET" (
+   "COR_RPT_STRC_ID"  INTEGER  NOT NULL   comment 'CORE REPORTING STRUCTURE ID',
+   "BEGIN_DATE_PRD_ID"  INTEGER  NOT NULL   comment 'Period ID',
+   "END_DATE_PRD_ID"  INTEGER     comment 'End Date Period ID',
+   "PRODUCT_ID"  INTEGER  NOT NULL   comment 'Product ID',
+   "PREM_CAT_ID"  INTEGER  NOT NULL   comment 'Premium Category ID',
+   "EVT_TYP_ID"  INTEGER  NOT NULL   comment 'Policy Life Cycle Transaction Type ID',
+   "EAP_TARGET"  DECIMAL(22,4)     comment 'EAP Target'
 , primary key  ( 
-     COR_RPT_STRC_ID,
-     BEGIN_DATE_PRD_ID,
-     PRODUCT_ID,
-     PREM_CAT_ID,
-     EVT_TYP_ID)
+     "COR_RPT_STRC_ID",
+     "BEGIN_DATE_PRD_ID",
+     "PRODUCT_ID",
+     "PREM_CAT_ID",
+     "EVT_TYP_ID")
 )
 with associations(
    MANY TO ONE join "D_CORE_EVT_TYP" as D_CORE_EVT_TYP_REF_155759 on (D_CORE_EVT_TYP_REF_155759.EVT_TYP_ID = EVT_TYP_ID),

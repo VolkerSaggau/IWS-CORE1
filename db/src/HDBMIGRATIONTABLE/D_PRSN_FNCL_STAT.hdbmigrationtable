@@ -2,25 +2,25 @@
 
 
 
-column table D_PRSN_FNCL_STAT (
-   ENTY_ID  INTEGER  NOT NULL   comment 'Person Customer ID',
-   DSPSBL_INCM  DECIMAL(22,4)     comment 'Disposable Income',
-   INCM_FRM_SAL  DECIMAL(22,4)     comment 'Income From Salary',
-   INCM_FRM_INVSTMT  DECIMAL(22,4)     comment 'Income From Investments',
-   OTHER_INCOME  DECIMAL(22,4)     comment 'Other Income',
-   CRDT_RTG  NVARCHAR(3)     comment 'CREDIT RATING',
-   TOT_DEBT  DECIMAL(22,4)     comment 'Total Debt',
-   DEBT_INCOME_RATIO  DECIMAL(4,2)     comment 'Debt Income Ratio',
-   INVST_PREF  NVARCHAR(3)     comment 'Invetment Preference',
-   PENSION_PLAN_IND  NVARCHAR(1)     comment 'Pension Plan Indicator',
-   FNCL_ACORN_CLS  NVARCHAR(10)     comment 'Finacail Acorn Classification',
-   ACORN_CLS  NVARCHAR(10)     comment 'Acorn Classification',
-   LIFE_CYCLE_CLS  NVARCHAR(10)     comment 'Life Cycle Classification',
-   PFS_BEGIN_DATE  TIMESTAMP     comment 'Begin Date Period ID',
-   PFS_END_DATE  TIMESTAMP     comment 'End Date Period ID',
-   PFS_ALL_ENTRIES_IN  NVARCHAR(1)     comment 'All Entries Indicator'
+column table "D_PRSN_FNCL_STAT" (
+   "ENTY_ID"  INTEGER  NOT NULL   comment 'Person Customer ID',
+   "DSPSBL_INCM"  DECIMAL(22,4)     comment 'Disposable Income',
+   "INCM_FRM_SAL"  DECIMAL(22,4)     comment 'Income From Salary',
+   "INCM_FRM_INVSTMT"  DECIMAL(22,4)     comment 'Income From Investments',
+   "OTHER_INCOME"  DECIMAL(22,4)     comment 'Other Income',
+   "CRDT_RTG"  NVARCHAR(3)     comment 'CREDIT RATING',
+   "TOT_DEBT"  DECIMAL(22,4)     comment 'Total Debt',
+   "DEBT_INCOME_RATIO"  DECIMAL(4,2)     comment 'Debt Income Ratio',
+   "INVST_PREF"  NVARCHAR(3)     comment 'Invetment Preference',
+   "PENSION_PLAN_IND"  NVARCHAR(1)     comment 'Pension Plan Indicator',
+   "FNCL_ACORN_CLS"  NVARCHAR(10)     comment 'Finacail Acorn Classification',
+   "ACORN_CLS"  NVARCHAR(10)     comment 'Acorn Classification',
+   "LIFE_CYCLE_CLS"  NVARCHAR(10)     comment 'Life Cycle Classification',
+   "PFS_BEGIN_DATE"  TIMESTAMP     comment 'Begin Date Period ID',
+   "PFS_END_DATE"  TIMESTAMP     comment 'End Date Period ID',
+   "PFS_ALL_ENTRIES_IN"  NVARCHAR(1)     comment 'All Entries Indicator'
 , primary key  ( 
-     ENTY_ID)
+     "ENTY_ID")
 )
 with associations(
    MANY TO ONE join "D_ENTITY" as D_ENTITY_REF_256387 on (D_ENTITY_REF_256387.ENTY_ID = ENTY_ID)

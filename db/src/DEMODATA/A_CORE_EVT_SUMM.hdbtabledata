@@ -2,51 +2,51 @@
    "format_version" : 1,   
    "imports" :[
       {
-         "target_table": A_CORE_EVT_SUMM,
+         "target_table": "A_CORE_EVT_SUMM",
          "source_data": {
             "data_type": "CSV",
             "file_name": "A_CORE_EVT_SUMM.csv", 
-            "has_header": false,
+            "has_header": "false",
             "type_config": {
                "delimiter": ";"
             }
          },
          "import_settings" : { 
             "import_columns" : [
-               MONTH_ID,
-               EVT_TYP_ID,
-               PRODUCT_ID,
-               COR_RPT_STRC_ID,
-               GEO_ID,
-               DEMO_ID,
-               FNCL_SCOR_ID,
-               PN_BHVR_SCOR_ID,
-               LANGUAGE_ID,
-               MEASURE_UNIT_ID,
-               PRM_EPSD_ID,
-               ISO_CRCY_ID,
-               AMOUNT,
-               QUANTITY,
-               SUMM_RECORD_COUNT
+               "MONTH_ID",
+               "EVT_TYP_ID",
+               "PRODUCT_ID",
+               "COR_RPT_STRC_ID",
+               "GEO_ID",
+               "DEMO_ID",
+               "FNCL_SCOR_ID",
+               "PN_BHVR_SCOR_ID",
+               "LANGUAGE_ID",
+               "MEASURE_UNIT_ID",
+               "PRM_EPSD_ID",
+               "ISO_CRCY_ID",
+               "AMOUNT",
+               "QUANTITY",
+               "SUMM_RECORD_COUNT"
             ],
             "include_filter" : []
          },
          "column_mappings": {
-            MONTH_ID : 1,
-            EVT_TYP_ID : 2,
-            PRODUCT_ID : 3,
-            COR_RPT_STRC_ID : 4,
-            GEO_ID : 5,
-            DEMO_ID : 6,
-            FNCL_SCOR_ID : 7,
-            PN_BHVR_SCOR_ID : 8,
-            LANGUAGE_ID : 9,
-            MEASURE_UNIT_ID : 10,
-            PRM_EPSD_ID : 11,
-            ISO_CRCY_ID : 12,
-            AMOUNT : 13,
-            QUANTITY : 14,
-            SUMM_RECORD_COUNT : 15
+            "MONTH_ID" : 1,
+            "EVT_TYP_ID" : 2,
+            "PRODUCT_ID" : 3,
+            "COR_RPT_STRC_ID" : 4,
+            "GEO_ID" : 5,
+            "DEMO_ID" : 6,
+            "FNCL_SCOR_ID" : 7,
+            "PN_BHVR_SCOR_ID" : 8,
+            "LANGUAGE_ID" : 9,
+            "MEASURE_UNIT_ID" : 10,
+            "PRM_EPSD_ID" : 11,
+            "ISO_CRCY_ID" : 12,
+            "AMOUNT" : 13,
+            "QUANTITY" : 14,
+            "SUMM_RECORD_COUNT" : 15
          
          }
       }

@@ -2,37 +2,37 @@
    "format_version" : 1,   
    "imports" :[
       {
-         "target_table": D_ACCOUNT_TYPE,
+         "target_table": "D_ACCOUNT_TYPE",
          "source_data": {
             "data_type": "CSV",
             "file_name": "D_ACCOUNT_TYPE.csv", 
-            "has_header": false,
+            "has_header": "false",
             "type_config": {
                "delimiter": ";"
             }
          },
          "import_settings" : { 
             "import_columns" : [
-               ACCOUNT_TYPE_ID,
-               ACCT_TYPE_NAME,
-               ACCT_TYPE_DESC,
-               ACCT_SUBTYPE_NAME,
-               ACCT_SUBTYPE_DESC,
-               ACCT_CAT_NAME,
-               ACCT_CAT_DESC,
-               BAT_ALL_ENTR_IND
+               "ACCOUNT_TYPE_ID",
+               "ACCT_TYPE_NAME",
+               "ACCT_TYPE_DESC",
+               "ACCT_SUBTYPE_NAME",
+               "ACCT_SUBTYPE_DESC",
+               "ACCT_CAT_NAME",
+               "ACCT_CAT_DESC",
+               "BAT_ALL_ENTR_IND"
             ],
             "include_filter" : []
          },
          "column_mappings": {
-            ACCOUNT_TYPE_ID : 1,
-            ACCT_TYPE_NAME : 2,
-            ACCT_TYPE_DESC : 3,
-            ACCT_SUBTYPE_NAME : 4,
-            ACCT_SUBTYPE_DESC : 5,
-            ACCT_CAT_NAME : 6,
-            ACCT_CAT_DESC : 7,
-            BAT_ALL_ENTR_IND : 8
+            "ACCOUNT_TYPE_ID" : 1,
+            "ACCT_TYPE_NAME" : 2,
+            "ACCT_TYPE_DESC" : 3,
+            "ACCT_SUBTYPE_NAME" : 4,
+            "ACCT_SUBTYPE_DESC" : 5,
+            "ACCT_CAT_NAME" : 6,
+            "ACCT_CAT_DESC" : 7,
+            "BAT_ALL_ENTR_IND" : 8
          
          }
       }

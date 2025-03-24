@@ -1,11 +1,11 @@
 
 
-view FV_PROSP_EPSD_EXCL comment 'Prospect Campaign Episode Exclusion'(
-PRM_EPSD_ID,
-PROSPECT_ID,
-BEGIN_DATE_PRD_ID,
-END_DATE_PRD_ID,
-PRM_EXCL_REASON
+view "FV_PROSP_EPSD_EXCL" comment 'Prospect Campaign Episode Exclusion'(
+"PRM_EPSD_ID",
+"PROSPECT_ID",
+"BEGIN_DATE_PRD_ID",
+"END_DATE_PRD_ID",
+"PRM_EXCL_REASON"
 )
 as
 select 

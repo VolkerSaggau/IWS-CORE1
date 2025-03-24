@@ -2,30 +2,30 @@
 
 
 
-column table D_DEMOGRAPHICS (
-   DEMO_ID  INTEGER  NOT NULL   comment 'Demographics ID',
-   DEMOGRAPHICS_TYPE  NVARCHAR(3)     comment 'Demographics Type',
-   DISP_INCOME_BAND  NVARCHAR(50)     comment 'Disposable Income Band',
-   INCOME_BAND  NVARCHAR(50)     comment 'Income Band',
-   AGE_BAND  NVARCHAR(50)  NOT NULL   comment 'Age Band',
-   GENDER  NVARCHAR(1)     comment 'Gender',
-   LIFE_STG_BAND  NVARCHAR(50),
-   MARITAL_STATUS  NVARCHAR(1)     comment 'Marital Status',
-   HIGH_VALUE_IND  NVARCHAR(1)     comment 'High Value Indicator',
-   ACMDTN_CAT  NVARCHAR(35)     comment 'Living/Residential Appartment',
-   HAS_DPND_IND  NVARCHAR(1)     comment 'Has Dependents Indicator',
-   NBR_IN_HH_BAND  NVARCHAR(50)     comment 'Number in HH Band',
-   CHLD_AT_HOME_BAND  NVARCHAR(50)     comment 'Children at Home Band',
-   SIZE_CLS  NVARCHAR(10)     comment 'Size Classification',
-   LEGAL_ORG_TYPE  NVARCHAR(3)     comment 'Legal Organization Type',
-   NBR_EMP_BAND  NVARCHAR(50)     comment 'Number Employees Band',
-   SECTOR_CLS  NVARCHAR(10)     comment 'Sector Classification',
-   MAIL_PRMSN_IND  NVARCHAR(1)     comment 'Mail Permission Index',
-   TELMKT_PRMSN_IND  NVARCHAR(1)     comment 'Telemarketing Permission Indicator',
-   HIGH_GRD_CPLT_BAND  NVARCHAR(50),
-   DEMO_ALL_ENTRIES_I  NVARCHAR(1)     comment 'All Entries Indicator'
+column table "D_DEMOGRAPHICS" (
+   "DEMO_ID"  INTEGER  NOT NULL   comment 'Demographics ID',
+   "DEMOGRAPHICS_TYPE"  NVARCHAR(3)     comment 'Demographics Type',
+   "DISP_INCOME_BAND"  NVARCHAR(50)     comment 'Disposable Income Band',
+   "INCOME_BAND"  NVARCHAR(50)     comment 'Income Band',
+   "AGE_BAND"  NVARCHAR(50)  NOT NULL   comment 'Age Band',
+   "GENDER"  NVARCHAR(1)     comment 'Gender',
+   "LIFE_STG_BAND"  NVARCHAR(50),
+   "MARITAL_STATUS"  NVARCHAR(1)     comment 'Marital Status',
+   "HIGH_VALUE_IND"  NVARCHAR(1)     comment 'High Value Indicator',
+   "ACMDTN_CAT"  NVARCHAR(35)     comment 'Living/Residential Appartment',
+   "HAS_DPND_IND"  NVARCHAR(1)     comment 'Has Dependents Indicator',
+   "NBR_IN_HH_BAND"  NVARCHAR(50)     comment 'Number in HH Band',
+   "CHLD_AT_HOME_BAND"  NVARCHAR(50)     comment 'Children at Home Band',
+   "SIZE_CLS"  NVARCHAR(10)     comment 'Size Classification',
+   "LEGAL_ORG_TYPE"  NVARCHAR(3)     comment 'Legal Organization Type',
+   "NBR_EMP_BAND"  NVARCHAR(50)     comment 'Number Employees Band',
+   "SECTOR_CLS"  NVARCHAR(10)     comment 'Sector Classification',
+   "MAIL_PRMSN_IND"  NVARCHAR(1)     comment 'Mail Permission Index',
+   "TELMKT_PRMSN_IND"  NVARCHAR(1)     comment 'Telemarketing Permission Indicator',
+   "HIGH_GRD_CPLT_BAND"  NVARCHAR(50),
+   "DEMO_ALL_ENTRIES_I"  NVARCHAR(1)     comment 'All Entries Indicator'
 , primary key  ( 
-     DEMO_ID)
+     "DEMO_ID")
 )
 
 comment 'Demographics'

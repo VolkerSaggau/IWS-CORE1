@@ -2,13 +2,13 @@
 
 
 
-column table D_RFM (
-   RFM_ID  INTEGER  NOT NULL,
-   RFM_CODE  NVARCHAR(3),
-   RFM_DESC  NVARCHAR(35),
-   RFM_DECILE  NVARCHAR(10)
+column table "D_RFM" (
+   "RFM_ID"  INTEGER  NOT NULL,
+   "RFM_CODE"  NVARCHAR(3),
+   "RFM_DESC"  NVARCHAR(35),
+   "RFM_DECILE"  NVARCHAR(10)
 , primary key  ( 
-     RFM_ID)
+     "RFM_ID")
 )
 
 

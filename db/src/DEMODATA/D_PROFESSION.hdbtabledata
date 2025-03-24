@@ -2,35 +2,35 @@
    "format_version" : 1,   
    "imports" :[
       {
-         "target_table": D_PROFESSION,
+         "target_table": "D_PROFESSION",
          "source_data": {
             "data_type": "CSV",
             "file_name": "D_PROFESSION.csv", 
-            "has_header": false,
+            "has_header": "false",
             "type_config": {
                "delimiter": ";"
             }
          },
          "import_settings" : { 
             "import_columns" : [
-               PROFESSION_ID,
-               PROFESSION_GRP,
-               PROFESSION_IDST,
-               PROFESSION_NAME,
-               PROFESSION_CD,
-               PROFESSION_TITLE,
-               PRF_ALL_ENTRIES_IN
+               "PROFESSION_ID",
+               "PROFESSION_GRP",
+               "PROFESSION_IDST",
+               "PROFESSION_NAME",
+               "PROFESSION_CD",
+               "PROFESSION_TITLE",
+               "PRF_ALL_ENTRIES_IN"
             ],
             "include_filter" : []
          },
          "column_mappings": {
-            PROFESSION_ID : 1,
-            PROFESSION_GRP : 2,
-            PROFESSION_IDST : 3,
-            PROFESSION_NAME : 4,
-            PROFESSION_CD : 5,
-            PROFESSION_TITLE : 6,
-            PRF_ALL_ENTRIES_IN : 7
+            "PROFESSION_ID" : 1,
+            "PROFESSION_GRP" : 2,
+            "PROFESSION_IDST" : 3,
+            "PROFESSION_NAME" : 4,
+            "PROFESSION_CD" : 5,
+            "PROFESSION_TITLE" : 6,
+            "PRF_ALL_ENTRIES_IN" : 7
          
          }
       }

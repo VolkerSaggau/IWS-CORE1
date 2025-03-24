@@ -2,16 +2,16 @@
 
 
 
-column table F_INTL_ACCT_HIER (
-   INTL_ACCT_ID  INTEGER  NOT NULL   comment 'Chart of Accounts Hierachy ID',
-   SBRD_INTL_ACCT_ID  INTEGER  NOT NULL   comment 'Subordinate Account ID',
-   BEGIN_DATE_PRD_ID  INTEGER  NOT NULL   comment 'Start Date',
-   END_DATE_PRD_ID  INTEGER     comment 'End Date Period ID',
-   SBRD_ACCT_RSN  NVARCHAR(255)
+column table "F_INTL_ACCT_HIER" (
+   "INTL_ACCT_ID"  INTEGER  NOT NULL   comment 'Chart of Accounts Hierachy ID',
+   "SBRD_INTL_ACCT_ID"  INTEGER  NOT NULL   comment 'Subordinate Account ID',
+   "BEGIN_DATE_PRD_ID"  INTEGER  NOT NULL   comment 'Start Date',
+   "END_DATE_PRD_ID"  INTEGER     comment 'End Date Period ID',
+   "SBRD_ACCT_RSN"  NVARCHAR(255)
 , primary key  ( 
-     INTL_ACCT_ID,
-     SBRD_INTL_ACCT_ID,
-     BEGIN_DATE_PRD_ID)
+     "INTL_ACCT_ID",
+     "SBRD_INTL_ACCT_ID",
+     "BEGIN_DATE_PRD_ID")
 )
 with associations(
    MANY TO ONE join "D_INTL_ACCOUNT" as D_INTL_ACCOUNT_REF_206015 on (D_INTL_ACCOUNT_REF_206015.INTL_ACCT_ID = INTL_ACCT_ID),

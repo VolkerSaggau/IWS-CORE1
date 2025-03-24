@@ -1,11 +1,11 @@
 
 
-view DV_PN_ASSETS comment 'Person Assets'(
-ASSET_ID,
-PROP_VAL_BAND,
-YRS_AT_RES_BAND,
-NBR_VHCL_BAND,
-PRIM_VHCL_VAL_BAND
+view "DV_PN_ASSETS" comment 'Person Assets'(
+"ASSET_ID",
+"PROP_VAL_BAND",
+"YRS_AT_RES_BAND",
+"NBR_VHCL_BAND",
+"PRIM_VHCL_VAL_BAND"
 )
 as
 select 

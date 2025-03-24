@@ -2,29 +2,29 @@
    "format_version" : 1,   
    "imports" :[
       {
-         "target_table": D_MEDIA,
+         "target_table": "D_MEDIA",
          "source_data": {
             "data_type": "CSV",
             "file_name": "D_MEDIA.csv", 
-            "has_header": false,
+            "has_header": "false",
             "type_config": {
                "delimiter": ";"
             }
          },
          "import_settings" : { 
             "import_columns" : [
-               MEDIA_ID,
-               MEDIA_SHRT_NAM,
-               MEDIA_LONG_NAM,
-               M_ALL_ENTRIES_IND
+               "MEDIA_ID",
+               "MEDIA_SHRT_NAM",
+               "MEDIA_LONG_NAM",
+               "M_ALL_ENTRIES_IND"
             ],
             "include_filter" : []
          },
          "column_mappings": {
-            MEDIA_ID : 1,
-            MEDIA_SHRT_NAM : 2,
-            MEDIA_LONG_NAM : 3,
-            M_ALL_ENTRIES_IND : 4
+            "MEDIA_ID" : 1,
+            "MEDIA_SHRT_NAM" : 2,
+            "MEDIA_LONG_NAM" : 3,
+            "M_ALL_ENTRIES_IND" : 4
          
          }
       }

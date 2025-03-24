@@ -1,10 +1,10 @@
 
 
-view DV_CLM_EVT_TYP comment 'Claim Event Type'(
-CLM_EVT_TYP_ID,
-CLM_EVT_TYP_SNM,
-CLM_EVT_TYP_LNM,
-CLM_EVT_SUBTYP_NM
+view "DV_CLM_EVT_TYP" comment 'Claim Event Type'(
+"CLM_EVT_TYP_ID",
+"CLM_EVT_TYP_SNM",
+"CLM_EVT_TYP_LNM",
+"CLM_EVT_SUBTYP_NM"
 )
 as
 select 

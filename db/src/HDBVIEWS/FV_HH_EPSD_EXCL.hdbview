@@ -1,11 +1,11 @@
 
 
-view FV_HH_EPSD_EXCL comment 'Household Campaign Episode Exclusion'(
-PRM_EPSD_ID,
-HOUSEHOLD_ID,
-BEGIN_DATE_PRD_ID,
-END_DATE_PRD_ID,
-PRM_EXCL_REASON
+view "FV_HH_EPSD_EXCL" comment 'Household Campaign Episode Exclusion'(
+"PRM_EPSD_ID",
+"HOUSEHOLD_ID",
+"BEGIN_DATE_PRD_ID",
+"END_DATE_PRD_ID",
+"PRM_EXCL_REASON"
 )
 as
 select 

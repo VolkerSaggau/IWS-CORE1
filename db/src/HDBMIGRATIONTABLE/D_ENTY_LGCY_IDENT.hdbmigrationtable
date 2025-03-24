@@ -2,16 +2,16 @@
 
 
 
-column table D_ENTY_LGCY_IDENT (
-   ENTY_ID  INTEGER  NOT NULL   comment 'Entity ID',
-   SYS_SEQ_NBR  INTEGER  NOT NULL   comment 'System Sequence Number',
-   OPER_SYS_NAME  NVARCHAR(30)     comment 'Operational System Name',
-   ENTY_LEGACY_ID  NVARCHAR(18)     comment 'Entity Legacy ID',
-   ID_START_DATE  TIMESTAMP     comment 'Start Date',
-   ID_END_DATE  TIMESTAMP     comment 'End Date'
+column table "D_ENTY_LGCY_IDENT" (
+   "ENTY_ID"  INTEGER  NOT NULL   comment 'Entity ID',
+   "SYS_SEQ_NBR"  INTEGER  NOT NULL   comment 'System Sequence Number',
+   "OPER_SYS_NAME"  NVARCHAR(30)     comment 'Operational System Name',
+   "ENTY_LEGACY_ID"  NVARCHAR(18)     comment 'Entity Legacy ID',
+   "ID_START_DATE"  TIMESTAMP     comment 'Start Date',
+   "ID_END_DATE"  TIMESTAMP     comment 'End Date'
 , primary key  ( 
-     ENTY_ID,
-     SYS_SEQ_NBR)
+     "ENTY_ID",
+     "SYS_SEQ_NBR")
 )
 with associations(
    MANY TO ONE join "D_ENTITY" as D_ENTITY_REF_252351 on (D_ENTITY_REF_252351.ENTY_ID = ENTY_ID)

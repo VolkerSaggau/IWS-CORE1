@@ -1,9 +1,9 @@
 
 
-view DV_ENTY_1_ASN_ROLE comment 'Entity 1 Association Role'(
-ENTY_1_ROLE_ID,
-ROLE_1_DESC,
-ERO1_ALL_ENTR_IND
+view "DV_ENTY_1_ASN_ROLE" comment 'Entity 1 Association Role'(
+"ENTY_1_ROLE_ID",
+"ROLE_1_DESC",
+"ERO1_ALL_ENTR_IND"
 )
 as
 select 

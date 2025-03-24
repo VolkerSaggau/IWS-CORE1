@@ -1,9 +1,9 @@
 
 
-view DV_ORG_ASSETS (
-ASSET_ID,
-NBR_VHCL_BAND,
-PROP_VAL_BAND
+view "DV_ORG_ASSETS" (
+"ASSET_ID",
+"NBR_VHCL_BAND",
+"PROP_VAL_BAND"
 )
 as
 select 

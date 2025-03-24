@@ -2,14 +2,14 @@
 
 
 
-column table D_AFFILIATION (
-   AFFILIATION_ID  INTEGER  NOT NULL   comment 'AFFILIATION ID',
-   AAA_IND  NVARCHAR(1)     comment 'AAA',
-   AARP_IND  NVARCHAR(1)     comment 'AARP',
-   NRA_IND  NVARCHAR(1)     comment 'NRA',
-   AFL_ALL_ENTRIES_IN  NVARCHAR(1)     comment 'All Entries Indicator'
+column table "D_AFFILIATION" (
+   "AFFILIATION_ID"  INTEGER  NOT NULL   comment 'AFFILIATION ID',
+   "AAA_IND"  NVARCHAR(1)     comment 'AAA',
+   "AARP_IND"  NVARCHAR(1)     comment 'AARP',
+   "NRA_IND"  NVARCHAR(1)     comment 'NRA',
+   "AFL_ALL_ENTRIES_IN"  NVARCHAR(1)     comment 'All Entries Indicator'
 , primary key  ( 
-     AFFILIATION_ID)
+     "AFFILIATION_ID")
 )
 
 comment 'Affiliation'

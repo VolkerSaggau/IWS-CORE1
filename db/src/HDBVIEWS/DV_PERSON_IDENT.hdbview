@@ -1,12 +1,12 @@
 
 
-view DV_PERSON_IDENT comment 'Person Identifier'(
-PERSON_ID,
-PN_SYS_SEQ_NBR,
-PN_OPER_SYS_NAME,
-PN_LEGACY_ID,
-PN_ID_START_DATE,
-PN_ID_END_DATE
+view "DV_PERSON_IDENT" comment 'Person Identifier'(
+"PERSON_ID",
+"PN_SYS_SEQ_NBR",
+"PN_OPER_SYS_NAME",
+"PN_LEGACY_ID",
+"PN_ID_START_DATE",
+"PN_ID_END_DATE"
 )
 as
 select 
