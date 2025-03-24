@@ -8,7 +8,7 @@
             "file_name": "F_CUS_ACCT_HIER.csv", 
             "has_header": "false",
             "type_config": {
-               "delimiter": ";"
+               "delimiter": ","
             }
          },
          "import_settings" : { 

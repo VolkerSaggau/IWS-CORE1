@@ -8,7 +8,7 @@
             "file_name": "F_CPGN_CNTC_EVT.csv", 
             "has_header": "false",
             "type_config": {
-               "delimiter": ";"
+               "delimiter": ","
             }
          },
          "import_settings" : { 
