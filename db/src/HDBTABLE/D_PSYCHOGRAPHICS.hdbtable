@@ -1,0 +1,24 @@
+
+
+column table "D_PSYCHOGRAPHICS" (
+   "PSYCH_ID"  INTEGER  NOT NULL   comment 'Psychographics ID',
+   "PSYCH_ENTY_TYP"  NVARCHAR(3),
+   "PSY_ALL_ENTRIES_IN"  NVARCHAR(1)     comment 'All Entries Indicator',
+   "CULTURE"  NVARCHAR(3)     comment 'Culture',
+   "PURCHASING"  NVARCHAR(3)     comment 'Purchasing',
+   "FISHING_IND"  NVARCHAR(1)     comment 'Fishing Indicator',
+   "CAMPING_IND"  NVARCHAR(1)     comment 'Camping Indicator',
+   "SMOKER_IND"  NVARCHAR(1)     comment 'Smoker Indicator',
+   "STOCK_MARKET_IND"  NVARCHAR(1)     comment 'Stock Market Indicator',
+   "DRV_VACATION_IND"  NVARCHAR(1)     comment 'Driving Vacations Indicator',
+   "PET_OWNR_IND"  NVARCHAR(1)     comment 'Pet Owner Indicator',
+   "CAT_OWNR_IND"  NVARCHAR(1)     comment 'Cat Owner Indicator',
+   "DOG_OWNR_IND"  NVARCHAR(1)     comment 'Dog Owner Indicator',
+   "OTHER_PET_OWNR_IND"  NVARCHAR(1)     comment 'Other Pet Owner Indicator',
+   "SAILING_IND"  NVARCHAR(1)     comment 'Sailing Indicator',
+   "COMPUTER_GAMES_IND"  NVARCHAR(1)     comment 'Computer Games Indicator'
+, primary key  ( 
+     "PSYCH_ID")
+)
+
+comment 'Psychographics'

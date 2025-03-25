@@ -1,0 +1,11 @@
+
+
+column table "D_STRTGC_CPGN" (
+   "STRTGC_CPGN_ID"  INTEGER  NOT NULL   comment 'Strategic Campaign ID',
+   "STGC_ALL_ENTRIES_I"  NVARCHAR(1)     comment 'All Entries Indicator',
+   "DESCRIPTION"  NVARCHAR(255)     comment 'Description'
+, primary key  ( 
+     "STRTGC_CPGN_ID")
+)
+
+comment 'Strategic Campaign'

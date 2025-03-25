@@ -1,0 +1,12 @@
+
+
+column table "D_CLM_STAT" (
+   "CLM_STAT_ID"  INTEGER  NOT NULL   comment 'Claim Status ID',
+   "CLM_STAT_NAME"  NVARCHAR(30)     comment 'Claim Status Name',
+   "CLM_STAT_DESC"  NVARCHAR(255)     comment 'Claim Status Description',
+   "PCCS_ALL_ENTR_IND"  NVARCHAR(1)     comment 'All Entries Indicator'
+, primary key  ( 
+     "CLM_STAT_ID")
+)
+
+comment 'Claim Status'

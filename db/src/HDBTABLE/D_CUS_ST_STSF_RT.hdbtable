@@ -1,0 +1,11 @@
+
+
+column table "D_CUS_ST_STSF_RT" (
+   "CUS_STSF_RT_ID"  INTEGER  NOT NULL   comment 'Customer Satisfaction Rating ID',
+   "DESCRIPTION"  NVARCHAR(255)     comment 'Description',
+   "CSSR_ALL_ENTRIES_I"  NVARCHAR(1)     comment 'All Entries Indicator'
+, primary key  ( 
+     "CUS_STSF_RT_ID")
+)
+
+comment 'Customer Stated Satisfaction Rating'

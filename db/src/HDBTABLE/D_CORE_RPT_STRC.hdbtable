@@ -1,0 +1,40 @@
+column table "D_CORE_RPT_STRC" (
+   "COR_RPT_STRC_ID"  INTEGER  NOT NULL   comment 'Core Reporting Structure ID',
+   "CHNL_ENTY_ID"  INTEGER  NOT NULL,
+   "CHNL_MGT_UNIT_ID"  INTEGER  NOT NULL   comment 'Management Unit ID',
+   "CHNL_CS_TRD_DATE"  TIMESTAMP     comment 'Channel Ceased Trading Date',
+   "CRS_BEGIN_DATE"  TIMESTAMP     comment 'Begin Date Period ID',
+   "CRS_END_DATE"  TIMESTAMP     comment 'End Date Period ID',
+   "COST_CENTER_IND"  NVARCHAR(1)     comment 'Cost Center Indicator',
+   "PROFIT_CENTER_IND"  NVARCHAR(1)     comment 'Profit Center Indicator',
+   "BOOKING_UNIT_IND"  NVARCHAR(1)     comment 'Booking Unit Indicator',
+   "ASN_CATEGORY"  NVARCHAR(35)     comment 'Association Category',
+   "DISTRICT"  NVARCHAR(3)     comment 'District',
+   "HOLDING_COMPANY"  NVARCHAR(30)     comment 'Holding Company',
+   "ORG_TYPE"  NVARCHAR(3)     comment 'Organization Type',
+   "ORG_TYPE_DESC"  NVARCHAR(35)     comment 'Organization Type Description',
+   "ORG_NAME"  NVARCHAR(30)     comment 'Organization Name',
+   "AREA"  NVARCHAR(30)     comment 'Area',
+   "REGION"  NVARCHAR(30)     comment 'Region',
+   "TEAM_TYPE"  NVARCHAR(3)     comment 'Sales Team Type',
+   "TEAM"  NVARCHAR(30)     comment 'Sales Team',
+   "PERSON_NAME"  NVARCHAR(30)     comment 'Sales Person Name',
+   "PERSON_GRADE"  NVARCHAR(3)     comment 'Sales Person Grade',
+   "PERSON_TYPE"  NVARCHAR(3)     comment 'Sales Person Type',
+   "CHNL_CATEGORY"  NVARCHAR(35)     comment 'Channel Category',
+   "CHNL_TYPE"  NVARCHAR(35)     comment 'Channel Type',
+   "CHNL_SUBCAT"  NVARCHAR(35)     comment 'Channel Subcategory',
+   "CHNL_NAME"  NVARCHAR(30)     comment 'Channel Name',
+   "CHNL_CITY"  NVARCHAR(30)     comment 'Channel City',
+   "CHNL_POSTCODE"  NVARCHAR(10)     comment 'Channel Postcode',
+   "CHNL_UNIT_ID_NBR"  NVARCHAR(18)     comment 'Channel Unit Identification Number',
+   "REV_COST_CTR_IND"  NVARCHAR(1),
+   "CRS_ALL_ENTR_IND"  NVARCHAR(1)     comment 'All Entries Indicator'
+, primary key  ( 
+     "COR_RPT_STRC_ID")
+)
+with associations(
+   MANY TO ONE join "D_ENTITY" as D_ENTITY_REF_302348 on (D_ENTITY_REF_302348.ENTY_ID = CHNL_ENTY_ID),
+   MANY TO ONE join "D_ENTITY" as D_ENTITY_REF_72713 on (D_ENTITY_REF_72713.ENTY_ID = CHNL_MGT_UNIT_ID)
+)
+comment 'Core Reporting Structure'

@@ -1,0 +1,12 @@
+
+
+column table "D_CNTC_RSOL" (
+   "CNTC_RSOL_ID"  INTEGER  NOT NULL   comment 'Contact Resolution ID',
+   "CNTC_RSOL_TYPE"  NVARCHAR(3)     comment 'Contact Resolution Type',
+   "CNTC_DESCRIPTION"  NVARCHAR(255)     comment 'Description',
+   "CR_ALL_ENTRIES_IND"  NVARCHAR(1)     comment 'All Entries Indicator'
+, primary key  ( 
+     "CNTC_RSOL_ID")
+)
+
+comment 'Contact Resolution'

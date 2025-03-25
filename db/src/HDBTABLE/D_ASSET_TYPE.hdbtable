@@ -1,0 +1,10 @@
+
+
+column table "D_ASSET_TYPE" (
+   "ASSET_TYPE_ID"  INTEGER  NOT NULL,
+   "ASSET_TYPE_NAME"  NVARCHAR(30),
+   "ASSET_TYPE_DESCR"  NVARCHAR(255),
+   "AT_ALL_ENTR_IND"  NVARCHAR(1)
+, primary key  ( 
+     "ASSET_TYPE_ID")
+)

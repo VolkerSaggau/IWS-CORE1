@@ -1,0 +1,9 @@
+
+
+column table "D_ENTY_ASN_ROLE" (
+   "ROLE_ID"  INTEGER  NOT NULL,
+   "ROLE_DESCRIPTION"  NVARCHAR(255),
+   "ERO_ALL_ENTRIES_IN"  NVARCHAR(1)     comment 'All Entries Indicator'
+, primary key  ( 
+     "ROLE_ID")
+)

@@ -1,0 +1,16 @@
+
+
+column table "D_ACCOUNT_TYPE" (
+   "ACCOUNT_TYPE_ID"  INTEGER  NOT NULL   comment 'Account Type ID',
+   "ACCT_TYPE_NAME"  NVARCHAR(30)     comment 'Account Type Primary Category',
+   "ACCT_TYPE_DESC"  NVARCHAR(255)     comment 'Account Type Secondary Category',
+   "ACCT_SUBTYPE_NAME"  NVARCHAR(30),
+   "ACCT_SUBTYPE_DESC"  NVARCHAR(255),
+   "ACCT_CAT_NAME"  NVARCHAR(30),
+   "ACCT_CAT_DESC"  NVARCHAR(255),
+   "BAT_ALL_ENTR_IND"  NVARCHAR(1)     comment 'All Entries Indicator'
+, primary key  ( 
+     "ACCOUNT_TYPE_ID")
+)
+
+comment 'Account Type'

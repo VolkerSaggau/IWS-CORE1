@@ -1,0 +1,13 @@
+
+
+column table "D_ISP" (
+   "ISP_ID"  INTEGER  NOT NULL   comment 'ISP ID',
+   "ISP_NAME"  NVARCHAR(30)     comment 'ISP Name',
+   "ISP_CATEGORY"  NVARCHAR(35)     comment 'ISP Category',
+   "ISP_DESCRIPTION"  NVARCHAR(35)     comment 'ISP Description',
+   "ISP_URL"  NVARCHAR(50)     comment 'ISP URL'
+, primary key  ( 
+     "ISP_ID")
+)
+
+comment 'Internet Service Provider'

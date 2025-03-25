@@ -1,0 +1,15 @@
+
+
+column table "D_INS_CUS_GROUP" (
+   "CUS_GROUP_ID"  INTEGER  NOT NULL   comment 'Insured Customer Group ID',
+   "CUS_GROUP_NAME"  NVARCHAR(30)     comment 'Customer Group Name',
+   "CUS_GROUP_DESC"  NVARCHAR(255)     comment 'Customer Group Description',
+   "CUS_GROUP_TYPE"  NVARCHAR(3)     comment 'Customer Group Type',
+   "CUS_GROUP_SUBTYPE"  NVARCHAR(3)     comment 'Customer Group Subtype',
+   "CUS_RISK_RATE_CAT"  NVARCHAR(35)     comment 'Customer Risk Rate Category',
+   "PCCU_ALL_ENTR_IND"  NVARCHAR(1)     comment 'All Entries Indicator'
+, primary key  ( 
+     "CUS_GROUP_ID")
+)
+
+comment 'Insured Customer Group'

@@ -1,0 +1,11 @@
+
+
+column table "D_ACCOUNT_STATUS" (
+   "ACCT_STATUS_ID"  INTEGER  NOT NULL   comment 'Account Status ID',
+   "ACCT_STATUS_DESC"  NVARCHAR(255)     comment 'Account Status Description',
+   "ACCT_STAT_ALL_ENTR"  NVARCHAR(1)     comment 'All Entries Indicator'
+, primary key  ( 
+     "ACCT_STATUS_ID")
+)
+
+comment 'Account Status'
