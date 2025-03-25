@@ -1,0 +1,8 @@
+{
+  "SYN_M_CS_TABLES": {
+    "target": {
+      "object": "M_CS_TABLES",
+      "schema": "SYS"
+    }
+  }
+}
